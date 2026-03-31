@@ -1,6 +1,6 @@
 
-import { Component, ChangeDetectionStrategy, OnInit, isDevMode } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, ChangeDetectionStrategy, OnInit, isDevMode, inject } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './components/navbar.component';
 import { FooterComponent } from './components/footer.component';
 import { PerformanceMonitor } from './utils/performance';
@@ -26,7 +26,16 @@ import { PerformanceMonitor } from './utils/performance';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent implements OnInit {
+  private router = inject(Router);
+
   ngOnInit(): void {
+    // Handle GitHub Pages 404 redirect for client-side routing
+    const redirect = sessionStorage.redirect;
+    if (redirect) {
+      delete sessionStorage.redirect;
+      this.router.navigateByUrl(redirect);
+    }
+
     // Initialize performance monitoring in development
     if (isDevMode()) {
       PerformanceMonitor.getInstance().trackWebVitals();
