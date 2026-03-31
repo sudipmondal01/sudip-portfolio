@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["angular:styles/component:css;9234bf456ec8ad6b81c9d8999f359eed54bd81d15a1378f9ffc970aa203530e9;C:/Users/Fytrips/Downloads/Portfolio Website/src/components/contact-page.component.ts"],
+  "sourcesContent": ["\n    @keyframes fadeInUp {\n      from { opacity: 0; transform: translateY(10px); }\n      to { opacity: 1; transform: translateY(0); }\n    }\n    .animate-fade-in-up {\n      animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;\n    }\n    input:focus, select:focus, textarea:focus {\n      border-bottom-width: 1.5px;\n      box-shadow: 0 4px 10px -4px rgba(198, 169, 107, 0.2);\n    }\n  "],
+  "mappings": ";AACI,WAAW;AACT;AAAO,aAAS;AAAG,eAAW,WAAW;AAAO;AAChD;AAAK,aAAS;AAAG,eAAW,WAAW;AAAI;AAC7C;AACA,CAAC;AACC,aAAW,SAAS,GAAG,aAAa,IAAI,EAAE,CAAC,EAAE,GAAG,EAAE,GAAG;AACvD;AACA,KAAK;AAAQ,MAAM;AAAQ,QAAQ;AACjC,uBAAqB;AACrB,cAAY,EAAE,IAAI,KAAK,KAAK,KAAK,GAAG,EAAE,GAAG,EAAE,GAAG,EAAE;AAClD;",
+  "names": []
+}
