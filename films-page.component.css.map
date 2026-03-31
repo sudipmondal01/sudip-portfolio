@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["angular:styles/component:css;6b416af2c5a3f3f2977b49cb1e7ece862f73de5466f34fde3eb15ff1ad24972f;C:/Users/Fytrips/Downloads/Portfolio Website/src/components/films-page.component.ts"],
+  "sourcesContent": ["\n    .text-shadow-lg {\n      text-shadow: 0 10px 40px rgba(0,0,0,0.8);\n    }\n    @keyframes scaleSlow {\n      from { transform: scale(1); }\n      to { transform: scale(1.1); }\n    }\n    .animate-scale-slow {\n      animation: scaleSlow 20s ease-out forwards;\n    }\n    @keyframes fadeIn {\n      from { opacity: 0; }\n      to { opacity: 1; }\n    }\n    .animate-fade-in {\n      animation: fadeIn 0.4s ease-out forwards;\n    }\n    @keyframes lightboxIn {\n      from { opacity: 0; transform: scale(0.96) translateY(20px); }\n      to { opacity: 1; transform: scale(1) translateY(0); }\n    }\n    .animate-lightbox {\n      animation: lightboxIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;\n    }\n  "],
+  "mappings": ";AACI,CAAC;AACC,eAAa,EAAE,KAAK,KAAK,KAAK,CAAC,EAAC,CAAC,EAAC,CAAC,EAAC;AACtC;AACA,WAAW;AACT;AAAO,eAAW,MAAM;AAAI;AAC5B;AAAK,eAAW,MAAM;AAAM;AAC9B;AACA,CAAC;AACC,aAAW,UAAU,IAAI,SAAS;AACpC;AACA,WAAW;AACT;AAAO,aAAS;AAAG;AACnB;AAAK,aAAS;AAAG;AACnB;AACA,CAAC;AACC,aAAW,OAAO,KAAK,SAAS;AAClC;AACA,WAAW;AACT;AAAO,aAAS;AAAG,eAAW,MAAM,MAAM,WAAW;AAAO;AAC5D;AAAK,aAAS;AAAG,eAAW,MAAM,GAAG,WAAW;AAAI;AACtD;AACA,CAAC;AACC,aAAW,WAAW,KAAK,aAAa,IAAI,EAAE,CAAC,EAAE,GAAG,EAAE,GAAG;AAC3D;",
+  "names": []
+}

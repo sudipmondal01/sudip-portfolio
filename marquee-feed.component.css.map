@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["angular:styles/component:css;47c6f9583a7f8464d978a268662be4507294ac804c05456da78e5418705b19f0;C:/Users/Fytrips/Downloads/Portfolio Website/src/components/marquee-feed.component.ts"],
+  "sourcesContent": ["\n    @keyframes marquee {\n      0% { transform: translateX(0); }\n      100% { transform: translateX(-50%); }\n    }\n\n    .animate-marquee-infinite {\n      display: flex;\n      flex-direction: row;\n      flex-wrap: nowrap;\n      width: fit-content;\n      animation: marquee 40s linear infinite;\n      will-change: transform;\n    }\n\n    .animate-marquee-infinite:hover {\n      animation-play-state: paused;\n    }\n  "],
+  "mappings": ";AACI,WAAW;AACT;AAAK,eAAW,WAAW;AAAI;AAC/B;AAAO,eAAW,WAAW;AAAO;AACtC;AAEA,CAAC;AACC,WAAS;AACT,kBAAgB;AAChB,aAAW;AACX,SAAO;AACP,aAAW,QAAQ,IAAI,OAAO;AAC9B,eAAa;AACf;AAEA,CATC,wBASwB;AACvB,wBAAsB;AACxB;",
+  "names": []
+}

@@ -1,0 +1,211 @@
+/* src/styles.css */
+:root {
+  --primary: #C6A96B;
+  --bg-dark: #070708;
+  --bg-darker: #040405;
+  --text-muted: #94a3b8;
+  --ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
+}
+body {
+  background-color: var(--bg-dark);
+  color: white;
+  font-family: "Manrope", sans-serif;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+.font-serif-italic {
+  font-family: "Playfair Display", serif;
+  font-style: italic;
+  font-weight: 400;
+}
+.font-mono-tech {
+  font-family: "Space Grotesk", sans-serif;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-darker);
+}
+::-webkit-scrollbar-thumb {
+  background: #222;
+  transition: background 0.3s;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+.grain-overlay::before {
+  content: "";
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background-image: url(https://grainy-gradients.vercel.app/noise.svg);
+  opacity: 0.02;
+  pointer-events: none;
+  z-index: 1;
+  animation: grain 12s steps(8) infinite;
+  will-change: transform;
+}
+@keyframes grain {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(-1%, -2%);
+  }
+  50% {
+    transform: translate(1%, -1%);
+  }
+  75% {
+    transform: translate(-2%, 1%);
+  }
+}
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes fade-in-glow {
+  0% {
+    opacity: 0;
+    filter: blur(10px);
+    text-shadow: 0 0 0 rgba(198, 169, 107, 0);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    text-shadow: 0 0 30px rgba(198, 169, 107, 0.4);
+  }
+}
+.animate-slide-up {
+  animation: reveal-up 1.4s var(--ease-editorial) forwards;
+}
+.animate-fade-in-glow {
+  opacity: 0;
+  animation: fade-in-glow 2s var(--ease-editorial) forwards;
+}
+.animation-delay-200 {
+  animation-delay: 0.2s;
+}
+.animation-delay-500 {
+  animation-delay: 0.5s;
+}
+.reveal {
+  opacity: 0;
+  animation: reveal-section 1s var(--ease-editorial) forwards;
+}
+@keyframes reveal-section {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (max-width: 768px) {
+  .reveal {
+    animation-duration: 0.7s;
+  }
+  @keyframes reveal-section {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes reveal-up {
+    from {
+      opacity: 0;
+      transform: translateY(15px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+.delay-1 {
+  animation-delay: 0.2s;
+}
+.delay-2 {
+  animation-delay: 0.4s;
+}
+.delay-3 {
+  animation-delay: 0.6s;
+}
+.bg-glow-radial {
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(198, 169, 107, 0.04) 0%,
+      transparent 70%);
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.btn-premium {
+  @apply transition-all duration-700 ease-out active:scale-95;
+  min-height: 48px;
+}
+.btn-premium:hover {
+  @apply -translate-y-1;
+}
+@keyframes lightbox-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.animate-lightbox {
+  animation: lightbox-in 0.6s var(--ease-editorial) forwards;
+}
+a,
+button {
+  @apply min-h-[44px] min-w-[44px] inline-flex items-center justify-center;
+}
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+body::before {
+  content: "\2713  CSS IS LOADING";
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 8px 12px;
+  background: #22c55e;
+  color: black;
+  font-weight: bold;
+  font-size: 12px;
+  z-index: 9999;
+  border-radius: 0 0 4px 0;
+}
+/*# sourceMappingURL=main.css.map */

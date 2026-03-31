@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["angular:styles/component:css;81dd5349b7262961c4078e51e3c3ef9fb807ea6b839dac7c2e3ac1b351a16df5;C:/Users/Fytrips/Downloads/Portfolio Website/src/components/navbar.component.ts"],
+  "sourcesContent": ["\n    @keyframes menuFade {\n      from { opacity: 0; }\n      to { opacity: 1; }\n    }\n    @keyframes staggerIn {\n      from { opacity: 0; transform: translateY(20px); filter: blur(4px); }\n      to { opacity: 1; transform: translateY(0); filter: blur(0); }\n    }\n    .animate-menu-fade { animation: menuFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }\n    .animate-stagger-in { \n      opacity: 0;\n      animation: staggerIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; \n      animation-delay: var(--delay);\n    }\n  "],
+  "mappings": ";AACI,WAAW;AACT;AAAO,aAAS;AAAG;AACnB;AAAK,aAAS;AAAG;AACnB;AACA,WAAW;AACT;AAAO,aAAS;AAAG,eAAW,WAAW;AAAO,YAAQ,KAAK;AAAM;AACnE;AAAK,aAAS;AAAG,eAAW,WAAW;AAAI,YAAQ,KAAK;AAAI;AAC9D;AACA,CAAC;AAAoB,aAAW,SAAS,KAAK,aAAa,IAAI,EAAE,CAAC,EAAE,GAAG,EAAE,GAAG;AAAU;AACtF,CAAC;AACC,WAAS;AACT,aAAW,UAAU,KAAK,aAAa,IAAI,EAAE,CAAC,EAAE,GAAG,EAAE,GAAG;AACxD,mBAAiB,IAAI;AACvB;",
+  "names": []
+}
