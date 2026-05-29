@@ -1,0 +1,244 @@
+/* ===== MOBILE INPUT & INTERACTION FIXES ===== */
+
+/* Prevent iOS zoom on input focus */
+@media (max-width: 768px) {
+  input,
+  textarea,
+  select,
+  button {
+    font-size: 16px !important;
+  }
+
+  /* Ensure proper input rendering on iOS */
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"],
+  input[type="search"],
+  textarea {
+    font-size: 16px !important;
+    padding: 12px 16px !important;
+    border-radius: 8px !important;
+    border: 2px solid #ccc !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    background-color: #fff !important;
+  }
+
+  /* Remove default iOS styling */
+  input:focus,
+  textarea:focus {
+    outline: none !important;
+    border-color: #333 !important;
+    background-color: #fff !important;
+  }
+
+  /* Proper select styling */
+  select {
+    font-size: 16px !important;
+    padding: 12px 16px !important;
+    border-radius: 8px !important;
+    border: 2px solid #ccc !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='#333' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><path d='M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z'/></svg>") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 12px center !important;
+    background-size: 20px !important;
+    padding-right: 40px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Ensure mobile menu is accessible */
+  .mobile-toggle {
+    background: none !important;
+    border: none !important;
+    cursor: pointer !important;
+    padding: 8px 12px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 4px !important;
+  }
+
+  .mobile-toggle span {
+    display: block !important;
+    width: 24px !important;
+    height: 2px !important;
+    background-color: #333 !important;
+    transition: 0.3s ease !important;
+  }
+
+  /* Active state for mobile toggle */
+  .mobile-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(8px, 8px) !important;
+  }
+
+  .mobile-toggle.active span:nth-child(2) {
+    opacity: 0 !important;
+  }
+
+  .mobile-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(8px, -8px) !important;
+  }
+}
+
+/* ===== SCROLL BEHAVIOR ===== */
+html {
+  scroll-behavior: smooth !important;
+}
+
+@media (max-width: 768px) {
+  /* Disable smooth scroll on mobile for better performance */
+  html {
+    scroll-behavior: auto !important;
+  }
+
+  /* Prevent rubber-band scrolling on iOS */
+  body {
+    -webkit-user-select: none !important;
+    -webkit-touch-callout: none !important;
+  }
+
+  /* But allow selection in inputs */
+  input,
+  textarea {
+    -webkit-user-select: text !important;
+    -webkit-touch-callout: text !important;
+  }
+}
+
+/* ===== IMAGE OPTIMIZATION ===== */
+@media (max-width: 768px) {
+  img {
+    -webkit-touch-callout: none !important;
+    user-select: none !important;
+  }
+
+  /* Lazy loading optimization */
+  img[loading="lazy"] {
+    background-color: #f0f0f0 !important;
+  }
+}
+
+/* ===== BUTTON STATES ON MOBILE ===== */
+@media (pointer: coarse) {
+  button,
+  a[role="button"],
+  input[type="button"],
+  input[type="submit"] {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1) !important;
+    tap-highlight-color: rgba(0, 0, 0, 0.1) !important;
+  }
+
+  button:active,
+  a:active {
+    opacity: 0.8 !important;
+  }
+}
+
+/* ===== LINK SPACING FOR MOBILE ===== */
+@media (max-width: 768px) {
+  a {
+    padding: 8px 4px !important;
+    display: inline-block !important;
+  }
+
+  /* Ensure proper click area */
+  nav a {
+    padding: 12px 8px !important;
+    display: block !important;
+  }
+}
+
+/* ===== FORM VALIDATION FEEDBACK ===== */
+@media (max-width: 768px) {
+  input:invalid {
+    border-color: #ff6b6b !important;
+  }
+
+  input:valid {
+    border-color: #51cf66 !important;
+  }
+
+  input:focus:invalid {
+    box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1) !important;
+  }
+
+  input:focus:valid {
+    box-shadow: 0 0 0 3px rgba(81, 207, 102, 0.1) !important;
+  }
+}
+
+/* ===== ACCESSIBILITY IMPROVEMENTS ===== */
+@media (max-width: 768px) {
+  /* Larger focus rings for accessibility */
+  :focus-visible {
+    outline: 3px solid #f5ab00 !important;
+    outline-offset: 2px !important;
+  }
+
+  /* Readable text color contrast */
+  body {
+    color: #333 !important;
+  }
+
+  /* Better link contrast */
+  a {
+    color: #0066cc !important;
+  }
+
+  a:visited {
+    color: #663399 !important;
+  }
+}
+
+/* ===== PERFORMANCE OPTIMIZATION ===== */
+@media (max-width: 768px) {
+  /* Disable animations for reduced motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* GPU acceleration for smooth scrolling */
+  .carousel-track,
+  [class*="carousel"],
+  [class*="scroll"] {
+    -webkit-transform: translateZ(0) !important;
+    transform: translateZ(0) !important;
+    -webkit-perspective: 1000 !important;
+    perspective: 1000 !important;
+  }
+}
+
+/* ===== VIEWPORT META ADJUSTMENTS ===== */
+/* These work in conjunction with proper meta tags */
+
+@media (max-width: 768px) {
+  /* Ensure proper minimum touch target sizes */
+  [role="button"],
+  button,
+  a[href],
+  input[type="button"],
+  input[type="submit"],
+  input[type="checkbox"],
+  input[type="radio"] {
+    min-width: 44px !important;
+    min-height: 44px !important;
+  }
+
+  /* Exception for very small icons */
+  .icon-small,
+  [class*="small-icon"] {
+    min-width: 24px !important;
+    min-height: 24px !important;
+  }
+}

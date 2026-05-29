@@ -1,0 +1,319 @@
+/* ===== CRITICAL MOBILE LAYOUT FIXES ===== */
+
+/* Prevent text from being cut off */
+@media (max-width: 768px) {
+  .hero-content {
+    position: relative !important;
+    z-index: 1 !important;
+  }
+
+  /* Ensure proper stacking on mobile */
+  .hero-text-area,
+  .hero-portrait-area {
+    position: relative !important;
+    width: 100% !important;
+  }
+
+  /* Fix any absolute positioning that breaks on mobile */
+  [style*="position: absolute"] {
+    position: relative !important;
+  }
+
+  /* Ensure images don't overflow */
+  .ref-portrait-wrap img,
+  .hero-portrait-img,
+  .about-image-container img {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100% !important;
+  }
+
+  /* Fix contact card sizing */
+  .ref-contact-card {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* Proper handling of flex containers */
+  [style*="display: flex"] {
+    flex-wrap: wrap !important;
+  }
+
+  /* Fix grid containers */
+  [style*="display: grid"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ===== NAVBAR MOBILE MENU ===== */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 12px 16px !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1000 !important;
+    background: #e5e5e5 !important;
+  }
+
+  .nav-container {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 12px !important;
+  }
+
+  .nav-logo {
+    font-size: 20px !important;
+    font-weight: 700 !important;
+    letter-spacing: -1px !important;
+  }
+
+  .nav-links {
+    position: fixed !important;
+    top: 60px !important;
+    left: 0 !important;
+    right: 0 !important;
+    background: #e5e5e5 !important;
+    flex-direction: column !important;
+    padding: 16px !important;
+    gap: 8px !important;
+    transform: translateX(-100%) !important;
+    transition: transform 0.3s ease !important;
+    z-index: 999 !important;
+    max-height: calc(100vh - 60px) !important;
+    overflow-y: auto !important;
+  }
+
+  .nav-links.active {
+    transform: translateX(0) !important;
+  }
+
+  .nav-link {
+    padding: 12px 16px !important;
+    display: block !important;
+    border-bottom: 1px solid #ddd !important;
+    font-size: 16px !important;
+  }
+
+  .nav-link:last-child {
+    border-bottom: none !important;
+  }
+
+  .nav-cta {
+    display: none !important;
+  }
+
+  .mobile-toggle {
+    z-index: 1001 !important;
+  }
+}
+
+/* ===== PORTRAIT IMAGE GALLERY ===== */
+@media (max-width: 768px) {
+  /* Two column grid for portrait galleries */
+  .portrait-grid,
+  [class*="portrait"] [class*="grid"],
+  [class*="photo-grid"] {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px !important;
+    padding: 0 !important;
+  }
+
+  /* Image aspect ratios */
+  .portrait-grid img,
+  [class*="photo-grid"] img {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 3/4 !important;
+    object-fit: cover !important;
+  }
+
+  /* Make some taller for visual interest */
+  .portrait-grid img:nth-child(1),
+  .portrait-grid img:nth-child(4) {
+    grid-row: span 2 !important;
+  }
+}
+
+/* ===== CONTACT FORM OPTIMIZATION ===== */
+@media (max-width: 768px) {
+  .contact-form,
+  [class*="contact-form"],
+  form {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
+
+  .form-group,
+  .form-input-group {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    width: 100% !important;
+  }
+
+  input,
+  textarea,
+  select {
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  label {
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    display: block !important;
+    margin-bottom: 4px !important;
+  }
+
+  /* Ensure button wraps properly */
+  .form-buttons,
+  [class*="form-button"] {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+}
+
+/* ===== SECTION PADDING CONSISTENCY ===== */
+@media (max-width: 768px) {
+  section {
+    padding: 32px 16px !important;
+    margin: 0 !important;
+    width: 100vw !important;
+    position: relative !important;
+    left: 50% !important;
+    right: 50% !important;
+    margin-left: -50vw !important;
+    margin-right: -50vw !important;
+  }
+
+  /* Reset for nested sections if any */
+  section section {
+    width: 100% !important;
+    left: auto !important;
+    right: auto !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+
+/* ===== HEADING RESPONSIVENESS ===== */
+@media (max-width: 768px) {
+  h1 {
+    font-size: clamp(28px, 8vw, 48px) !important;
+    line-height: 0.95 !important;
+    margin-bottom: 16px !important;
+  }
+
+  h2 {
+    font-size: clamp(24px, 6vw, 36px) !important;
+    line-height: 1.1 !important;
+    margin-bottom: 16px !important;
+  }
+
+  h3 {
+    font-size: clamp(18px, 5vw, 24px) !important;
+    line-height: 1.2 !important;
+    margin-bottom: 12px !important;
+  }
+
+  h4,
+  h5,
+  h6 {
+    font-size: clamp(16px, 4vw, 20px) !important;
+    margin-bottom: 12px !important;
+  }
+}
+
+/* ===== LIST STYLING MOBILE ===== */
+@media (max-width: 768px) {
+  ul,
+  ol {
+    margin-left: 20px !important;
+    margin-bottom: 12px !important;
+  }
+
+  li {
+    margin-bottom: 8px !important;
+    line-height: 1.6 !important;
+  }
+
+  /* Ensure bullets are visible */
+  li::marker {
+    color: #333 !important;
+    font-weight: 600 !important;
+  }
+}
+
+/* ===== BLOCKQUOTE STYLING MOBILE ===== */
+@media (max-width: 768px) {
+  blockquote {
+    margin: 16px 0 !important;
+    padding: 12px 16px !important;
+    border-left: 3px solid #f5ab00 !important;
+    font-style: italic !important;
+    background: #f9f9f9 !important;
+    font-size: 15px !important;
+  }
+}
+
+/* ===== CODE/PRE STYLING MOBILE ===== */
+@media (max-width: 768px) {
+  code,
+  pre {
+    background: #f0f0f0 !important;
+    padding: 4px 8px !important;
+    border-radius: 4px !important;
+    font-size: 13px !important;
+    overflow-x: auto !important;
+  }
+
+  pre {
+    padding: 12px 16px !important;
+    margin: 12px 0 !important;
+  }
+}
+
+/* ===== MODAL/POPUP FIXES ===== */
+@media (max-width: 768px) {
+  .modal,
+  [role="dialog"],
+  [class*="modal"],
+  [class*="popup"] {
+    width: 90vw !important;
+    max-width: 90vw !important;
+    margin: 0 auto !important;
+    max-height: 90vh !important;
+    overflow-y: auto !important;
+  }
+
+  .modal-backdrop,
+  [class*="modal-backdrop"] {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    background: rgba(0, 0, 0, 0.5) !important;
+    z-index: 999 !important;
+  }
+}
+
+/* ===== SHADOW & DEPTH MOBILE ===== */
+@media (max-width: 768px) and (hover: none) {
+  /* Reduce shadows on touch devices for better performance */
+  * {
+    box-shadow: none !important;
+  }
+
+  /* But keep important structural shadows */
+  .card,
+  [class*="card"],
+  .modal,
+  [class*="modal"] {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+  }
+}
