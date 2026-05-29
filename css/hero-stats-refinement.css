@@ -1,0 +1,33 @@
+
+/* ===== HERO STATS LAYOUT REFINEMENT ===== */
+.hero-text-area {
+    height: auto !important; /* Revert to natural height so stats sit right under the button */
+}
+
+.hero-stats {
+    position: relative !important; /* Unanchor from absolute bottom */
+    bottom: auto !important;
+    left: auto !important;
+    margin-top: 24px !important; /* Precisely 24px below the button */
+    display: flex !important;
+    justify-content: flex-start !important;
+    gap: 32px !important; /* Required 32px gap */
+    align-items: center !important;
+    width: 100%;
+}
+
+.stat-divider {
+    width: 1px !important;
+    height: 40px !important;
+    background-color: #ddd !important;
+    margin: 0 !important;
+}
+
+/* Mobile responsive fixes */
+@media (max-width: 768px) {
+    .hero-stats {
+        justify-content: center !important;
+        margin-top: 40px !important;
+        gap: 16px !important;
+    }
+}

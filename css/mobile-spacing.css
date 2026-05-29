@@ -1,0 +1,424 @@
+@media (max-width: 768px) {
+
+  /* ===== GLOBAL ===== */
+  html, body {
+    overflow-x: hidden !important;
+    width: 100% !important;
+  }
+
+  /* ===== HIDE VERTICAL COPYRIGHT ===== */
+  .vertical-copyright,
+  div.vertical-copyright,
+  [class*="vertical-copyright"],
+  [style*="writing-mode: vertical"] {
+    display: none !important;
+  }
+
+  /* ===== NAVBAR ===== */
+  .nav-links,
+  .navbar-menu,
+  .nav-menu {
+    display: none !important;
+  }
+
+  .mobile-toggle,
+  #mobile-toggle {
+    display: flex !important;
+  }
+
+  /* ===== HERO ===== */
+  section.cinematic-hero,
+  #hero {
+    flex-direction: column !important;
+    min-height: 100vh !important;
+    padding: 0 !important;
+  }
+
+  .hero-text-area {
+    width: 100% !important;
+    padding: 100px 24px 40px !important;
+    order: 2 !important;
+  }
+
+  .hero-portrait-area,
+  .hero-image-container {
+    width: 100% !important;
+    height: 45vh !important;
+    order: 1 !important;
+    position: relative !important;
+  }
+
+  .hero-portrait-img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: top center !important;
+    filter: none !important;
+    transform: none !important;
+  }
+
+  h1.hero-title {
+    font-size: 48px !important;
+    line-height: 0.95 !important;
+    white-space: normal !important;
+  }
+
+  .hero-stats.stats-row {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 16px !important;
+    flex-wrap: nowrap !important;
+  }
+
+  .hero-bottom-info {
+    flex-direction: column !important;
+    gap: 8px !important;
+    padding: 16px 24px !important;
+  }
+
+  .portrait-glass-bg,
+  .portrait-yellow-shape {
+    display: none !important;
+  }
+
+  /* ===== ABOUT ===== */
+  section.about,
+  #about {
+    padding: 40px 20px !important;
+  }
+
+  .ref-about-content {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 32px !important;
+  }
+
+  .ref-about-left {
+    width: 100% !important;
+    max-width: 260px !important;
+    margin: 0 auto !important;
+    flex: none !important;
+  }
+
+  .ref-about-right {
+    width: 100% !important;
+    flex: none !important;
+  }
+
+  h2.ref-hello-text {
+    font-size: 40px !important;
+  }
+
+  .ref-details-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+
+  .ref-detail-block {
+    width: 100% !important;
+  }
+
+  /* ===== ALL SECTION HEADINGS ===== */
+  .editorial-title,
+  .editorial-title span,
+  h2.portfolio-heading,
+  .border-accent {
+    font-size: clamp(24px, 7vw, 38px) !important;
+    padding: 10px 16px !important;
+    max-width: 90vw !important;
+    white-space: normal !important;
+    word-break: break-word !important;
+    line-height: 1.1 !important;
+  }
+
+  /* ===== ALL SECTION LAYOUTS ===== */
+  section {
+    padding: 40px 20px !important;
+    overflow-x: hidden !important;
+  }
+
+  /* ===== CINEMATIC PORTRAITS ===== */
+  .portrait-grid,
+  .photo-grid,
+  [class*="portraits-grid"],
+  [class*="photo-grid"] {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 6px !important;
+  }
+
+  /* ===== ELEGANT MOMENTS ===== */
+  [class*="elegant-grid"],
+  [class*="moments-grid"] {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 6px !important;
+  }
+
+  /* ===== STREET & MOODY ===== */
+  [class*="street"],
+  [class*="moody"] {
+    flex-direction: column !important;
+    gap: 20px !important;
+  }
+
+  /* ===== EDITORIAL SHOTS ===== */
+  [class*="editorial-layout"],
+  [class*="editorial-grid"] {
+    flex-direction: column !important;
+    gap: 20px !important;
+  }
+
+  [class*="fan"],
+  [class*="card-spread"] {
+    transform: none !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 12px !important;
+  }
+
+  [class*="fan"] img,
+  [class*="card-spread"] img {
+    transform: none !important;
+    rotate: 0deg !important;
+    width: 100% !important;
+    max-width: 280px !important;
+  }
+
+  /* ===== CINEMATIC REELS ===== */
+  [class*="video-block"],
+  [class*="reels-layout"] {
+    flex-direction: column !important;
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+
+  /* ===== SHORT FILMS CAROUSEL ===== */
+  [class*="carousel-track"],
+  [class*="films-carousel"],
+  .cinematography-carousel-track {
+    overflow-x: scroll !important;
+    scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
+    display: flex !important;
+    gap: 12px !important;
+    padding: 0 20px !important;
+  }
+
+  [class*="carousel-card"],
+  [class*="film-card"] {
+    min-width: 240px !important;
+    scroll-snap-align: start !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* ===== COLOR GRADING ===== */
+  .video-block.block-timelines {
+    grid-template-columns: 1fr !important;
+    flex-direction: column !important;
+  }
+
+  .timelines-left,
+  .timelines-right {
+    width: 100% !important;
+  }
+
+  .complex-materials-layout {
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+
+  .timeline-card {
+    width: 100% !important;
+  }
+
+  .timeline-card img {
+    width: 100% !important;
+    height: 200px !important;
+    object-fit: cover !important;
+  }
+
+  /* ===== CREATIVE CARDS ===== */
+  .service-cards,
+  [class*="service-cards"],
+  [class*="creative-grid"],
+  [class*="expertise-grid"] {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  /* ===== VISUAL STORYTELLING ===== */
+  [class*="storytelling"] h2,
+  [class*="visual-story"] h2 {
+    font-size: clamp(36px, 10vw, 64px) !important;
+  }
+
+  /* ===== THE VISION ===== */
+  [class*="vision-layout"],
+  [class*="vision-grid"] {
+    flex-direction: column !important;
+    gap: 24px !important;
+  }
+
+  [class*="vision-image"],
+  [class*="vision-img"] {
+    width: 100% !important;
+    height: 300px !important;
+    object-fit: cover !important;
+  }
+
+  /* ===== CONTACT SECTION ===== */
+  [class*="contact-layout"],
+  [class*="contact-grid"],
+  [class*="build-layout"] {
+    flex-direction: column !important;
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+
+  [class*="contact-left"],
+  [class*="contact-image"] {
+    width: 100% !important;
+    max-height: 280px !important;
+    object-fit: cover !important;
+  }
+
+  [class*="contact-form"],
+  [class*="build-form"] {
+    width: 100% !important;
+  }
+
+  [class*="form-buttons"],
+  [class*="contact-buttons"] {
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+
+  [class*="send-btn"],
+  [class*="whatsapp-btn"],
+  .send-btn,
+  .whatsapp-btn {
+    width: 100% !important;
+    text-align: center !important;
+  }
+
+  /* ===== FOOTER ===== */
+  footer,
+  [class*="footer"] {
+    padding: 40px 20px 20px !important;
+  }
+
+  footer h2,
+  [class*="footer-title"],
+  [class*="lets-create"] {
+    font-size: clamp(32px, 10vw, 56px) !important;
+    line-height: 1 !important;
+  }
+
+  [class*="footer-bottom"],
+  [class*="footer-bar"] {
+    flex-direction: column !important;
+    gap: 12px !important;
+    text-align: center !important;
+  }
+
+  [class*="social-links"],
+  [class*="footer-social"] {
+    justify-content: center !important;
+    flex-wrap: wrap !important;
+    gap: 16px !important;
+  }
+
+  /* ===== HIDE DECORATIVE FEATURES ===== */
+  .cinematic-divider,
+  [class*="divider"],
+  [class*="section-number"],
+  .bg-number,
+  [class*="bg-number"] {
+    display: none !important;
+  }
+
+  /* ===== ALL IMAGES RESPONSIVE ===== */
+  img {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  /* ===== CAMERA LOADER MOBILE ===== */
+  .cam-frame {
+    width: 90vw !important;
+    height: 55vh !important;
+  }
+
+  .cam-name {
+    font-size: 36px !important;
+    letter-spacing: 0.1em !important;
+  }
+
+  .cam-hud-top,
+  .cam-hud-bottom {
+    padding: 0 16px !important;
+    font-size: 9px !important;
+  }
+}
+
+/* ===== SMALL PHONES 390px ===== */
+@media (max-width: 390px) {
+
+  h1.hero-title {
+    font-size: 40px !important;
+  }
+
+  .editorial-title span {
+    font-size: 22px !important;
+  }
+
+  section {
+    padding: 32px 16px !important;
+  }
+
+  .hero-stats.stats-row {
+    gap: 10px !important;
+  }
+}
+
+@media (max-width: 768px) {
+
+  /* ABOUT - NUCLEAR STACK FIX */
+  .ref-about-content,
+  .ref-about-content * {
+    float: none !important;
+  }
+
+  .ref-about-content {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+  }
+
+  .ref-about-left,
+  .ref-about-right {
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    flex: 0 0 100% !important;
+    position: static !important;
+  }
+
+  /* KILL VERTICAL TEXT - ALL METHODS */
+  *[style*="writing-mode"],
+  *[style*="vertical-rl"],
+  *[style*="vertical-lr"],
+  *[style*="rotate(90"],
+  *[style*="rotate(-90"],
+  *[style*="rotate(180"] {
+    display: none !important;
+  }
+
+  /* FIX REMAINING OVERFLOW */
+  .ref-about-header,
+  .ref-about-content,
+  section > * {
+    max-width: 100vw !important;
+    overflow: hidden !important;
+  }
+}

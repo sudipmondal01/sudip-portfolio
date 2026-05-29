@@ -1,0 +1,35 @@
+
+/* ===== HERO PORTRAIT 100VH REFINEMENT ===== */
+.hero-portrait-area {
+    position: relative !important;
+    height: 100% !important;
+    display: flex !important;
+    justify-content: flex-end !important;
+}
+
+.hero-portrait-img {
+    position: absolute !important;
+    top: -60px !important; /* Offset the 60px .hero padding to touch the absolute top edge */
+    height: 100vh !important; /* Force exact viewport height */
+    width: 450px !important; /* Keep original column width */
+    object-fit: cover !important;
+    object-position: center top !important; /* Keep face visible */
+}
+
+/* Keep the portrait floating shapes properly anchored */
+.portrait-yellow-shape, .portrait-glass-bg {
+    z-index: 4 !important; /* Keep them above if needed, or 2 to stay behind */
+}
+
+/* On mobile, revert to a natural stacked layout */
+@media (max-width: 768px) {
+    .hero-portrait-area {
+        height: auto !important;
+    }
+    .hero-portrait-img {
+        position: relative !important;
+        top: 0 !important;
+        height: 65vh !important;
+        width: 100% !important;
+    }
+}

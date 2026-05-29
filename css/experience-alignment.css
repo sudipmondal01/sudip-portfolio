@@ -1,0 +1,28 @@
+
+/* ===== WORKING EXPERIENCE BLOCK FIXES ===== */
+
+/* 1 & 4. Working Experience Container Alignment */
+.ref-about-right .ref-detail-block:last-child {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-top: 40px !important; /* Overrides inline 35px */
+    margin-left: 0 !important;
+    box-sizing: border-box !important;
+}
+
+/* 2. Two-column grid layout */
+.ref-experience-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 40px !important;
+    align-items: start !important; /* Aligns both columns to top baseline */
+}
+
+/* 3. Yellow timeline dots */
+.ref-exp-item::before {
+    position: absolute !important;
+    left: -20px !important;
+    top: 0 !important;
+    margin-top: 4px !important; /* Aligns to top of text */
+    background-color: var(--yellow) !important;
+}

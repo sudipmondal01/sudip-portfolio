@@ -1,0 +1,20 @@
+
+/* ===== HERO GEOMETRIC ACCENT REFINEMENT ===== */
+.portrait-yellow-shape {
+    width: 245px !important;       /* Reduced by 30% */
+    height: 210px !important;      /* Reduced by 30% */
+    border-radius: 12px !important;
+    right: -80px !important;       /* Bleeds off the right edge */
+    bottom: -30px !important;      /* Anchors to bottom right */
+    animation: none !important;    /* Remove float to make it deliberate and solid */
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4) !important; /* Add subtle grounding */
+}
+
+/* Ensure mobile layout doesn't break horizontal scrolling */
+@media (max-width: 768px) {
+    .portrait-yellow-shape {
+        width: 180px !important;
+        height: 150px !important;
+        right: -30px !important;
+    }
+}

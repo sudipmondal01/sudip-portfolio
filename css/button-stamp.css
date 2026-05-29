@@ -1,0 +1,22 @@
+
+/* ===== EDITORIAL STAMP BUTTON STYLE ===== */
+.hero-cv-btn,
+.contact-form .submit-btn {
+    border-radius: 4px !important;
+    border: 1.5px solid #111 !important;
+    box-shadow: 4px 4px 0px #111 !important; /* Hard shadow for stamp effect */
+    background: var(--yellow) !important;
+    color: #111 !important;
+    font-weight: 800 !important;
+    transition: transform 0.15s ease, box-shadow 0.15s ease !important;
+    padding: 16px 32px !important; /* Slightly blockier padding */
+}
+
+/* Tactile hover press effect */
+.hero-cv-btn:hover,
+.contact-form .submit-btn:hover {
+    transform: translate(3px, 3px) !important;
+    box-shadow: 1px 1px 0px #111 !important;
+    background: var(--yellow) !important;
+    color: #111 !important;
+}

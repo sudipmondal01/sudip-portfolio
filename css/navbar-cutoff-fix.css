@@ -1,0 +1,21 @@
+
+/* ===== NAVBAR CONTACT LINK CUTOFF FIX ===== */
+header, 
+.header, 
+nav, 
+.nav,
+.nav-container {
+    overflow: visible !important;
+}
+
+.nav-links {
+    overflow: visible !important;
+    flex-wrap: nowrap !important;
+    gap: 20px !important; /* Reduce gap so 5 items easily fit */
+}
+
+.nav-link {
+    font-size: 13px !important; /* Slightly smaller to prevent pushing right edge */
+    letter-spacing: 0.05em !important;
+    white-space: nowrap !important;
+}

@@ -1,0 +1,14 @@
+
+/* ===== HERO YELLOW SHAPE FINAL REFINEMENT ===== */
+.portrait-yellow-shape {
+    width: 140px !important;
+    height: 120px !important;
+    border-radius: 10px !important;
+    position: absolute !important;
+    bottom: 80px !important; 
+    right: -40px !important; /* Bleeds 40px off the right viewport edge */
+    top: auto !important;
+    left: auto !important;
+    z-index: 2 !important; /* Sits beneath the portrait */
+    flex-shrink: 0 !important;
+}

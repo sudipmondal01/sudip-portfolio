@@ -1,0 +1,23 @@
+
+/* ===== RESUME SECTION HEADINGS EDITORIAL RESTYLE ===== */
+.ref-section-title {
+    text-transform: uppercase !important;
+    font-weight: 700 !important;
+    font-size: 13px !important;
+    letter-spacing: 0.15em !important;
+    color: #111 !important;
+    border-bottom: none !important;
+    text-decoration: none !important;
+    padding-bottom: 0 !important;
+}
+
+/* Remove any pseudo-element underlines or borders */
+.ref-section-title::after,
+.ref-section-title::before {
+    display: none !important;
+}
+
+/* Ensure the dot is yellow */
+.ref-section-title .ref-dot {
+    color: var(--yellow) !important;
+}

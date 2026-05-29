@@ -1,0 +1,66 @@
+
+/* ===== CONTACT CARD PREMIUM DARK RESTYLE ===== */
+.ref-contact-card {
+    background: #111 !important;
+    opacity: 1 !important;
+    color: #fff !important;
+    padding: 28px !important;
+    border-radius: 4px !important;
+    border: none !important;
+    border-left: 2px solid var(--yellow) !important;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2) !important;
+}
+
+/* Adjust heading inside the card */
+.ref-contact-info h3 {
+    color: #fff !important;
+    margin-bottom: 24px !important;
+}
+
+/* The list */
+.ref-contact-list {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* List items */
+.ref-contact-list li {
+    display: flex !important;
+    align-items: center !important;
+    gap: 16px !important;
+    color: #fff !important;
+    font-size: 15px !important;
+    border: none !important; /* Remove any old borders if present */
+    padding: 0 !important;
+}
+
+/* The Icons */
+.ref-icon-circle {
+    background: rgba(255,255,255,0.1) !important; /* Slight dark mode tweak for icons */
+    color: var(--yellow) !important;
+    flex-shrink: 0 !important;
+}
+
+/* Contact Text Wrappers */
+.contact-text {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2px !important;
+}
+
+.c-lbl {
+    font-size: 10px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.1em !important;
+    color: #888 !important; /* Gray label */
+    font-weight: 600 !important;
+}
+
+.c-val {
+    font-size: 15px !important;
+    color: #fff !important; /* White value */
+    font-weight: 500 !important;
+}

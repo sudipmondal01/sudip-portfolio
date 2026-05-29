@@ -1,0 +1,30 @@
+
+/* ===== ABOUT SECTION HEADING EDITORIAL RESTYLE ===== */
+/* Remove template line and arrow */
+.ref-about-line,
+.ref-about-arrow {
+    display: none !important;
+}
+
+/* Restyle heading text */
+.ref-about-title {
+    font-size: 56px !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.02em !important;
+    position: relative !important;
+    display: inline-block !important;
+    padding-bottom: 12px !important;
+    margin-bottom: 30px !important; /* Add space below the heading */
+}
+
+/* Add the 40px thin yellow editorial underline */
+.ref-about-title::after {
+    content: '' !important;
+    position: absolute !important;
+    left: 0 !important;
+    bottom: 0 !important;
+    width: 40px !important;
+    height: 1px !important;
+    background: var(--yellow) !important;
+    display: block !important;
+}

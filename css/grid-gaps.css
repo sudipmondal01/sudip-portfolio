@@ -1,0 +1,9 @@
+
+/* ===== UNIFORM 8PX IMAGE GRID GAP ===== */
+.gallery-container-box, 
+.row-3-images, 
+.grid-3x2, 
+.diag-grid, 
+.reels-grid {
+    gap: 8px !important;
+}

@@ -1,0 +1,21 @@
+
+/* ===== HERO PORTRAIT SHARPNESS FIX ===== */
+.hero-portrait-img {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    /* Ensure image is clearly above decorative backgrounds */
+    z-index: 10 !important; 
+}
+
+/* The glass background was layering over the image and blurring it */
+.portrait-glass-bg {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    z-index: 1 !important; 
+    display: none !important; /* Alternatively, just hide it if it's completely redundant now */
+}
+
+/* Ensure the yellow shape is also tucked safely behind */
+.portrait-yellow-shape {
+    z-index: 2 !important;
+}

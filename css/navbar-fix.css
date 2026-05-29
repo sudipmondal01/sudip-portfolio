@@ -1,0 +1,12 @@
+
+/* ===== NAVBAR OVERFLOW FIX ===== */
+.nav-links {
+    overflow: visible !important;
+    flex-wrap: nowrap !important;
+}
+
+.nav-link {
+    font-size: 13px !important;
+    letter-spacing: 0.08em !important;
+    white-space: nowrap !important; /* Ensure items themselves don't wrap awkwardly */
+}

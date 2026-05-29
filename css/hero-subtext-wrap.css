@@ -1,0 +1,7 @@
+
+/* ===== HERO SUBTEXT WRAP REFINEMENT ===== */
+.cinematic-hero .hero-subtext, 
+.hero-subtext {
+    max-width: 480px !important; /* Force natural break around "LIKE" */
+    white-space: normal !important; /* Ensure it wraps naturally */
+}

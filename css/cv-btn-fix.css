@@ -1,0 +1,11 @@
+
+/* ===== CV BUTTON FIT-CONTENT FIX ===== */
+.hero-cv-btn {
+    display: inline-flex !important; /* Forces it to only take up required width while allowing flex behavior inside */
+    width: fit-content !important;
+    max-width: fit-content !important;
+    white-space: nowrap !important; /* Prevents text from wrapping and making it taller */
+    align-items: center !important;
+    justify-content: center !important;
+    /* Ensure there are no block-level width inheritances */
+}

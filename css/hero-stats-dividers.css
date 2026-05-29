@@ -1,0 +1,9 @@
+
+/* ===== HERO STATS DIVIDER FIX ===== */
+.stat-divider {
+    width: 1px !important;
+    height: 36px !important; /* Adjusted to 36px */
+    background: #999 !important; /* Adjusted to #999 */
+    align-self: center !important; /* Ensure perfect vertical centering within the flex row */
+    margin: 0 !important;
+}

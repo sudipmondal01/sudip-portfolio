@@ -1,0 +1,14 @@
+
+/* ===== CONSISTENT SECTION PADDING ===== */
+.about, .photography, .videography, .services, .wow-section, .philosophy, .contact {
+    padding-top: 120px !important;
+    padding-bottom: 120px !important;
+}
+
+@media (max-width: 768px) {
+    /* Keep breathing room on mobile but slightly reduced for small screens */
+    .about, .photography, .videography, .services, .wow-section, .philosophy, .contact {
+        padding-top: 80px !important;
+        padding-bottom: 80px !important;
+    }
+}

@@ -1,0 +1,11 @@
+
+/* ===== ABOUT SECTION BOTTOM SPACING FIX ===== */
+section.about,
+#about {
+    padding-bottom: 80px !important;
+}
+
+/* Ensure the Working Experience block doesn't add any hidden overflow or margins */
+.ref-about-right .ref-detail-block:last-child {
+    margin-bottom: 0 !important;
+}

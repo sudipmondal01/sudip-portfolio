@@ -1,0 +1,15 @@
+
+/* ===== STANDARDIZED PORTFOLIO HEADINGS ===== */
+.portfolio-heading {
+    font-family: 'Playfair Display', serif !important;
+    font-size: clamp(48px, 6vw, 80px) !important;
+    font-weight: 800 !important;
+    letter-spacing: -1.5px !important;
+    line-height: 1.1 !important;
+    margin-bottom: 25px !important;
+}
+
+.portfolio-heading > span[style*="color:var(--yellow)"] {
+    display: inline-block;
+    margin-right: 5px;
+}

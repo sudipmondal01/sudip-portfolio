@@ -1,0 +1,21 @@
+
+/* ===== YELLOW SHAPE FINAL RE-ADD & OVERFLOW FIX ===== */
+.hero-portrait-area {
+    position: relative !important;
+    overflow: visible !important;
+}
+
+.portrait-yellow-shape {
+    position: absolute !important;
+    bottom: 60px !important;
+    right: -20px !important;
+    width: 110px !important;
+    height: 85px !important;
+    background: #F5C518 !important;
+    border-radius: 8px !important;
+    z-index: 2 !important;
+    pointer-events: none !important;
+    display: block !important;
+    top: auto !important;
+    left: auto !important;
+}

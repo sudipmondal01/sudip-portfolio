@@ -1,0 +1,12 @@
+
+/* ===== EDUCATION LAYOUT REFINEMENT ===== */
+.ref-edu-item {
+    display: grid !important;
+    grid-template-columns: 80px 1fr !important;
+    gap: 15px !important;
+    align-items: flex-start !important;
+}
+
+.ref-edu-info {
+    min-width: 220px !important;
+}

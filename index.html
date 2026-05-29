@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudip Mondal | Portfolio</title>
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,600&family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/mobile-spacing.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<style>
+/* ===== MOBILE OVERRIDE ===== */
+@media (max-width: 768px) {
+
+  /* ABOUT STACK */
+  .ref-about-content {
+    flex-direction: column !important;
+    display: flex !important;
+  }
+  .ref-about-left,
+  .ref-about-right {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 0 0 100% !important;
+  }
+  .ref-about-left {
+    max-width: 260px !important;
+    margin: 0 auto 24px !important;
+  }
+
+  /* HERO STACK */
+  section#hero,
+  .cinematic-hero {
+    flex-direction: column !important;
+    display: flex !important;
+  }
+  .hero-portrait-area {
+    width: 100% !important;
+    height: 45vh !important;
+    order: -1 !important;
+  }
+  .hero-text-area {
+    width: 100% !important;
+    padding: 24px 20px !important;
+    order: 1 !important;
+  }
+  h1.hero-title {
+    font-size: 46px !important;
+  }
+
+  /* HIDE VERTICAL TEXT */
+  .vertical-copyright {
+    display: none !important;
+  }
+
+  /* ALL SECTIONS */
+  section {
+    padding: 40px 20px !important;
+    overflow-x: hidden !important;
+  }
+
+  /* ALL HEADINGS */
+  .editorial-title span,
+  h2.editorial-title {
+    font-size: 28px !important;
+    white-space: normal !important;
+    word-break: break-word !important;
+  }
+
+  /* ALL GRIDS → SINGLE COLUMN */
+  .ref-details-grid,
+  .video-block.block-timelines,
+  [class*="service-cards"],
+  [class*="creative-grid"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* TIMELINE CARDS */
+  .timeline-card {
+    width: 100% !important;
+  }
+  .timeline-card img {
+    width: 100% !important;
+    height: 180px !important;
+    object-fit: cover !important;
+  }
+
+  /* CONTACT */
+  [class*="contact-layout"],
+  [class*="build-layout"] {
+    flex-direction: column !important;
+  }
+  .send-btn,
+  .whatsapp-btn {
+    width: 100% !important;
+  }
+
+  /* FOOTER */
+  footer h2,
+  [class*="footer"] h2 {
+    font-size: 36px !important;
+  }
+
+  /* IMAGES */
+  img {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  /* HIDE DECORATIVE */
+  .cinematic-divider,
+  .bg-number,
+  [class*="bg-number"],
+  .portrait-glass-bg,
+  .portrait-yellow-shape {
+    display: none !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div id="page-loader">
+  <div class="cam-flash"></div>
+  <div class="cam-curtain-top" id="curtainTop"></div>
+  <div class="cam-curtain-bottom" id="curtainBottom"></div>
+  <div class="cam-grid"></div>
+
+  <!-- HUD top bar -->
+  <div class="cam-hud hud-rec">REC ● 00:00:03</div>
+  <div class="cam-hud hud-iso">ISO 3200</div>
+  <div class="cam-hud hud-aperture">f/1.8 · 1/500s</div>
+
+  <!-- Viewfinder frame -->
+  <div class="cam-frame">
+    <div class="cam-corner tl"></div>
+    <div class="cam-corner tr"></div>
+    <div class="cam-corner bl"></div>
+    <div class="cam-corner br"></div>
+  </div>
+
+  <!-- Center content -->
+  <div class="cam-content">
+    <div class="cam-name">SUDIP<span>.</span></div>
+    <div class="cam-divider"></div>
+    <div class="cam-tagline">
+      Photographer · Filmmaker · Director
+    </div>
+    <div class="cam-status" id="camStatus">
+      FOCUSING...
+    </div>
+  </div>
+
+  <!-- HUD bottom bar -->
+  <div class="cam-hud hud-copyright">SUDIP MONDAL © 2026</div>
+  <div class="cam-hud hud-location">● KOLKATA, IN</div>
+  <div class="cam-hud hud-lens">24-70mm · RAW</div>
+</div>
+
+    <!-- ===== NAVBAR ===== -->
+    <header class="cinematic-header navbar">
+        <div class="nav-container">
+            <a href="#hero" class="nav-logo magnetic-hover">SUDIP<span style="color:var(--yellow)">.</span></a>
+
+            <nav class="nav-links">
+                <a href="#hero" class="nav-link">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#photography" class="nav-link">Photography</a>
+                <a href="#videography" class="nav-link">Films</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </nav>
+
+            <a href="#contact" class="nav-cta magnetic-hover">Let's Talk</a>
+
+            <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <div class="vertical-copyright"
+        style="position: fixed; right: 12px; top: 50%; transform: translateY(-50%) rotate(180deg); writing-mode: vertical-rl; font-size: 10px; color: #bbb; z-index: 100; display: none;">
+        SUDIP &copy; 2026</div>
+
+    <!-- ===== HERO SECTION ===== -->
+    <section class="hero cinematic-hero" id="hero">
+        <div class="hero-noise-overlay"></div>
+        <div class="bg-number bg-number--1 reveal-fade">01</div>
+
+        <div class="hero-content">
+            <div class="hero-text-area" data-aos="fade-right" data-aos-delay="200">
+                <div class="hero-quote reveal-up">"</div>
+                <div class="pill-label reveal-up hero-entrance" style="animation-delay: 0.1s;">Photographer & Filmmaker</div>
+                <h1 class="hero-title reveal-up hero-entrance" style="animation-delay: 0.2s;">
+                    SUDIP<br>
+                    MONDAL<span style="color:var(--yellow)">.</span>
+                </h1>
+                <p class="hero-subtext reveal-up hero-entrance" style="animation-delay: 0.3s;">MAKING LIFE LOOK LIKE<br>A MOVIE FRAME.
+                </p>
+                <a href="assets/Sudip_Mondal_Photographer_Resume.pdf" class="hero-cv-btn reveal-up magnetic-hover hero-entrance"
+                    style="animation-delay: 0.4s;" download="Sudip_Mondal_Resume.pdf">Download CV</a>
+
+                <div class="hero-stats stats-row reveal-up hero-entrance" style="animation-delay: 0.5s;" data-aos="fade-up" data-aos-delay="300">
+                    <div class="hero-stat">
+                        <span class="stat-number">4+</span>
+                        <span class="stat-label">Years / Experience</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="hero-stat">
+                        <span class="stat-number">170+</span>
+                        <span class="stat-label">Projects</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="hero-stat">
+                        <span class="stat-number">65+</span>
+                        <span class="stat-label">Clients</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-portrait-area hero-image-container reveal-left" style="position: relative;">
+                <div class="portrait-glass-bg floating"></div>
+                <div class="portrait-yellow-shape floating-alt"></div>
+                <img src="https://i.ibb.co/Y7nQS5bT/sudip-mondal-photographer-filmmaker-kolkata-webp.webp" alt="Sudip Mondal - Photographer and Filmmaker Kolkata"
+                    class="hero-portrait-img hero-image cinematic-shadow magnetic-hover">
+            </div>
+        </div>
+
+        <div class="hero-bottom-info reveal-up" style="animation-delay: 0.5s;">
+            <div class="scroll-indicator">
+                <span class="scroll-text">Scroll to Explore</span>
+                <div class="scroll-line"></div>
+            </div>
+            <span class="name" style="margin-left: 20px;">Cinematic Archive — Selected Works</span>
+        </div>
+    </section>
+
+    <!-- ===== ABOUT SECTION ===== -->
+    <section class="about" id="about" style="position: relative;">
+        <div class="bg-number bg-number--2 reveal-fade">02</div>
+        <div class="ref-about-header">
+            <h2 class="ref-about-title portfolio-heading">About</h2>
+            <div class="ref-about-line"></div>
+            <div class="ref-about-arrow">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M9 18l6-6-6-6" />
+                </svg>
+            </div>
+        </div>
+
+        <div class="ref-about-content">
+            <!-- Left Column -->
+            <div class="ref-about-left about-left reveal-right" data-aos="fade-right">
+                <div class="ref-portrait-wrap about-image-container about-image-wrapper">
+                    <img src="https://i.ibb.co/Xxx0rxRp/Wedding-Photography-by-Sudip-Mondal-Kolkata.png" alt="Sudip Mondal - Photographer Kolkata" class="ref-portrait-img cinematic-shadow">
+                </div>
+
+                <div class="ref-contact-card">
+                    <div class="ref-qr-container">
+                        <div class="ref-qr-white">
+                            <img src="https://i.ibb.co/VYYKtJ5Y/https-linktr-ee-sudip-portfolio.png" alt="Sudip Mondal Linktree QR Code" style="display: block; width: 100%; height: 100%; object-fit: contain;">
+                        </div>
+                    </div>
+                    <div class="ref-contact-info">
+                        <h3
+                            style="text-decoration: none !important; border-bottom: none !important; background: none !important;">
+                            <span class="ref-dot">.</span><span
+                                style="text-decoration: none !important; border-bottom: none !important; background: none !important; color:#ffffff; font-weight:700; font-size:18px;">Let's
+                                Work Together</span></h3>
+                        <ul class="ref-contact-list">
+                            <li>
+                                <div class="ref-icon-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path
+                                            d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                        </path>
+                                        <polyline points="22,6 12,13 2,6"></polyline>
+                                    </svg></div>
+                                <div class="contact-text"><span class="c-lbl">EMAIL</span><span
+                                        class="c-val">sudipxv@gmail.com</span></div>
+                            </li>
+                            <li>
+                                <div class="ref-icon-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path
+                                            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                                        </path>
+                                    </svg></div>
+                                <div class="contact-text"><span class="c-lbl">PHONE</span><span class="c-val">+91 70446
+                                        92706</span></div>
+                            </li>
+                            <li>
+                                <div class="ref-icon-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                                    </svg></div>
+                                <div class="contact-text"><span class="c-lbl">SOCIAL</span><span
+                                        class="c-val">@bunnyxdneo</span></div>
+                            </li>
+                            <li>
+                                <div class="ref-icon-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                                        <path
+                                            d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                                        </path>
+                                    </svg></div>
+                                <div class="contact-text"><span class="c-lbl">WEBSITE</span><span
+                                        class="c-val">sudipmondal.in</span></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="ref-about-right reveal-left" data-aos="fade-left">
+                <div class="ref-hello-wrap">
+                    <span class="ref-hello-quotes">"</span>
+                    <h2 class="ref-hello-text">HELLO<span style="color:var(--dark);">.</span></h2>
+                </div>
+
+                <div class="ref-about-desc">
+                    <p>I’m <strong>Sudip Mondal</strong>, a photographer and graphic designer with a passion for
+                        creating visuals that feel meaningful and memorable. I love blending creativity with
+                        storytelling, whether it’s through cinematic photography, branding, or digital design.</p>
+                    <p>From capturing moments behind the camera to crafting modern visuals on screen, I enjoy turning
+                        ideas into experiences that connect with people. For me, great design is not just about
+                        aesthetics, it’s about emotion, detail, and telling a story that lasts.</p>
+                </div>
+
+                <div class="ref-details-grid">
+                    <!-- Education -->
+                    <div class="ref-detail-block">
+                        <h4 class="ref-section-title"><span class="ref-dot">.</span>Education</h4>
+                        <div class="ref-edu-item" style="margin-bottom: 15px;">
+                            <div class="ref-edu-year" style="font-size: 16px;">2011-<br>2017</div>
+                            <div class="ref-edu-info">
+                                <h5 style="font-size: 13px;">10th (Secondary Education)</h5>
+                                <p style="font-size: 10px;">Bamanpukuria S.M.M High School</p>
+                            </div>
+                        </div>
+                        <div class="ref-edu-item" style="margin-bottom: 15px;">
+                            <div class="ref-edu-year" style="font-size: 16px;">2017-<br>2019</div>
+                            <div class="ref-edu-info">
+                                <h5 style="font-size: 13px;">12th (High Secondary Education)</h5>
+                                <p style="font-size: 10px;">Chandrahati Dilip Kumar High School</p>
+                            </div>
+                        </div>
+                        <div class="ref-edu-item">
+                            <div class="ref-edu-year" style="font-size: 16px;">2020-<br>2023</div>
+                            <div class="ref-edu-info">
+                                <h5 style="font-size: 13px;">Bachelor of Arts in General Studies</h5>
+                                <p style="font-size: 10px;">Calcutta University</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Software Skill -->
+                    <div class="ref-detail-block">
+                        <h4 class="ref-section-title"><span class="ref-dot">.</span>Software Skill</h4>
+                        <div class="ref-software-grid">
+                            <div class="soft-tile-wrap">
+                                <div class="ref-soft-icon" style="background:#00005C;">
+                                    <!-- Adobe Premiere Pro -->
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/premierepro/premierepro-original.svg" 
+                                         alt="Premiere Pro" width="28" height="28">
+                                </div>
+                            </div>
+                            <div class="soft-tile-wrap">
+                                <div class="ref-soft-icon" style="background:#330000;">
+                                    <!-- Adobe Illustrator - position 2 -->
+                                    <div style="width:28px;height:28px;background:#FF9A00;
+border-radius:6px;display:flex;align-items:center;
+justify-content:center;color:white;font-weight:900;
+font-size:13px;font-family:Arial;">Ai</div>
+                                </div>
+                            </div>
+                            <div class="soft-tile-wrap">
+                                <div class="ref-soft-icon" style="background:#001A4D;">
+                                    <!-- Adobe Photoshop - position 3 -->
+                                    <div style="width:28px;height:28px;background:#31A8FF;
+border-radius:6px;display:flex;align-items:center;
+justify-content:center;color:white;font-weight:900;
+font-size:13px;font-family:Arial;">Ps</div>
+                                </div>
+                            </div>
+                            <div class="soft-tile-wrap">
+                                <div class="ref-soft-icon" style="background:#002b5e;">
+                                    <!-- Adobe Lightroom -->
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/aftereffects/aftereffects-original.svg" 
+                                         alt="Lightroom" width="28" height="28">
+                                </div>
+                            </div>
+                            <div class="soft-tile-wrap">
+                                <div class="ref-soft-icon" style="background:linear-gradient(135deg, #00C4CC, #7D2AE8);">
+                                    <!-- Canva -->
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/canva/canva-original.svg" 
+                                         alt="Canva" width="28" height="28">
+                                </div>
+                            </div>
+                            <div class="soft-tile-wrap">
+                                <div class="ref-soft-icon" style="background:#fff; color:#000;">
+                                    <!-- DaVinci Resolve -->
+                                    <img src="https://cdn.simpleicons.org/davinciresolve" 
+                                         alt="DaVinci Resolve" width="28" height="28">
+                                </div>
+                            </div>
+                            <div class="soft-tile-wrap">
+                                <div class="ref-soft-icon" style="background:#fff;">
+                                    <!-- Final Cut Pro -->
+                                    <img src="https://cdn.simpleicons.org/apple" 
+                                         alt="Final Cut Pro" width="28" height="28">
+                                </div>
+                            </div>
+                            <div class="soft-tile-wrap">
+                                <div class="ref-soft-icon" style="background:#fff;">
+                                    <!-- Figma -->
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" 
+                                         alt="Figma" width="28" height="28">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Working Experience -->
+                <div class="ref-detail-block" style="margin-top: 35px;">
+                    <h4 class="ref-section-title"><span class="ref-dot">.</span>Working Experience</h4>
+                    <div class="ref-experience-grid">
+                        <div class="ref-exp-column">
+                            <div class="ref-exp-item">
+                                <h5>Wedding Photographer</h5>
+                                <p>Freelance</p>
+                                <span>2021 - 2025</span>
+                            </div>
+                            <div class="ref-exp-item">
+                                <h5>Media & Photography Intern</h5>
+                                <p>FyTrips</p>
+                                <span>3 Months</span>
+                            </div>
+                        </div>
+                        <div class="ref-exp-column">
+                            <div class="ref-exp-item">
+                                <h5>Graphics Designer</h5>
+                                <p>Fyloom</p>
+                                <span>2025 - Present</span>
+                            </div>
+                            <div class="ref-exp-item">
+                                <h5>Brand Media & Photography Executive</h5>
+                                <p>FyTrips</p>
+                                <span>2025 - Present</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PHOTOGRAPHY SECTION ===== -->
+    <section class="photography" id="photography">
+        <div class="bg-number bg-number--photo reveal-fade">03</div>
+
+        <!-- TOP AREA: Cinematic Portraits -->
+        <div class="photo-section-header reveal-left">
+            <h3>Photography Showcase</h3>
+        </div>
+
+        <div class="photo-block block-top" style="position: relative;">
+            <div class="top-left reveal-right">
+                <div class="tall-featured-wrap" data-aos="fade-up" data-aos-delay="200">
+                    <img src="assets/gallery_1.png" alt="Featured Portrait"
+                        class="tall-featured-img cinematic-shadow magnetic-hover">
+                </div>
+            </div>
+            <div class="top-right reveal-left">
+                <h2 class="editorial-title portfolio-heading border-accent" data-aos="fade-up" data-aos-delay="100"
+                    style="display: block !important; border-left: 4px solid #F5C518; padding-left: 16px;"><span
+                        style="border-radius: 6px !important; display: inline-block !important; width: fit-content !important; margin-left: 20px !important;">CINEMATIC
+                        PORTRAITS</span><span style="display: none !important;">.</span>
+                </h2>
+                <p class="editorial-desc">My photography is all about energy and emotion. I love capturing authentic
+                    expressions and turning them into cinematic visuals with depth, atmosphere, and character.</p>
+
+                <div class="gallery-container-box" data-aos="fade-up" data-aos-delay="200">
+                    <div class="vertical-card"><img src="assets/gallery_2.png" alt="Gallery"></div>
+                    <div class="vertical-card"><img src="assets/portfolio_1.png" alt="Gallery"></div>
+                    <div class="vertical-card"><img src="assets/sudip-portrait.png" alt="Gallery"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MIDDLE AREA: Visual Stories -->
+        <div class="photo-section-header" style="margin-top: 50px;">
+            <h3>Photography Showcase</h3>
+        </div>
+
+        <div class="photo-block block-middle">
+            <div class="middle-left">
+                <div class="overlap-horizontal" data-aos="fade-up" data-aos-delay="200">
+                    <img src="assets/gallery_3.png" class="ov-img ov-1" alt="Street">
+                    <img src="assets/portfolio_2.png" class="ov-img ov-2" alt="Street">
+                    <img src="assets/gallery_4.png" class="ov-img ov-3" alt="Street">
+                </div>
+
+                <h2 class="editorial-title mt-40 portfolio-heading border-accent" data-aos="fade-up" data-aos-delay="100"
+                    style="display: block !important; border-left: 4px solid #F5C518; padding-left: 16px;"><span
+                        style="border-radius: 6px !important; display: inline-block !important; width: fit-content !important; margin-left: 20px !important; background: #F5C518 !important; padding: 14px 28px !important; color: var(--dark) !important;">STREET
+                        & MOODY</span><span class="heading-dot-hidden">.</span></h2>
+                <div class="row-3-images" data-aos="fade-up" data-aos-delay="200">
+                    <img src="assets/gallery_4.png" class="square-img" alt="Moody">
+                    <img src="assets/gallery_3.png" class="square-img" alt="Moody">
+                    <img src="assets/portfolio_2.png" class="square-img" alt="Moody">
+                </div>
+            </div>
+
+            <div class="middle-right" style="position: relative;">
+                <h2 class="editorial-title portfolio-heading border-accent" data-aos="fade-up" data-aos-delay="100"
+                    style="display: block !important; border-left: 4px solid #F5C518; padding-left: 16px;"><span
+                        style="border-radius: 6px !important; display: inline-block !important; width: fit-content !important; margin-left: 20px !important; background: #F5C518 !important; padding: 14px 28px !important; color: var(--dark) !important;">ELEGANT
+                        MOMENTS</span><span class="heading-dot-hidden">.</span></h2>
+                <div class="grid-3x2" data-aos="fade-up" data-aos-delay="200">
+                    <img src="assets/gallery_4.png" class="square-img" alt="Grid">
+                    <img src="assets/gallery_2.png" class="square-img" alt="Grid">
+                    <img src="assets/portfolio_1.png" class="square-img" alt="Grid">
+                    <img src="assets/gallery_1.png" class="square-img" alt="Grid">
+                    <img src="assets/portfolio_3.png" class="square-img" alt="Grid">
+                </div>
+            </div>
+        </div>
+
+        <!-- BOTTOM AREA: Editorial Selection -->
+        <div class="photo-block block-bottom" style="position: relative;">
+            <div class="bottom-left">
+                <h2 class="editorial-title portfolio-heading" data-aos="fade-up" data-aos-delay="100"><span>EDITORIAL SHOTS</span><span
+                        class="heading-dot-hidden">.</span>
+                </h2>
+                <p class="editorial-desc">Editorial photography, for me, is more than just creating stylish images. It’s
+                    about building a mood, telling a story, and turning ideas into visuals that feel alive. This
+                    portfolio reflects my approach to crafting cinematic and expressive imagery with personality and
+                    emotion.</p>
+                <p class="editorial-desc">I enjoy working on fashion-inspired concepts, creative portraits, and visually
+                    driven shoots that feel modern and authentic. Through lighting, composition, and color, I focus on
+                    creating frames that not only stand out visually but also connect naturally with people.</p>
+            </div>
+
+            <div class="bottom-right diagonal-gallery" data-aos="fade-up" data-aos-delay="200">
+                <div class="diag-wrap">
+                    <div class="diag-img d-1"><img src="assets/gallery_2.png" alt="Diagonal 1"></div>
+                    <div class="diag-img d-2"><img src="assets/portfolio_1.png" alt="Diagonal 2"></div>
+                    <div class="diag-img d-3"><img src="assets/gallery_1.png" alt="Diagonal 3"></div>
+                    <div class="diag-img d-4"><img src="assets/sudip-portrait.png" alt="Diagonal 4"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== VIDEOGRAPHY SECTION ===== -->
+    <section class="videography" id="videography" style="border: none !important; outline: none !important;">
+        <div class="bg-number bg-number--video">04</div>
+
+        <!-- TOP AREA: Cinematic Reels -->
+        <div class="video-section-header reveal-left">
+            <h3>Filmmaking Showcase</h3>
+        </div>
+
+        <div class="video-block block-reels"
+            style="display: flex !important; align-items: flex-start !important; gap: 40px;">
+            <div class="reels-left" style="width: 45%; align-self: flex-start !important;">
+                <h2 class="editorial-title portfolio-heading border-accent" data-aos="fade-up" data-aos-delay="100"
+                    style="display: block !important; margin-top: 0 !important;">
+                    <span
+                        style="border-radius: 6px !important; display: inline-block !important; width: fit-content !important; background: #F5C518 !important; padding: 14px 28px !important; color: var(--dark) !important;">CINEMATIC
+                        REELS & VIDEO EDITING.</span>
+                </h2>
+                <p class="editorial-desc">This collection showcases my work in cinematic reels and short-form video
+                    editing. I love creating content that combines storytelling, motion, music, and visuals into edits
+                    that feel immersive and impactful.</p>
+                <p class="editorial-desc">Using creative pacing, cinematic tones, and modern editing styles, I turn
+                    ideas into videos that feel expressive, engaging, and visually memorable. For me, great editing is
+                    about making people feel something through every second of the frame.</p>
+
+                <div class="floating-icons mt-40" style="display: flex; gap: 25px; align-items: center;">
+                    <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: #666; font-family: 'Inter', sans-serif;">Premiere Pro</div>
+                    <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: #666; font-family: 'Inter', sans-serif;">DaVinci</div>
+                    <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: #666; font-family: 'Inter', sans-serif;">After Effects</div>
+                </div>
+            </div>
+            <div class="reels-right" style="width: 55%;">
+                <div class="massive-yellow-box"
+                    style="margin-top: 0 !important; border: none !important; background: transparent !important; box-shadow: none !important; padding: 0 !important;">
+                    <div class="reels-grid" data-aos="fade-up" data-aos-delay="200" style="grid-template-columns: repeat(2, 1fr) !important;">
+                        <img src="assets/reel_cover.png" class="reel-item" alt="Reel">
+                        <img src="assets/bts_shot.png" class="reel-item" alt="BTS">
+                        <img src="assets/cinematic_frame.png" class="reel-item" alt="Cinematic Frame">
+                        <img src="assets/timeline_ui.png" class="reel-item" alt="Timeline">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MIDDLE AREA: Filmmaking Projects -->
+        <div class="video-section-header reveal-left" style="margin-top: 60px;">
+            <h3>Filmmaking Showcase</h3>
+        </div>
+
+        <div class="video-block block-projects" style="display: block !important; max-width: 100% !important; padding: 0 60px !important; border: none !important; outline: none !important; overflow: visible !important;">
+            <h2 class="editorial-title portfolio-heading border-accent" data-aos="fade-up" data-aos-delay="100" style="display: inline-block !important; width: fit-content !important; margin-bottom: 40px !important;">
+                <span
+                    style="border-radius: 6px !important; display: inline-block !important; width: fit-content !important; background: #F5C518 !important; padding: 14px 28px !important; color: var(--dark) !important;">SHORT
+                    FILMS & CINEMATOGRAPHY.</span>
+            </h2>
+
+            <!-- Horizontal snap carousel container -->
+            <div class="cinematography-carousel-container" data-aos="fade-up" data-aos-delay="200">
+                <div class="cinematography-carousel-track">
+                    <!-- Card 1 (Side Card) -->
+                    <div class="carousel-card side-card">
+                        <img src="assets/gallery_1.png" alt="Chasing Shadows">
+                        <div class="carousel-card-overlay">
+                            <div class="carousel-card-title">Chasing Shadows</div>
+                            <div class="carousel-card-category">Cinematography</div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 (Side Card) -->
+                    <div class="carousel-card side-card">
+                        <img src="assets/gallery_2.png" alt="The Silent Echo">
+                        <div class="carousel-card-overlay">
+                            <div class="carousel-card-title">The Silent Echo</div>
+                            <div class="carousel-card-category">Short Film</div>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 (Center Card) -->
+                    <div class="carousel-card center-card">
+                        <img src="assets/bts_shot.png" alt="Beyond The Lens">
+                        <div class="carousel-card-overlay">
+                            <div class="carousel-card-title">Beyond The Lens</div>
+                            <div class="carousel-card-category">Director's Cut</div>
+                        </div>
+                    </div>
+
+                    <!-- Card 4 (Side Card) -->
+                    <div class="carousel-card side-card">
+                        <img src="assets/cinematic_frame.png" alt="Nocturnal Run">
+                        <div class="carousel-card-overlay">
+                            <div class="carousel-card-title">Nocturnal Run</div>
+                            <div class="carousel-card-category">Music Video</div>
+                        </div>
+                    </div>
+
+                    <!-- Card 5 (Side Card) -->
+                    <div class="carousel-card side-card">
+                        <img src="assets/portfolio_1.png" alt="Monochrome Beats">
+                        <div class="carousel-card-overlay">
+                            <div class="carousel-card-title">Monochrome Beats</div>
+                            <div class="carousel-card-category">Documentary</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Existing description & software icons placed below carousel -->
+            <div class="cinematography-info-footer" style="margin-top: 40px;">
+                <p class="editorial-desc">This section showcases my work in short films and cinematography, where
+                    storytelling meets visual emotion. From framing to lighting, every detail is shaped to create
+                    immersive and meaningful cinematic experiences.</p>
+
+                <div class="floating-icons" style="margin-bottom: 20px; display: flex; gap: 25px; align-items: center;">
+                    <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: #666; font-family: 'Inter', sans-serif;">Premiere Pro</div>
+                    <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: #666; font-family: 'Inter', sans-serif;">DaVinci</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BOTTOM AREA: Timeline & Color Grading -->
+        <div class="video-section-header" style="margin-top: 60px; margin-bottom: 20px !important;">
+            <h3 style="font-size: 11px !important; text-transform: uppercase !important; letter-spacing: 0.2em !important; color: #888 !important; font-family: 'Inter', sans-serif !important; font-weight: 500 !important; margin: 0 !important; display: inline-block !important;">Filmmaking Showcase</h3>
+        </div>
+
+        <div class="video-block block-timelines">
+            <div class="timelines-left">
+                <h2 class="editorial-title portfolio-heading border-accent" data-aos="fade-up" data-aos-delay="100" style="display: inline-block !important; width: fit-content !important; margin-top: 0 !important; margin-bottom: 25px !important;">
+                    <span
+                        style="border-radius: 6px !important; display: inline-block !important; width: fit-content !important; background: #F5C518 !important; padding: 16px 28px !important; color: var(--dark) !important;">COLOR GRADING & POST PRODUCTION.</span>
+                </h2>
+                <p class="editorial-desc">Color grading and post-production play a huge role in defining the mood of a
+                    visual story. This collection highlights my process of turning raw footage into cinematic scenes
+                    with rich tones, atmosphere, and a strong visual identity.</p>
+            </div>
+            <div class="timelines-right">
+                <div class="complex-materials-layout" data-aos="fade-up" data-aos-delay="200">
+                    <svg class="connecting-line" viewBox="0 0 500 500" preserveAspectRatio="none">
+                        <path d="M50 50 C 250 50, 100 450, 450 450" fill="none" stroke="var(--yellow)" stroke-width="40"
+                            stroke-linecap="round" />
+                    </svg>
+
+                    <div class="timeline-card t-1">
+                        <span class="t-badge">Node Tree</span>
+                        <img src="assets/timeline_ui.png" alt="Timeline">
+                    </div>
+                    <div class="timeline-card t-2">
+                        <span class="t-badge">Final Render</span>
+                        <img src="assets/cinematic_frame.png" alt="Timeline">
+                    </div>
+                    <div class="timeline-card t-3">
+                        <span class="t-badge">Editing Timeline</span>
+                        <img src="assets/timeline_ui.png" alt="Timeline">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SERVICES / EXPERTISE SECTION ===== -->
+    <section class="services creative-section" id="services" style="position: relative;">
+        <div class="bg-number bg-number--5 reveal-fade">05</div>
+        <div class="section-header reveal-left">
+            <span class="expertise-label">Expertise</span>
+        </div>
+
+        <div class="services-title reveal-up">
+            <span class="big">CREATIVE</span> <span class="small">DISCIPLINES</span>
+        </div>
+
+        <div class="services-grid">
+            <div class="service-card reveal-up" data-aos="fade-up" data-aos-delay="100" style="animation-delay: 0.1s;">
+                <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z">
+                        </path>
+                        <circle cx="12" cy="13" r="4"></circle>
+                    </svg></div>
+                <h3><strong>Photography</strong><br>Editorial & Lifestyle</h3>
+            </div>
+            <div class="service-card reveal-up" data-aos="fade-up" data-aos-delay="200" style="animation-delay: 0.2s;">
+                <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="23 7 16 12 23 17 23 7"></polygon>
+                        <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+                    </svg></div>
+                <h3><strong>Cinematography</strong><br>Short Films & Commercials</h3>
+            </div>
+            <div class="service-card reveal-up" data-aos="fade-up" data-aos-delay="300" style="animation-delay: 0.3s;">
+                <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="4" width="20" height="16" rx="2" ry="2"></rect>
+                        <path d="M6 4v16"></path>
+                        <path d="M18 4v16"></path>
+                        <path d="M2 8h20"></path>
+                        <path d="M2 16h20"></path>
+                    </svg></div>
+                <h3><strong>Post-Production</strong><br>Editing & Color Grading</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== WOW SECTION: CINEMATIC SHOWCASE ===== -->
+    <section class="wow-section">
+        <div class="wow-parallax-wrap">
+            <img src="assets/wow_cinematic.png" alt="Cinematic Showcase" class="wow-image">
+            <div class="wow-overlay"></div>
+            <div style="position: relative; z-index: 10;">
+                <h2 class="wow-text reveal-up portfolio-heading">
+                    VISUAL<br><span style="color:var(--yellow)">STORYTELLING.</span></h2>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== BRAND PHILOSOPHY ===== -->
+    <section class="philosophy" id="philosophy" style="position: relative;">
+        <div class="philosophy-container">
+            <div class="phil-left reveal-right">
+                <img src="assets/philosophy_portrait.png" alt="Director" class="phil-img cinematic-shadow">
+            </div>
+            <div class="phil-right reveal-left">
+                <h2 class="editorial-title portfolio-heading" data-aos="fade-up" data-aos-delay="100"><span class="vision-dot-left-1" style="display: none !important;">.</span> <span>THE
+                        VISION</span><span class="vision-dot-right" style="display: none !important;">.</span></h2>
+                <h3 class="phil-subtitle">Every frame is a painted canvas.</h3>
+                <p class="phil-desc">My approach to visual storytelling is rooted in emotion and authenticity. Whether
+                    crafting a high-end fashion film or capturing a fleeting editorial moment, my goal is always to
+                    freeze time in its most cinematic form.</p>
+                <div class="signature" style="position: relative;">
+                    Sudip Mondal
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CONTACT ME ===== -->
+    <section class="contact" id="contact" style="max-width: 1400px; margin: 0 auto;">
+        <div class="contact-container"
+            style="display: grid; grid-template-columns: 5fr 7fr; gap: 80px; align-items: center;">
+
+            <!-- Left Side: Cinematic Image + Info -->
+            <div class="contact-left reveal-right">
+                <div class="contact-img-wrap"
+                    style="position: relative; border-radius: 12px !important; overflow: hidden; margin-bottom: 40px; border: none !important;">
+                    <div class="contact-glass-bg floating"
+                        style="position: absolute; top: -20px; right: -20px; width: 100%; height: 100%; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 12px !important; z-index: 0;">
+                    </div>
+                    <img src="assets/contact_cinematic.png" alt="Let's Connect" class="contact-img cinematic-shadow"
+                        style="position: relative; z-index: 2; width: 100%; height: 600px; object-fit: cover; border-radius: 12px !important; filter: grayscale(20%); transition: filter 0.6s ease; display: block;"
+                        onmouseover="this.style.filter='grayscale(0%)'" onmouseout="this.style.filter='grayscale(20%)'">
+                </div>
+
+                <div class="contact-info" style="display: flex; flex-direction: column; gap: 20px;">
+                    <div class="info-block" style="display: flex; flex-direction: column; gap: 5px;">
+                        <span
+                            style="font-size: 14px; font-weight: 700; color: var(--text-main); text-transform: uppercase; letter-spacing: 1px;">Email</span>
+                        <a href="mailto:sudipxv@gmail.com" class="magnetic-hover"
+                            style="font-family: 'Playfair Display', serif; font-size: 24px; color: var(--dark); text-decoration: none; font-weight: 700; transition: color 0.3s ease;">sudipxv@gmail.com</a>
+                    </div>
+                    <div class="info-block" style="display: flex; flex-direction: column; gap: 5px;">
+                        <span
+                            style="font-size: 14px; font-weight: 700; color: var(--text-main); text-transform: uppercase; letter-spacing: 1px;">Phone</span>
+                        <a href="tel:+917044692706" class="magnetic-hover"
+                            style="font-family: 'Playfair Display', serif; font-size: 24px; color: var(--dark); text-decoration: none; font-weight: 700; transition: color 0.3s ease;">+91
+                            70446 92706</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side: Form + Headers -->
+            <div class="contact-right reveal-left"
+                style="background: transparent !important; padding: 60px; border-radius: 0 !important; box-shadow: none !important;">
+                <h2 class="editorial-title portfolio-heading" data-aos="fade-up" data-aos-delay="100" style="margin-bottom: 15px;"><span class="contact-dot-left-1" style="display: none !important;">.</span> <span>LET'S BUILD</span><br>VISUAL STORIES.</h2>
+                <p class="phil-desc"
+                    style="font-size: 18px; color: var(--text-main); margin-bottom: 40px; font-style: italic;">Let's
+                    make something people actually feel.</p>
+
+                <form class="contact-form" data-aos="fade-up" data-aos-delay="150" style="display: flex; flex-direction: column; gap: 25px;">
+                    <div class="form-group">
+                        <input type="text" placeholder="Your Name" required class="form-input"
+                            style="width: 100%; padding: 20px; border: 2px solid #eee; border-radius: 15px; font-family: 'Inter', sans-serif; font-size: 16px; background: #fafafa; transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Your Email" required class="form-input"
+                            style="width: 100%; padding: 20px; border: 2px solid #eee; border-radius: 15px; font-family: 'Inter', sans-serif; font-size: 16px; background: #fafafa; transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;">
+                    </div>
+                    <div class="form-group">
+                        <select class="form-input custom-select" required
+                            style="width: 100%; padding: 20px; border: 2px solid #eee; border-radius: 15px; font-family: 'Inter', sans-serif; font-size: 16px; background: #fafafa; appearance: none; transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s; cursor: pointer;">
+                            <option value="" disabled selected>Select Project Type</option>
+                            <optgroup label="Photography">
+                                <option value="wedding-photography">Wedding Photography</option>
+                                <option value="portrait-photography">Portrait / Cinematic Photography</option>
+                                <option value="editorial-photography">Editorial / Fashion Photography</option>
+                                <option value="event-photography">Event Photography</option>
+                                <option value="product-photography">Product Photography</option>
+                            </optgroup>
+                            <optgroup label="Videography & Film">
+                                <option value="wedding-film">Wedding Film / Highlight Reel</option>
+                                <option value="cinematic-reel">Cinematic Reel / Short Film</option>
+                                <option value="commercial-video">Commercial / Brand Video</option>
+                                <option value="music-video">Music Video</option>
+                                <option value="documentary">Documentary / Story Film</option>
+                            </optgroup>
+                            <optgroup label="Post Production">
+                                <option value="video-editing">Video Editing</option>
+                                <option value="color-grading">Color Grading</option>
+                                <option value="reels-editing">Social Media Reels Editing</option>
+                            </optgroup>
+                            <optgroup label="Graphic Design">
+                                <option value="brand-identity">Brand Identity / Logo Design</option>
+                                <option value="social-media-design">Social Media Graphics</option>
+                                <option value="poster-design">Poster / Flyer Design</option>
+                                <option value="ui-design">UI / Digital Design</option>
+                            </optgroup>
+                            <option value="other">Other / Custom Project</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <textarea placeholder="Tell me about your project..." rows="5" required class="form-input"
+                            style="width: 100%; padding: 20px; border: 2px solid #eee; border-radius: 15px; font-family: 'Inter', sans-serif; font-size: 16px; background: #fafafa; resize: vertical; transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;"></textarea>
+                    </div>
+
+                    <div class="contact-actions" style="display: flex; gap: 20px; margin-top: 10px; flex-wrap: wrap;">
+                        <button type="submit" class="submit-btn magnetic-hover"
+                            style="width: fit-content !important; min-width: 200px !important; padding: 20px 40px; background: var(--yellow) !important; color: #111 !important; border: none; border-radius: 50px; font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">Send
+                            Message</button>
+
+                        <a href="https://wa.me/917044692706" target="_blank" class="whatsapp-btn magnetic-hover"
+                            style="flex: 1; min-width: 200px; padding: 20px 40px; background: #111 !important; color: #fff !important; border: 1px solid #333 !important; border-radius: 50px; font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 700; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 10px; transition: all 0.3s ease; box-shadow: none !important;">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z" />
+                            </svg>
+                            WhatsApp
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CINEMATIC FOOTER ===== -->
+    <footer class="cinematic-footer">
+        <div class="footer-noise"></div>
+        <div class="footer-content reveal-up">
+            <h2 class="footer-title" data-aos="fade-up">LET'S CREATE<br><span style="color:var(--yellow)">TOGETHER.</span></h2>
+            <div class="footer-links">
+                <a href="#contact" class="start-project-btn footer-btn">Start a Project</a>
+                <div class="social-links">
+                    <a href="#">Instagram</a>
+                    <a href="#">Behance</a>
+                    <a href="#">Vimeo</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 SUDIP MONDAL. ALL RIGHTS RESERVED.</p>
+                <p>Designed with <span style="color:var(--yellow)">&#10084;</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        duration: 800,
+        easing: 'ease-in-out',
+        once: true,
+        offset: 80
+      });
+    </script>
+    <script>
+      const camStatuses = [
+        "FOCUSING...",
+        "METERING LIGHT...",
+        "SETTING EXPOSURE...",
+        "READY TO SHOOT.",
+      ];
+
+      let sIdx = 0;
+      const camStatusEl = document.getElementById('camStatus');
+
+      const sInterval = setInterval(function() {
+        sIdx++;
+        if (sIdx < camStatuses.length) {
+          camStatusEl.textContent = camStatuses[sIdx];
+        }
+      }, 500);
+
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          // Shutter close (curtains)
+          document.getElementById('curtainTop')
+            .classList.add('close');
+          document.getElementById('curtainBottom')
+            .classList.add('close');
+
+          // Then hide loader
+          setTimeout(function() {
+            clearInterval(sInterval);
+            document.getElementById('page-loader')
+              .classList.add('hidden');
+
+            // Hero entrance
+            document.querySelectorAll('.hero-entrance')
+              .forEach(function(el, i) {
+                setTimeout(function() {
+                  el.classList.add('visible');
+                }, i * 150);
+              });
+          }, 500);
+
+        }, 2400);
+      });
+    </script>
+    <script>
+// Mobile fixes - runs on page load
+function applyMobileFixes() {
+  if (window.innerWidth <= 768) {
+    
+    // 1. HIDE ALL VERTICAL TEXT
+    document.querySelectorAll('*').forEach(el => {
+      const style = el.getAttribute('style') || '';
+      if (
+        style.includes('writing-mode') ||
+        style.includes('vertical-rl') ||
+        style.includes('rotate(90') ||
+        style.includes('rotate(180') ||
+        style.includes('rotate(-90')
+      ) {
+        el.style.display = 'none';
+      }
+    });
+
+    // 2. FIX ABOUT SECTION STACKING
+    const aboutContent = document.querySelector(
+      '.ref-about-content'
+    );
+    if (aboutContent) {
+      aboutContent.style.flexDirection = 'column';
+      aboutContent.style.display = 'flex';
+    }
+
+    const aboutLeft = document.querySelector(
+      '.ref-about-left'
+    );
+    if (aboutLeft) {
+      aboutLeft.style.width = '100%';
+      aboutLeft.style.maxWidth = '260px';
+      aboutLeft.style.margin = '0 auto';
+    }
+
+    const aboutRight = document.querySelector(
+      '.ref-about-right'
+    );
+    if (aboutRight) {
+      aboutRight.style.width = '100%';
+    }
+
+    // 3. FIX HERO LAYOUT
+    const heroPortrait = document.querySelector(
+      '.hero-portrait-area'
+    );
+    if (heroPortrait) {
+      heroPortrait.style.width = '100%';
+      heroPortrait.style.height = '45vh';
+    }
+
+    // 4. FIX ALL SECTION HEADINGS
+    document.querySelectorAll(
+      '.editorial-title, .editorial-title span'
+    ).forEach(el => {
+      el.style.fontSize = 
+        'clamp(22px, 7vw, 34px)';
+      el.style.whiteSpace = 'normal';
+      el.style.wordBreak = 'break-word';
+      el.style.maxWidth = '90vw';
+    });
+
+    // 5. FIX REMAINING OVERFLOW
+    document.querySelectorAll('section').forEach(
+      el => {
+        el.style.overflowX = 'hidden';
+        el.style.maxWidth = '100vw';
+      }
+    );
+
+    // 6. FIX CREATIVE CARDS
+    const serviceCards = document.querySelector(
+      '.service-cards, [class*="service-cards"]'
+    );
+    if (serviceCards) {
+      serviceCards.style.gridTemplateColumns = 
+        '1fr';
+    }
+
+    // 7. FIX CONTACT BUTTONS
+    document.querySelectorAll(
+      '.send-btn, .whatsapp-btn, ' +
+      '[class*="send-btn"], ' +
+      '[class*="whatsapp-btn"]'
+    ).forEach(btn => {
+      btn.style.width = '100%';
+    });
+
+  }
+}
+
+// Run on load
+applyMobileFixes();
+
+// Run on resize
+window.addEventListener('resize', 
+  applyMobileFixes
+);
+</script>
+</body>
+
+</html>

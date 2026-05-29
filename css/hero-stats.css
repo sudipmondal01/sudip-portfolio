@@ -1,0 +1,61 @@
+
+/* ===== HERO STATS COMPONENT ===== */
+.hero-text-area {
+    height: 100% !important; 
+    /* Ensures it matches the right column height so absolute bottom works */
+}
+
+.hero-stats {
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.hero-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.stat-number {
+    font-family: 'Playfair Display', serif !important;
+    font-size: 28px !important;
+    font-weight: 800 !important;
+    color: var(--dark) !important;
+    line-height: 1 !important;
+}
+
+.stat-label {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    color: #888 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 2px !important;
+}
+
+.stat-divider {
+    width: 1px !important;
+    height: 35px !important;
+    background-color: #ddd !important;
+}
+
+/* Ensure mobile layout doesn't break due to absolute positioning */
+@media (max-width: 768px) {
+    .hero-text-area {
+        height: auto !important;
+    }
+    .hero-stats {
+        position: relative !important;
+        bottom: 0 !important;
+        margin-top: 50px !important;
+        justify-content: center;
+        width: 100%;
+        gap: 20px;
+    }
+    .stat-number { font-size: 24px !important; }
+    .stat-label { font-size: 9px !important; letter-spacing: 1px !important; }
+}
