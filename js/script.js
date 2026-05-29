@@ -263,6 +263,38 @@
         });
     }
 
+    // Contact form — mailto handler
+    const contactForm = document.querySelector('.contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const name    = contactForm.querySelector('input[type="text"]').value.trim();
+            const email   = contactForm.querySelector('input[type="email"]').value.trim();
+            const project = contactForm.querySelector('select').value;
+            const message = contactForm.querySelector('textarea').value.trim();
+
+            const subject = encodeURIComponent('Project Inquiry: ' + project + ' — ' + name);
+            const body    = encodeURIComponent(
+                'Name: ' + name + '\n' +
+                'Email: ' + email + '\n' +
+                'Project: ' + project + '\n\n' +
+                message
+            );
+
+            window.location.href = 'mailto:sudipxv@gmail.com?subject=' + subject + '&body=' + body;
+
+            const btn = contactForm.querySelector('.submit-btn');
+            const original = btn.textContent;
+            btn.textContent = 'Opening email client…';
+            btn.disabled = true;
+            setTimeout(function() {
+                btn.textContent = original;
+                btn.disabled = false;
+            }, 3000);
+        });
+    }
+
     // Smooth scroll progress bar at top
     const progressBar = document.createElement('div');
     progressBar.style.position = 'fixed';
@@ -288,7 +320,7 @@
     sectionsToDivide.forEach(section => {
         const divider = document.createElement('div');
         divider.className = 'cinematic-divider';
-        divider.innerHTML = '<div class=\divider-line\></div><div class=\divider-blur\></div>';
+        divider.innerHTML = '<div class="divider-line"></div><div class="divider-blur"></div>';
         section.parentNode.insertBefore(divider, section);
     });
 
