@@ -30,27 +30,53 @@
         });
     });
 
-    // Navbar scroll effect
+    // Consolidated scroll handler (navbar + active links + wow parallax + progress bar)
     const navbar = document.querySelector('.cinematic-header');
     let lastScrollY = window.scrollY;
-    
+    const sections = document.querySelectorAll('section[id]');
+    const wowSection = document.querySelector('.wow-section');
+    const wowImage   = document.querySelector('.wow-image');
+
+    const progressBar = document.createElement('div');
+    progressBar.style.cssText = 'position:fixed;top:0;left:0;height:4px;background:var(--yellow);width:0%;z-index:9999;transition:width 0.1s ease;box-shadow:0 0 10px rgba(245,171,0,0.5);';
+    document.body.appendChild(progressBar);
+
     window.addEventListener('scroll', () => {
-        if (!navbar) return;
-        
-        // Add scrolled class for glassmorphism
-        if (window.scrollY > 50) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
+        const scrollY = window.scrollY;
+
+        // Navbar: glassmorphism + hide/show
+        if (navbar) {
+            navbar.classList.toggle('scrolled', scrollY > 50);
+            if (scrollY > lastScrollY && scrollY > 200) {
+                navbar.classList.add('hide-nav');
+            } else {
+                navbar.classList.remove('hide-nav');
+            }
+            lastScrollY = scrollY;
         }
-        
-        // Hide/Show on scroll direction
-        if (window.scrollY > lastScrollY && window.scrollY > 200) {
-            navbar.classList.add('hide-nav');
-        } else {
-            navbar.classList.remove('hide-nav');
+
+        // Active nav link
+        sections.forEach(current => {
+            const sectionTop = current.offsetTop - 100;
+            const navLink = document.querySelector(`.nav-link[href*="#${current.getAttribute('id')}"]`);
+            if (navLink && scrollY > sectionTop && scrollY <= sectionTop + current.offsetHeight) {
+                document.querySelectorAll('.nav-link').forEach(a => a.classList.remove('active'));
+                navLink.classList.add('active');
+            }
+        });
+
+        // WOW section parallax
+        if (wowSection && wowImage) {
+            const rect = wowSection.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
+                const progress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
+                wowImage.style.transform = `scale(1.1) translateY(${(progress - 0.5) * 50}px)`;
+            }
         }
-        lastScrollY = window.scrollY;
+
+        // Scroll progress bar
+        const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        progressBar.style.width = (scrollY / scrollHeight * 100) + '%';
     });
 
     // Parallax effect on scroll
@@ -87,24 +113,7 @@
         }
     });
 
-    // Mouse move parallax for floating effect
-    const icons = document.querySelectorAll('.hero__icon');
-    const dots = document.querySelectorAll('.hero__dot');
-
-    document.addEventListener('mousemove', function(e) {
-        const mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-        const mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
-
-        icons.forEach(function(icon, index) {
-            const factor = (index + 1) * 3;
-            icon.style.transform = `translate(${mouseX * factor}px, ${mouseY * factor}px)`;
-        });
-
-        dots.forEach(function(dot, index) {
-            const factor = (index + 1) * 2;
-            dot.style.transform = `translate(${mouseX * factor}px, ${mouseY * factor}px)`;
-        });
-    });
+    // Hero icon/dot mouse parallax is handled by mouse-parallax.js (smooth rAF version)
 
     // Intersection Observer for scroll animations
     const observerOptions = {
@@ -125,24 +134,7 @@
         observer.observe(el);
     });
 
-    // Active link update on scroll
-    const sections = document.querySelectorAll('section[id]');
-    window.addEventListener('scroll', () => {
-        const scrollY = window.pageYOffset;
-        sections.forEach(current => {
-            const sectionHeight = current.offsetHeight;
-            const sectionTop = current.offsetTop - 100;
-            const sectionId = current.getAttribute('id');
-            const navLink = document.querySelector(`.nav-link[href*="#${sectionId}"]`);
-            
-            if (navLink) {
-                if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-                    document.querySelectorAll('.nav-link').forEach(a => a.classList.remove('active'));
-                    navLink.classList.add('active');
-                }
-            }
-        });
-    });
+    // Active link + all other scroll work is handled by the consolidated listener above
 
     // Smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
@@ -169,8 +161,8 @@
     // NEW: Advanced Intersection Observer for Scroll Reveals
     const advancedObserverOptions = {
         root: null,
-        rootMargin: '0px 0px -100px 0px',
-        threshold: 0.1
+        rootMargin: '0px 0px -50px 0px',
+        threshold: 0.05
     };
 
     const advancedObserver = new IntersectionObserver((entries, observer) => {
@@ -202,118 +194,140 @@
         });
     });
 
-    // Fix Wow Section Parallax
-    const wowSection = document.querySelector('.wow-section');
-    const wowImage = document.querySelector('.wow-image');
-    
-    window.addEventListener('scroll', () => {
-        if (wowSection && wowImage) {
-            const rect = wowSection.getBoundingClientRect();
-            if (rect.top < window.innerHeight && rect.bottom > 0) {
-                const scrollProgress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
-                wowImage.style.transform = `scale(1.1) translateY(${(scrollProgress - 0.5) * 50}px)`;
-            }
+    // WOW section parallax is handled by the consolidated scroll listener
+
+    // ── Premium cursor: snapping dot + lagging ring ─────────────────────────
+    const dot  = document.createElement('div');
+    const ring = document.createElement('div');
+    dot.id  = 'cursor-dot';
+    ring.id = 'cursor-ring';
+    document.body.appendChild(dot);
+    document.body.appendChild(ring);
+
+    let curMouseX = 0, curMouseY = 0;
+    let ringX = 0,     ringY = 0;
+    let ringRafId  = null;
+    let cursorReady = false;
+
+    document.addEventListener('mousemove', function(e) {
+        curMouseX = e.clientX;
+        curMouseY = e.clientY;
+
+        if (!cursorReady) {
+            // First move: teleport ring so it doesn't sweep in from (0,0)
+            cursorReady = true;
+            ringX = curMouseX;
+            ringY = curMouseY;
+            dot.classList.add('is-ready');
+            ring.classList.add('is-ready');
         }
-    });
 
-    // Cinematic Cursor
-    const cursor = document.createElement('div');
-    cursor.classList.add('cinematic-cursor');
-    document.body.appendChild(cursor);
+        // Dot: half of 8px size = 4px centre-offset
+        dot.style.transform = 'translate(' + (curMouseX - 4) + 'px,' + (curMouseY - 4) + 'px)';
 
-    document.addEventListener('mousemove', e => {
-        cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
-    });
+        if (!ringRafId) ringRafId = requestAnimationFrame(animateRing);
+    }, { passive: true });
 
+    function animateRing() {
+        var ease = 0.13;
+        ringX += (curMouseX - ringX) * ease;
+        ringY += (curMouseY - ringY) * ease;
+        // Half of 36px base ring size = 18px centre-offset
+        ring.style.transform = 'translate(' + (ringX - 18) + 'px,' + (ringY - 18) + 'px)';
+
+        if (Math.abs(curMouseX - ringX) > 0.2 || Math.abs(curMouseY - ringY) > 0.2) {
+            ringRafId = requestAnimationFrame(animateRing);
+        } else {
+            ringRafId = null;
+        }
+    }
+
+    // Hover state on interactive elements
     const hoverables = document.querySelectorAll('a, button, .magnetic-hover, input, textarea, select');
-    hoverables.forEach(el => {
-        el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-        el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-    });
-
-    // Cinematic Cursor Trail
-    const cursorTrail = document.createElement('div');
-    cursorTrail.classList.add('cinematic-cursor-trail');
-    document.body.appendChild(cursorTrail);
-
-    let trailX = 0, trailY = 0;
-    let mouseX = 0, mouseY = 0;
-
-    document.addEventListener('mousemove', e => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-    });
-
-    function animateTrail() {
-        // Easing factor for the trail
-        const ease = 0.15;
-        trailX += (mouseX - trailX) * ease;
-        trailY += (mouseY - trailY) * ease;
-        
-        cursorTrail.style.transform = `translate(${trailX}px, ${trailY}px)`;
-        requestAnimationFrame(animateTrail);
-    }
-    animateTrail();
-
-    // Add trail hover effect to existing hoverables
-    if (typeof hoverables !== 'undefined') {
-        hoverables.forEach(el => {
-            el.addEventListener('mouseenter', () => cursorTrail.classList.add('hover'));
-            el.addEventListener('mouseleave', () => cursorTrail.classList.remove('hover'));
+    hoverables.forEach(function(el) {
+        el.addEventListener('mouseenter', function() {
+            dot.classList.add('is-hovering');
+            ring.classList.add('is-hovering');
         });
-    }
+        el.addEventListener('mouseleave', function() {
+            dot.classList.remove('is-hovering');
+            ring.classList.remove('is-hovering');
+        });
+    });
 
-    // Contact form — mailto handler
+    // Click: ring squeezes on press, springs back on release
+    document.addEventListener('mousedown', function() {
+        dot.classList.add('is-clicking');
+        ring.classList.add('is-clicking');
+    });
+    document.addEventListener('mouseup', function() {
+        dot.classList.remove('is-clicking');
+        ring.classList.remove('is-clicking');
+    });
+
+    // Fade ring when pointer leaves the viewport
+    document.addEventListener('mouseleave', function() { ring.classList.add('is-hidden'); });
+    document.addEventListener('mouseenter', function() { ring.classList.remove('is-hidden'); });
+
+    // Contact form — validation + success message
     const contactForm = document.querySelector('.contact-form');
     if (contactForm) {
+        // Inject error and success message containers once
+        const msgEl = document.createElement('div');
+        msgEl.style.cssText = 'margin-top:12px;padding:12px 16px;border-radius:8px;font-size:14px;font-weight:600;display:none;';
+        contactForm.appendChild(msgEl);
+
+        function showMsg(text, isError) {
+            msgEl.textContent = text;
+            msgEl.style.display = 'block';
+            msgEl.style.background = isError ? '#ffe0e0' : '#e6f9f0';
+            msgEl.style.color      = isError ? '#c0392b' : '#1a7a4a';
+        }
+
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
+            msgEl.style.display = 'none';
 
-            const name    = contactForm.querySelector('input[type="text"]').value.trim();
-            const email   = contactForm.querySelector('input[type="email"]').value.trim();
-            const project = contactForm.querySelector('select').value;
-            const message = contactForm.querySelector('textarea').value.trim();
+            const nameField    = contactForm.querySelector('input[type="text"]');
+            const emailField   = contactForm.querySelector('input[type="email"]');
+            const messageField = contactForm.querySelector('textarea');
+            const name         = nameField.value.trim();
+            const email        = emailField.value.trim();
+            const project      = contactForm.querySelector('select').value;
+            const message      = messageField.value.trim();
 
-            const subject = encodeURIComponent('Project Inquiry: ' + project + ' — ' + name);
+            // Validation
+            if (!name) { showMsg('Please enter your name.', true); nameField.focus(); return; }
+            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                showMsg('Please enter a valid email address.', true); emailField.focus(); return;
+            }
+            if (!message) { showMsg('Please tell me about your project.', true); messageField.focus(); return; }
+
+            // Open mailto
+            const subject = encodeURIComponent('Project Inquiry: ' + (project || 'General') + ' — ' + name);
             const body    = encodeURIComponent(
                 'Name: ' + name + '\n' +
                 'Email: ' + email + '\n' +
-                'Project: ' + project + '\n\n' +
+                'Project: ' + (project || 'Not specified') + '\n\n' +
                 message
             );
-
             window.location.href = 'mailto:sudipxv@gmail.com?subject=' + subject + '&body=' + body;
 
+            // Success state
+            showMsg("Thanks! I'll get back to you soon.", false);
             const btn = contactForm.querySelector('.submit-btn');
-            const original = btn.textContent;
-            btn.textContent = 'Opening email client…';
+            btn.textContent = 'Message Sent ✓';
             btn.disabled = true;
             setTimeout(function() {
-                btn.textContent = original;
+                contactForm.reset();
+                btn.textContent = 'Send Message';
                 btn.disabled = false;
-            }, 3000);
+                msgEl.style.display = 'none';
+            }, 4000);
         });
     }
 
-    // Smooth scroll progress bar at top
-    const progressBar = document.createElement('div');
-    progressBar.style.position = 'fixed';
-    progressBar.style.top = '0';
-    progressBar.style.left = '0';
-    progressBar.style.height = '4px';
-    progressBar.style.backgroundColor = 'var(--yellow)';
-    progressBar.style.width = '0%';
-    progressBar.style.zIndex = '9999';
-    progressBar.style.transition = 'width 0.1s ease';
-    progressBar.style.boxShadow = '0 0 10px rgba(245, 171, 0, 0.5)';
-    document.body.appendChild(progressBar);
-
-    window.addEventListener('scroll', () => {
-        const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-        const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        const progress = (scrollTop / scrollHeight) * 100;
-        progressBar.style.width = progress + '%';
-    });
+    // Progress bar is created and updated inside the consolidated scroll listener
 
     // Dynamic Cinematic Dividers
     const sectionsToDivide = document.querySelectorAll('section:not(.wow-section):not(.hero)');
@@ -323,5 +337,145 @@
         divider.innerHTML = '<div class="divider-line"></div><div class="divider-blur"></div>';
         section.parentNode.insertBefore(divider, section);
     });
+
+// ── QR Code Lightbox ─────────────────────────────────────────────────────────
+
+(function () {
+    const modal   = document.getElementById('qr-modal');
+    const trigger = document.getElementById('qr-trigger');
+    const close   = modal && modal.querySelector('.qr-modal__close');
+    const backdrop = modal && modal.querySelector('.qr-modal__backdrop');
+
+    if (!modal || !trigger) return;
+
+    // Focus trap: collect focusable children inside the modal box
+    function getFocusable() {
+        return Array.from(modal.querySelectorAll(
+            'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        ));
+    }
+
+    function openModal() {
+        modal.removeAttribute('hidden');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        // Double rAF ensures the transition fires after display kicks in
+        requestAnimationFrame(function () {
+            requestAnimationFrame(function () {
+                modal.classList.add('is-open');
+                // Focus the close button for keyboard users
+                if (close) close.focus();
+            });
+        });
+    }
+
+    function closeModal() {
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        // Re-hide after CSS transition completes (opacity: 0 → visibility: hidden)
+        setTimeout(function () {
+            if (!modal.classList.contains('is-open')) {
+                modal.setAttribute('hidden', '');
+            }
+        }, 320);
+        // Return focus to the trigger that opened it
+        trigger.focus();
+    }
+
+    // Open on click + Enter/Space for keyboard users
+    trigger.addEventListener('click', openModal);
+    trigger.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openModal();
+        }
+    });
+
+    // Close via close button
+    close.addEventListener('click', closeModal);
+
+    // Close when clicking anywhere outside the card (backdrop or modal flex area)
+    modal.addEventListener('click', function (e) {
+        if (!e.target.closest('.qr-modal__inner')) {
+            closeModal();
+        }
+    });
+
+    // Close via ESC
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && modal.classList.contains('is-open')) {
+            closeModal();
+        }
+    });
+
+    // Trap focus inside the modal while open
+    modal.addEventListener('keydown', function (e) {
+        if (e.key !== 'Tab' || !modal.classList.contains('is-open')) return;
+        const focusable = getFocusable();
+        if (!focusable.length) return;
+        const first = focusable[0];
+        const last  = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+        }
+    });
+}());
+
+// ── Portrait Showcase Selector ────────────────────────────────────────────────
+(function () {
+    var showcase = document.getElementById('portrait-showcase');
+    var thumbs   = document.querySelectorAll('.portrait-thumb');
+
+    if (!showcase || !thumbs.length) return;
+
+    // Mark the first thumb active by default
+    thumbs[0].classList.add('is-active');
+
+    function selectThumb(thumb) {
+        var newSrc = thumb.dataset.src;
+        var newAlt = thumb.dataset.alt || showcase.alt;
+
+        if (showcase.src.includes(encodeURIComponent(newSrc)) ||
+            showcase.src === newSrc) return; // already showing this one
+
+        // Cross-fade: fade out → swap src → fade back in
+        showcase.classList.add('is-fading');
+
+        setTimeout(function () {
+            showcase.src = newSrc;
+            showcase.alt = newAlt;
+
+            showcase.onload = function () {
+                showcase.classList.remove('is-fading');
+                showcase.onload = null;
+            };
+            // Fallback in case onload doesn't fire (cached image)
+            setTimeout(function () {
+                showcase.classList.remove('is-fading');
+            }, 400);
+        }, 300);
+
+        // Update active state on thumbnails
+        thumbs.forEach(function (t) { t.classList.remove('is-active'); });
+        thumb.classList.add('is-active');
+    }
+
+    thumbs.forEach(function (thumb) {
+        // Click
+        thumb.addEventListener('click', function () { selectThumb(thumb); });
+        // Keyboard: Enter or Space
+        thumb.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                selectThumb(thumb);
+            }
+        });
+    });
+}());
 
 

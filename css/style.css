@@ -887,6 +887,56 @@ body {
     transform: scale(1.05);
 }
 
+/* ── Portrait thumbnail selector ── */
+.portrait-thumb {
+    cursor: pointer;
+    position: relative;
+    transition: box-shadow 0.22s ease, transform 0.22s ease;
+}
+
+.portrait-thumb::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 8px;
+    border: 3px solid transparent;
+    transition: border-color 0.22s ease;
+    pointer-events: none;
+}
+
+.portrait-thumb:hover::after {
+    border-color: rgba(245, 171, 0, 0.6);
+}
+
+.portrait-thumb:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+}
+
+.portrait-thumb.is-active::after {
+    border-color: #f5ab00;
+    box-shadow: 0 0 0 1px #f5ab00;
+}
+
+.portrait-thumb.is-active {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(245, 171, 0, 0.18);
+}
+
+/* ── Showcase image — always full colour, no grayscale ── */
+#portrait-showcase,
+.tall-featured-wrap #portrait-showcase,
+.tall-featured-wrap:hover #portrait-showcase {
+    filter: none !important;
+    -webkit-filter: none !important;
+    transition: opacity 0.38s ease, transform 0.38s ease !important;
+}
+
+#portrait-showcase.is-fading {
+    opacity: 0;
+    transform: scale(1.03);
+}
+
 /* MIDDLE AREA */
 .block-middle {
     display: grid;
@@ -1190,7 +1240,7 @@ body {
     object-fit: cover;
     border-radius: 8px;
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-    transition: transform 0.4s ease;
+    transition: transform 0.25s ease;
 }
 
 .reel-item:hover {
@@ -1273,7 +1323,7 @@ body {
     width: 100%;
     height: auto;
     display: block;
-    transition: transform 0.8s ease;
+    transition: transform 0.25s ease;
 }
 
 .large-project-wrap:hover .large-project-img {
@@ -1680,9 +1730,11 @@ body {
     background: #111111 !important;
     background-image: none !important;
     color: white;
-    padding: 80px 80px 40px;
+    padding: 100px 80px 64px !important;
     position: relative;
-    overflow: hidden;
+    overflow: hidden !important;
+    overflow-x: hidden !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 .cinematic-footer::before,
@@ -1692,7 +1744,7 @@ body {
     background: none !important;
 }
 
-/* Remove any gradient overlays at the top of the footer */
+/* Remove decorative overlays */
 .cinematic-footer .footer-noise,
 .cinematic-footer .footer-gradient,
 .cinematic-footer .footer-top-gradient {
@@ -1705,90 +1757,161 @@ body {
     z-index: 10;
     max-width: 1400px;
     margin: 0 auto;
+    /* No extra padding-top — footer already handles it */
+    padding-top: 0 !important;
 }
 
-/* Set the footer's first child padding-top to 60px to push content clean below top edge */
-.cinematic-footer> :first-child,
-.cinematic-footer>.footer-content {
-    padding-top: 60px !important;
+/* Remove the stale extra-padding rule that caused 140px dead space */
+.cinematic-footer > :first-child {
+    padding-top: 0 !important;
 }
 
 .footer-title {
-    font-family: \'Playfair Display\', serif;
-    font-size: clamp(50px, 8vw, 100px);
-    line-height: 1;
-    margin-bottom: 60px;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(42px, 6.5vw, 96px);
+    line-height: 1.08;
+    margin-bottom: 56px;
+    letter-spacing: -1px;
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    user-select: none;
 }
 
 .footer-links {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    padding-bottom: 60px;
-    margin-bottom: 60px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    padding-bottom: 48px;
+    margin-bottom: 40px;
 }
 
-
+/* ── Start a Project button ── */
 .footer-btn {
-    display: inline-block;
-    padding: 20px 40px;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 44px;
     background: var(--yellow);
-    color: #111;
+    color: #0d0d0d;
+    font-family: 'Inter', sans-serif;
     font-weight: 700;
+    font-size: 11px;
     text-transform: uppercase;
-    letter-spacing: 2px;
-    border-radius: 6px;
+    letter-spacing: 0.22em;
+    border-radius: 2px;
     text-decoration: none;
-    transition: transform 0.3s, box-shadow 0.3s;
+    overflow: hidden;
+    isolation: isolate;
+    transition: transform 0.22s ease, box-shadow 0.22s ease, filter 0.22s ease;
+    will-change: transform;
 }
 
-/* Add padding-top to push content down from the edge */
-.cinematic-footer {
-    padding-top: 80px !important;
+/* Light shimmer — sweeps left→right on hover */
+.footer-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        108deg,
+        transparent 25%,
+        rgba(255, 255, 255, 0.28) 50%,
+        transparent 75%
+    );
+    translate: -130% 0;
+    transition: translate 0s;
+    pointer-events: none;
+    z-index: 1;
 }
 
-.footer-btn:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 20px 40px rgba(239, 219, 72, 0.3);
+/* Arrow */
+.footer-btn::after {
+    content: '→';
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0;
+    display: inline-block;
+    position: relative;
+    z-index: 2;
+    transition: transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.footer-btn:hover,
+a.footer-btn:hover {
+    transform: scale(1.025) !important;
+    filter: none !important;
+    box-shadow:
+        0 8px 28px rgba(0, 0, 0, 0.35),
+        inset 0 0 0 1.5px rgba(0, 0, 0, 0.1) !important;
+}
+
+.footer-btn:hover::before {
+    translate: 200% 0;
+    transition: translate 0.52s ease;
+}
+
+.footer-btn:hover::after {
+    transform: translateX(6px) !important;
+}
+
+.footer-btn:active,
+a.footer-btn:active {
+    transform: scale(0.975) !important;
+    filter: brightness(0.95) !important;
+    transition-duration: 0.08s !important;
 }
 
 .social-links {
     display: flex;
-    gap: 30px;
+    gap: 32px;
+    align-items: center;
 }
 
 .social-links a {
-    color: white;
+    color: rgba(255, 255, 255, 0.65);
     text-decoration: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
     font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
     position: relative;
-    overflow: hidden;
+    transition: color 0.2s ease;
+}
+
+.social-links a:hover {
+    color: #fff;
 }
 
 .social-links a::after {
-    content: \'\';
+    content: '';
     position: absolute;
-    bottom: 0;
+    bottom: -2px;
     left: 0;
     width: 100%;
-    height: 2px;
+    height: 1px;
     background: var(--yellow);
-    transform: translateX(-101%);
-    transition: transform 0.3s;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.28s ease;
 }
 
 .social-links a:hover::after {
-    transform: translateX(0);
+    transform: scaleX(1);
 }
 
 .footer-bottom {
     display: flex;
     justify-content: space-between;
-    color: #888;
-    font-size: 14px;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.3);
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.12em;
+    padding-top: 8px;
 }
 
 /* Scroll Reveal Animations */
@@ -1830,155 +1953,320 @@ body {
     transform: translate(0, 0);
 }
 
-/* ===== CONTACT SECTION ===== */
+/* ===== CONTACT SECTION — Reference-style dark redesign ===== */
 .contact {
-    padding: 60px 80px;
-    max-width: 1400px;
-    margin: 0 auto;
+    background: #0d0d0d;
     position: relative;
+    overflow: hidden;
+    padding: 110px 80px 100px;
     z-index: 10;
 }
 
-/* Remove any bottom gradient overlay affecting the footer */
+/* Large decorative background word */
+.contact-bg-word {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(100px, 20vw, 300px);
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.028);
+    letter-spacing: -6px;
+    user-select: none;
+    pointer-events: none;
+    white-space: nowrap;
+    line-height: 1;
+}
+
 .contact::after,
 .contact::before {
     content: none !important;
     display: none !important;
-    background: none !important;
 }
 
+/* Grid layout */
 .contact-container {
     display: grid;
-    grid-template-columns: 5fr 7fr;
-    gap: 100px;
-    align-items: center;
-}
-
-.contact-img-wrap {
+    grid-template-columns: 1fr 1.15fr;
+    gap: 80px;
+    align-items: start;
     position: relative;
-    margin-bottom: 40px;
+    z-index: 1;
+    max-width: 1240px;
+    margin: 0 auto;
 }
 
-.contact-glass-bg {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: -20px;
-    left: -20px;
-    background: rgba(239, 219, 72, 0.1);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(239, 219, 72, 0.3);
-    border-radius: 20px;
-    z-index: 0;
-}
-
-.contact-img {
-    width: 100%;
-    border-radius: 20px;
-    position: relative;
-    z-index: 2;
-    border: 5px solid white;
-}
-
-.contact-info {
+/* ── LEFT COLUMN ── */
+.contact-left {
     display: flex;
     flex-direction: column;
-    gap: 20px;
 }
 
-.info-block {
-    border-left: 2px solid var(--yellow);
-    padding-left: 20px;
-}
-
-.info-block span {
-    display: block;
+/* Badge pill */
+.contact-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50px;
+    padding: 8px 18px;
+    margin-bottom: 36px;
+    color: rgba(255, 255, 255, 0.65);
+    font-family: 'Inter', sans-serif;
     font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: #888;
-    margin-bottom: 5px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    width: fit-content;
 }
 
-.info-block a,
-.info-block p {
+.contact-badge-dot {
+    width: 7px;
+    height: 7px;
+    background: #f5ab00;
+    border-radius: 50%;
+    flex-shrink: 0;
+    box-shadow: 0 0 8px rgba(245, 171, 0, 0.7);
+}
+
+.contact-heading {
     font-family: 'Playfair Display', serif;
-    font-size: 20px;
-    color: var(--text-main);
-    text-decoration: none;
-    font-weight: 600;
-    margin: 0;
-    transition: color 0.3s;
+    font-size: clamp(36px, 4vw, 58px);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.1;
+    margin: 0 0 16px;
+    letter-spacing: -0.5px;
 }
 
-.info-block a:hover {
-    color: var(--yellow);
+.contact-sub {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.42);
+    line-height: 1.65;
+    margin: 0 0 48px;
+    max-width: 300px;
+}
+
+/* Info cards */
+.contact-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.contact-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 14px;
+    padding: 18px 20px;
+    text-decoration: none;
+    transition: background 0.22s ease, border-color 0.22s ease;
+}
+
+.contact-card:hover {
+    background: rgba(245, 171, 0, 0.06);
+    border-color: rgba(245, 171, 0, 0.28);
+}
+
+.contact-card-icon {
+    width: 46px;
+    height: 46px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: rgba(255, 255, 255, 0.7);
+    transition: border-color 0.22s ease, color 0.22s ease;
+}
+
+.contact-card-icon svg {
+    width: 19px;
+    height: 19px;
+}
+
+.contact-card:hover .contact-card-icon {
+    border-color: rgba(245, 171, 0, 0.4);
+    color: #f5ab00;
+}
+
+.contact-card-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+}
+
+.contact-card-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.35);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+}
+
+.contact-card-value {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.82);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.contact-card-arrow {
+    width: 34px;
+    height: 34px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.4);
+    flex-shrink: 0;
+    transition: background 0.22s ease, color 0.22s ease;
+}
+
+.contact-card-arrow svg {
+    width: 13px;
+    height: 13px;
+}
+
+.contact-card:hover .contact-card-arrow {
+    background: #f5ab00;
+    color: #0d0d0d;
+}
+
+/* ── RIGHT COLUMN: Form ── */
+.contact-right {
+    background: transparent;
+    padding: 0;
 }
 
 .contact-form {
-    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 0;
 }
 
 .form-group {
-    margin-bottom: 25px;
+    margin-bottom: 0;
 }
 
 .form-input {
     width: 100%;
-    padding: 20px;
-    background: #f9f9f9;
-    border: 1px solid #eaeaea;
+    padding: 17px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.09);
     border-radius: 10px;
     font-family: 'Inter', sans-serif;
-    font-size: 16px;
-    color: var(--text-main);
-    transition: all 0.4s ease;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.85);
+    outline: none;
+    transition: border-color 0.22s ease, background 0.22s ease;
     box-sizing: border-box;
 }
 
+.form-input::placeholder {
+    color: rgba(255, 255, 255, 0.28);
+}
+
 .form-input:focus {
-    outline: none;
-    background: #fff;
-    border-color: var(--yellow);
-    box-shadow: 0 10px 30px rgba(239, 219, 72, 0.15);
-    transform: translateY(-2px);
+    border-color: rgba(245, 171, 0, 0.5);
+    background: rgba(255, 255, 255, 0.07);
+    box-shadow: none;
+    transform: none;
 }
 
 textarea.form-input {
     resize: vertical;
-    min-height: 120px;
+    min-height: 140px;
 }
 
 .custom-select {
     appearance: none;
-    background-image: url('data:image/svg+xml;utf8,<svg fill="black" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+    background-image: url("data:image/svg+xml,%3Csvg fill='rgba(255,255,255,0.3)' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
-    background-position-x: 98%;
-    background-position-y: 50%;
+    background-position: right 16px center;
+    cursor: pointer;
+}
+
+.custom-select option,
+.custom-select optgroup {
+    background: #1a1a1a;
+    color: #fff;
+}
+
+/* Action row */
+.contact-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 4px;
+    flex-wrap: wrap;
 }
 
 .submit-btn {
-    display: inline-block;
-    width: auto;
-    padding: 20px 50px;
-    background: #111;
-    color: white;
+    flex: 1;
+    min-width: 160px;
+    padding: 17px 24px;
+    background: #fff;
+    color: #0d0d0d;
     font-family: 'Inter', sans-serif;
     font-weight: 700;
-    font-size: 16px;
+    font-size: 13px;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
-    letter-spacing: 2px;
     border: none;
-    border-radius: 50px;
+    border-radius: 10px;
     cursor: pointer;
-    transition: all 0.4s ease;
+    transition: background 0.22s ease, color 0.22s ease, transform 0.2s ease;
 }
 
 .submit-btn:hover {
-    background: var(--yellow);
-    color: #111;
-    box-shadow: 0 10px 20px rgba(239, 219, 72, 0.3);
-    transform: translateY(-2px);
+    background: #f5ab00;
+    color: #0d0d0d;
+    transform: none;
+    box-shadow: none;
+}
+
+.whatsapp-btn {
+    flex: 1;
+    min-width: 140px;
+    padding: 17px 24px;
+    background: rgba(255, 255, 255, 0.06);
+    color: rgba(255, 255, 255, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background 0.22s ease, border-color 0.22s ease, color 0.22s ease;
+    box-sizing: border-box;
+}
+
+.whatsapp-btn:hover {
+    background: rgba(37, 211, 102, 0.12);
+    border-color: rgba(37, 211, 102, 0.4);
+    color: #25d366;
+    box-shadow: none;
+    transform: none;
 }
 
 /* ===== FINAL POLISH & MICRO DETAILS ===== */
@@ -1998,33 +2286,83 @@ html {
     }
 }
 
-.cinematic-cursor {
+/* ── Cursor dot — snaps to exact pointer position ── */
+#cursor-dot {
     position: fixed;
     top: 0;
     left: 0;
-    width: 20px;
-    height: 20px;
-    border: 1.5px solid var(--yellow);
+    width: 7px;
+    height: 7px;
+    background: #f5ab00;
     border-radius: 50%;
     pointer-events: none;
-    z-index: 99999;
-    transform: translate(-50%, -50%);
-    transition: width 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
-        height 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
-        background-color 0.3s;
-    mix-blend-mode: difference;
-    margin-left: -10px;
-    margin-top: -10px;
+    z-index: 2147483647;
+    /* translate() set by JS — no CSS transition so it snaps instantly */
+    will-change: transform;
+    box-shadow: 0 0 8px rgba(245, 171, 0, 0.7);
+    transition: width 0.2s ease, height 0.2s ease, opacity 0.2s ease;
 }
 
-.cinematic-cursor.hover {
-    width: 60px;
-    height: 60px;
-    background-color: rgba(239, 219, 72, 0.15);
-    border-color: transparent;
-    margin-left: -30px;
-    margin-top: -30px;
+#cursor-dot.is-hovering {
+    width: 5px;
+    height: 5px;
+    opacity: 0.6;
 }
+
+#cursor-dot.is-clicking {
+    width: 4px;
+    height: 4px;
+    opacity: 1;
+    box-shadow: 0 0 14px rgba(245, 171, 0, 0.9);
+}
+
+/* ── Cursor ring — follows with smooth lag ── */
+#cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 36px;
+    height: 36px;
+    border: 1.5px solid rgba(245, 171, 0, 0.65);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 2147483646;
+    will-change: transform;
+    /* size + color transitions only — transform handled by JS */
+    transition:
+        width  0.28s cubic-bezier(0.2, 0.8, 0.2, 1),
+        height 0.28s cubic-bezier(0.2, 0.8, 0.2, 1),
+        border-color 0.22s ease,
+        background   0.22s ease,
+        opacity      0.3s ease;
+}
+
+#cursor-ring.is-hovering {
+    width: 54px;
+    height: 54px;
+    border-color: rgba(245, 171, 0, 0.9);
+    background: rgba(245, 171, 0, 0.07);
+}
+
+#cursor-ring.is-clicking {
+    width: 24px;
+    height: 24px;
+    border-color: #f5ab00;
+    background: rgba(245, 171, 0, 0.16);
+    transition:
+        width  0.1s ease,
+        height 0.1s ease,
+        border-color 0.1s ease,
+        background   0.1s ease;
+}
+
+#cursor-ring.is-hidden {
+    opacity: 0;
+}
+
+/* Legacy classes — kept so nothing else breaks */
+.cinematic-cursor  { display: none !important; }
+.cinematic-cursor-trail { display: none !important; }
 
 /* ===== FLOATING CREATIVE ICONS ===== */
 .creative-icon {
@@ -2208,7 +2546,7 @@ img:not(.hero__icon):not(.doodle-icon) {
     display: none;
     background: none;
     border: none;
-    cursor: none !important;
+    cursor: pointer;
     flex-direction: column;
     gap: 6px;
     z-index: 10000;
@@ -2354,7 +2692,7 @@ img:not(.hero__icon):not(.doodle-icon) {
 }
 
 .bg-number {
-    animation: pulseBg 6s infinite ease-in-out;
+    /* pulseBg removed — saves a continuous GPU repaint on every section */
 }
 
 /* Image Hover Grayscale to Color */
@@ -2362,7 +2700,7 @@ img:not(.hero__icon):not(.doodle-icon) {
 .square-img,
 .tall-featured-img {
     filter: grayscale(40%);
-    transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.6s ease, box-shadow 0.6s ease;
+    transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.25s ease, box-shadow 0.25s ease;
 }
 
 .vertical-card:hover img,
@@ -2402,26 +2740,8 @@ img:not(.hero__icon):not(.doodle-icon) {
     box-shadow: 0 10px 20px rgba(245, 171, 0, 0.1);
 }
 
-/* Cursor Trail */
-.cinematic-cursor-trail {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 12px;
-    height: 12px;
-    background-color: rgba(245, 171, 0, 0.4);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9998;
-    transform: translate(-50%, -50%);
-    transition: width 0.3s, height 0.3s, background-color 0.3s;
-}
-
-.cinematic-cursor-trail.hover {
-    width: 40px;
-    height: 40px;
-    background-color: rgba(245, 171, 0, 0.1);
-}
+/* Cursor Trail — replaced by #cursor-ring; kept selector for safety */
+.cinematic-cursor-trail { display: none !important; }
 
 .magnetic-hover:active {
     transform: scale(0.98) !important;
@@ -2462,7 +2782,7 @@ img:not(.hero__icon):not(.doodle-icon) {
 section,
 .section {
     position: relative;
-    margin-bottom: 100px !important;
+    margin-bottom: 40px !important;
 }
 
 section::after {
@@ -2653,8 +2973,8 @@ section {
 .wow-section,
 .philosophy,
 .contact {
-    padding-top: 120px !important;
-    padding-bottom: 120px !important;
+    padding-top: 80px !important;
+    padding-bottom: 80px !important;
 }
 
 @media (max-width: 768px) {
@@ -2673,7 +2993,7 @@ section {
 }
 
 /* ===== ABOUT SECTION SUB-BLOCK SEPARATION ===== */
-.ref-contact-card,
+/* .ref-contact-card styling is owned exclusively by contact-card-restyle.css */
 .ref-detail-block {
     padding: 32px !important;
     background: rgba(255, 255, 255, 0.02) !important;
@@ -2686,15 +3006,8 @@ section {
     gap: 32px !important;
 }
 
-/* Ensure Let's Work Together card has proper gap from the portrait */
-.ref-contact-card {
-    margin-top: 32px !important;
-}
-
 /* Fix mobile scaling for the added padding */
 @media (max-width: 768px) {
-
-    .ref-contact-card,
     .ref-detail-block {
         padding: 24px !important;
     }
@@ -2832,12 +3145,13 @@ h2.wow-text.portfolio-heading {
 }
 
 .wow-image {
-    animation: kenBurnsZoom 8s ease-in-out infinite alternate !important;
+    /* kenBurnsZoom removed — 8s infinite scale held the GPU layer open constantly */
+    transform: scale(1.04);
 }
 
 .wow-section:hover .wow-image {
-    /* Prevent the old transform hover from breaking the animation */
-    transform: none !important;
+    transform: scale(1.06);
+    transition: transform 0.6s ease;
 }
 
 /* ===== HERO GEOMETRIC ACCENT REFINEMENT ===== */
@@ -3956,6 +4270,14 @@ section.about,
     content: none !important;
     height: 0 !important;
 }
+
+/* =============================================================
+   LET'S WORK TOGETHER — CONTACT CARD
+   All card styles live in css/contact-card-restyle.css.
+   Duplicate rules below have been removed to eliminate cascade
+   conflicts. Do not re-add contact card rules to this file.
+   ============================================================= */
+
 
 /* ===== EDITORIAL HIGHLIGHT BLOCK FIX ===== */
 .editorial-title span {
@@ -5891,5 +6213,70 @@ div:empty {
     /* REMOVE ANY TRANSFORM CAUSING OVERFLOW */
     section *:not(.cam-name) {
         transform: none !important;
+    }
+}
+
+/* ===== HIDE ALL SCROLLBARS ===== */
+
+/* Hide scrollbar - Chrome, Safari, Edge */
+::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* Hide scrollbar - Firefox */
+* {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+/* Keep scroll functionality
+   but hide the bar */
+html, body {
+  overflow-x: hidden !important;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+/* Fix horizontal scrollbar */
+body {
+  max-width: 100vw !important;
+  overflow-x: hidden !important;
+}
+
+/* For carousel/slider sections
+   that need horizontal scroll */
+[class*="carousel"],
+[class*="slider"],
+[class*="track"] {
+  overflow-x: scroll !important;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+[class*="carousel"]::-webkit-scrollbar,
+[class*="slider"]::-webkit-scrollbar,
+[class*="track"]::-webkit-scrollbar {
+  display: none !important;
+}
+
+/* ===== MOBILE EDITORIAL GRID (FIX 14) ===== */
+.mobile-editorial-grid {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .mobile-editorial-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin-top: 20px;
+    }
+    .mobile-editorial-grid img {
+        width: 100%;
+        aspect-ratio: 3/4;
+        object-fit: cover;
+        border-radius: 8px;
     }
 }

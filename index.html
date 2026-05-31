@@ -10,7 +10,27 @@
     <meta name="theme-color" content="#333333">
     <meta name="msapplication-TileColor" content="#f5ab00">
     <meta name="format-detection" content="telephone=no">
-    <title>Sudip Mondal | Portfolio</title>
+    <title>Sudip Mondal | Photographer &amp; Filmmaker in Kolkata</title>
+
+    <!-- SEO -->
+    <meta name="description" content="Sudip Mondal is a cinematic photographer and filmmaker based in Kolkata. Specializing in wedding photography, portrait photography, short films, and video editing. Available for bookings across India.">
+    <meta name="keywords" content="photographer Kolkata, filmmaker Kolkata, wedding photographer, cinematic photography, portrait photographer, video editing, Sudip Mondal">
+    <meta name="author" content="Sudip Mondal">
+    <link rel="canonical" href="https://sudipmondal.in">
+
+    <!-- Open Graph -->
+    <meta property="og:type"         content="website">
+    <meta property="og:url"          content="https://sudipmondal.in">
+    <meta property="og:title"        content="Sudip Mondal | Photographer &amp; Filmmaker, Kolkata">
+    <meta property="og:description"  content="Cinematic photographer and filmmaker based in Kolkata. Wedding, portrait, editorial photography and short films.">
+    <meta property="og:image"        content="https://sudipmondal.in/assets/sudip-mondal-photographer-filmmaker-kolkata.webp">
+    <meta property="og:site_name"    content="Sudip Mondal Portfolio">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:title"       content="Sudip Mondal | Photographer &amp; Filmmaker, Kolkata">
+    <meta name="twitter:description" content="Cinematic photographer and filmmaker based in Kolkata.">
+    <meta name="twitter:image"       content="https://sudipmondal.in/assets/sudip-mondal-photographer-filmmaker-kolkata.webp">
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,13 +38,70 @@
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,600&family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/contact-card-restyle.css">
     <link rel="stylesheet" href="css/mobile-spacing.css">
     <link rel="stylesheet" href="css/mobile-responsive-enhancements.css">
     <link rel="stylesheet" href="css/mobile-interactions-fix.css">
     <link rel="stylesheet" href="css/mobile-layout-fixes.css">
     <link rel="stylesheet" href="css/mobile-ultimate-overrides.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/cursor.css">
+
+    <!-- JSON-LD Person Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Sudip Mondal",
+      "jobTitle": "Photographer & Filmmaker",
+      "url": "https://sudipmondal.in",
+      "image": "https://sudipmondal.in/assets/sudip-mondal-photographer-filmmaker-kolkata.webp",
+      "email": "sudipxv@gmail.com",
+      "telephone": "+917044692706",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Kolkata",
+        "addressRegion": "West Bengal",
+        "addressCountry": "IN"
+      },
+      "sameAs": [
+        "https://www.instagram.com/bunnyxdneo",
+        "https://linktr.ee/sudip_portfolio"
+      ],
+      "description": "Sudip Mondal is a Photographer & Filmmaker based in Kolkata, specialising in cinematic portraits, wedding films, editorial photography, and post-production."
+    }
+    </script>
 <style>
+/* Respect OS-level reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* GPU layer hints for elements that legitimately animate */
+.hero-portrait-img,
+.phil-img,
+.wow-image {
+    will-change: transform;
+}
+
+/* Visually hidden — readable by crawlers and screen readers */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
 /* ===== MOBILE OVERRIDE ===== */
 @media (max-width: 768px) {
 
@@ -210,9 +287,9 @@
             <div class="hero-text-area" data-aos="fade-right" data-aos-delay="200">
                 <div class="hero-quote reveal-up">"</div>
                 <div class="pill-label reveal-up hero-entrance" style="animation-delay: 0.1s;">Photographer & Filmmaker</div>
-                <h1 class="hero-title reveal-up hero-entrance" style="animation-delay: 0.2s;">
+                <h1 class="hero-title reveal-up hero-entrance" style="animation-delay: 0.2s;" aria-label="Sudip Mondal - Cinematic Photographer and Filmmaker, Kolkata">
                     SUDIP<br>
-                    MONDAL<span style="color:var(--yellow)">.</span>
+                    MONDAL<span style="color:var(--yellow)">.</span><span class="sr-only"> — Photographer &amp; Filmmaker in Kolkata</span>
                 </h1>
                 <p class="hero-subtext reveal-up hero-entrance" style="animation-delay: 0.3s;">MAKING LIFE LOOK LIKE<br>A MOVIE FRAME.
                 </p>
@@ -240,8 +317,9 @@
             <div class="hero-portrait-area hero-image-container reveal-left" style="position: relative;">
                 <div class="portrait-glass-bg floating"></div>
                 <div class="portrait-yellow-shape floating-alt"></div>
-                <img src="assets/sudip-mondal-photographer-filmmaker-kolkata.webp" alt="Sudip Mondal - Photographer and Filmmaker Kolkata"
-                    class="hero-portrait-img hero-image cinematic-shadow magnetic-hover">
+                <img src="https://i.ibb.co/Y7nQS5bT/sudip-mondal-photographer-filmmaker-kolkata-webp.webp" alt="Sudip Mondal - Photographer and Filmmaker Kolkata"
+                    class="hero-portrait-img hero-image cinematic-shadow magnetic-hover"
+                    fetchpriority="high" decoding="async">
             </div>
         </div>
 
@@ -271,66 +349,75 @@
             <!-- Left Column -->
             <div class="ref-about-left about-left reveal-right" data-aos="fade-right">
                 <div class="ref-portrait-wrap about-image-container about-image-wrapper">
-                    <img src="https://i.ibb.co/Xxx0rxRp/Wedding-Photography-by-Sudip-Mondal-Kolkata.png" alt="Sudip Mondal - Photographer Kolkata" class="ref-portrait-img cinematic-shadow">
+                    <img src="https://i.ibb.co/Xxx0rxRp/Wedding-Photography-by-Sudip-Mondal-Kolkata.png" alt="Sudip Mondal - Photographer Kolkata" class="ref-portrait-img cinematic-shadow" loading="lazy" decoding="async">
                 </div>
 
+                <!-- "Let's Work Together" contact card — restructured for clarity -->
                 <div class="ref-contact-card">
-                    <div class="ref-qr-container">
-                        <div class="ref-qr-white">
-                            <img src="https://i.ibb.co/VYYKtJ5Y/https-linktr-ee-sudip-portfolio.png" alt="Sudip Mondal Linktree QR Code" style="display: block; width: 100%; height: 100%; object-fit: contain;">
-                        </div>
+
+                    <!-- Card heading with yellow accent dot -->
+                    <div class="ref-card-header">
+                        <h3 class="ref-card-title">Let's Work Together</h3>
                     </div>
-                    <div class="ref-contact-info">
-                        <h3
-                            style="text-decoration: none !important; border-bottom: none !important; background: none !important;">
-                            <span class="ref-dot">.</span><span
-                                style="text-decoration: none !important; border-bottom: none !important; background: none !important; color:#ffffff; font-weight:700; font-size:18px;">Let's
-                                Work Together</span></h3>
+
+                    <!-- Card body: contact rows left, QR right -->
+                    <div class="ref-card-body">
+
+                        <!-- Contact detail rows -->
                         <ul class="ref-contact-list">
                             <li>
-                                <div class="ref-icon-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2">
-                                        <path
-                                            d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
-                                        </path>
-                                        <polyline points="22,6 12,13 2,6"></polyline>
-                                    </svg></div>
-                                <div class="contact-text"><span class="c-lbl">EMAIL</span><span
-                                        class="c-val">sudipxv@gmail.com</span></div>
+                                <div class="contact-text">
+                                    <span class="c-lbl">Email</span>
+                                    <span class="c-val">sudipxv@gmail.com</span>
+                                </div>
                             </li>
                             <li>
-                                <div class="ref-icon-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2">
-                                        <path
-                                            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
-                                        </path>
-                                    </svg></div>
-                                <div class="contact-text"><span class="c-lbl">PHONE</span><span class="c-val">+91 70446
-                                        92706</span></div>
+                                <div class="contact-text">
+                                    <span class="c-lbl">Phone</span>
+                                    <span class="c-val">+91 70446 92706</span>
+                                </div>
                             </li>
                             <li>
-                                <div class="ref-icon-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2">
-                                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                                    </svg></div>
-                                <div class="contact-text"><span class="c-lbl">SOCIAL</span><span
-                                        class="c-val">@bunnyxdneo</span></div>
+                                <div class="contact-text">
+                                    <span class="c-lbl">Instagram</span>
+                                    <span class="c-val">@bunnyxdneo</span>
+                                </div>
                             </li>
                             <li>
-                                <div class="ref-icon-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2">
-                                        <circle cx="12" cy="12" r="10"></circle>
-                                        <line x1="2" y1="12" x2="22" y2="12"></line>
-                                        <path
-                                            d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
-                                        </path>
-                                    </svg></div>
-                                <div class="contact-text"><span class="c-lbl">WEBSITE</span><span
-                                        class="c-val">sudipmondal.in</span></div>
+                                <div class="contact-text">
+                                    <span class="c-lbl">Website</span>
+                                    <span class="c-val">sudipmondal.in</span>
+                                </div>
                             </li>
                         </ul>
+
+                        <!-- QR code block -->
+                        <div class="ref-qr-block">
+                            <div class="ref-qr-white"
+                                 id="qr-trigger"
+                                 role="button"
+                                 tabindex="0"
+                                 aria-haspopup="dialog"
+                                 aria-label="Click to expand QR code">
+                                <img src="https://i.ibb.co/VYYKtJ5Y/https-linktr-ee-sudip-portfolio.png"
+                                     alt="Scan QR code to view Sudip Mondal's portfolio on Linktree"
+                                     loading="lazy" decoding="async">
+                            </div>
+                            <div class="ref-qr-cta">
+                                <svg class="ref-qr-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <rect x="2" y="2" width="6" height="6" rx="1"/>
+                                    <rect x="12" y="2" width="6" height="6" rx="1"/>
+                                    <rect x="2" y="12" width="6" height="6" rx="1"/>
+                                    <rect x="13" y="13" width="2" height="2"/>
+                                    <rect x="16" y="13" width="2" height="2"/>
+                                    <rect x="13" y="16" width="2" height="2"/>
+                                    <rect x="16" y="16" width="2" height="2"/>
+                                </svg>
+                                <p class="ref-qr-caption">All my links, one scan.</p>
+                                <span class="ref-qr-sub">linktr.ee/sudip-portfolio</span>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -411,7 +498,7 @@ font-size:13px;font-family:Arial;">Ps</div>
                                 <div class="ref-soft-icon" style="background:#002b5e;">
                                     <!-- Adobe Lightroom -->
                                     <img src="https://cdn.simpleicons.org/adobelightroom/31A8FF"
-                                         alt="Lightroom" width="28" height="28">
+                                         alt="Adobe Lightroom" width="28" height="28">
                                 </div>
                             </div>
                             <div class="soft-tile-wrap">
@@ -429,11 +516,7 @@ font-size:13px;font-family:Arial;">Ps</div>
                                 </div>
                             </div>
                             <div class="soft-tile-wrap">
-                                <div class="ref-soft-icon" style="background:#fff;">
-                                    <!-- Final Cut Pro -->
-                                    <img src="https://cdn.simpleicons.org/apple" 
-                                         alt="Final Cut Pro" width="28" height="28">
-                                </div>
+                                <div class="ref-soft-icon" style="background:#1c1c1e;border-radius:6px;display:flex;align-items:center;justify-content:center;color:white;font-weight:900;font-size:11px;font-family:Arial;letter-spacing:-0.5px;">FCP</div>
                             </div>
                             <div class="soft-tile-wrap">
                                 <div class="ref-soft-icon" style="background:#fff;">
@@ -492,8 +575,11 @@ font-size:13px;font-family:Arial;">Ps</div>
         <div class="photo-block block-top" style="position: relative;">
             <div class="top-left reveal-right">
                 <div class="tall-featured-wrap" data-aos="fade-up" data-aos-delay="200">
-                    <img src="assets/gallery_1.png" alt="Featured Portrait"
-                        class="tall-featured-img cinematic-shadow magnetic-hover">
+                    <img id="portrait-showcase"
+                         src="https://i.ibb.co/ZRmxGRMQ/5-O7-A2320-Original.webp"
+                         alt="Featured cinematic portrait by Sudip Mondal"
+                         class="tall-featured-img cinematic-shadow"
+                         loading="lazy" decoding="async">
                 </div>
             </div>
             <div class="top-right reveal-left">
@@ -506,48 +592,57 @@ font-size:13px;font-family:Arial;">Ps</div>
                     expressions and turning them into cinematic visuals with depth, atmosphere, and character.</p>
 
                 <div class="gallery-container-box" data-aos="fade-up" data-aos-delay="200">
-                    <div class="vertical-card"><img src="assets/gallery_2.png" alt="Gallery"></div>
-                    <div class="vertical-card"><img src="assets/portfolio_1.png" alt="Gallery"></div>
-                    <div class="vertical-card"><img src="assets/sudip-portrait.png" alt="Gallery"></div>
+                    <div class="vertical-card portrait-thumb"
+                         data-src="https://i.ibb.co/mrV73Jsd/594311221-1449739290495420-6613825379268310414-n.webp"
+                         data-alt="Cinematic couple portrait by Sudip Mondal"
+                         role="button" tabindex="0" aria-label="View photo in showcase">
+                        <img src="https://i.ibb.co/mrV73Jsd/594311221-1449739290495420-6613825379268310414-n.webp" alt="Cinematic photography by Sudip Mondal" loading="lazy" decoding="async">
+                    </div>
+                    <div class="vertical-card portrait-thumb"
+                         data-src="https://i.ibb.co/tyZXVfP/Portfolio-Photo-1.webp"
+                         data-alt="Portfolio photography by Sudip Mondal"
+                         role="button" tabindex="0" aria-label="View photo in showcase">
+                        <img src="https://i.ibb.co/tyZXVfP/Portfolio-Photo-1.webp" alt="Cinematic photography by Sudip Mondal" loading="lazy" decoding="async">
+                    </div>
+                    <div class="vertical-card portrait-thumb"
+                         data-src="https://i.ibb.co/ZRmxGRMQ/5-O7-A2320-Original.webp"
+                         data-alt="Featured cinematic portrait by Sudip Mondal"
+                         role="button" tabindex="0" aria-label="View photo in showcase">
+                        <img src="https://i.ibb.co/ZRmxGRMQ/5-O7-A2320-Original.webp" alt="Cinematic photography by Sudip Mondal" loading="lazy" decoding="async">
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- MIDDLE AREA: Visual Stories -->
-        <div class="photo-section-header" style="margin-top: 50px;">
-            <h3>Photography Showcase</h3>
-        </div>
-
         <div class="photo-block block-middle">
-            <div class="middle-left">
+            <div class="middle-left" id="brides-tale-section">
                 <div class="overlap-horizontal" data-aos="fade-up" data-aos-delay="200">
-                    <img src="assets/gallery_3.png" class="ov-img ov-1" alt="Street">
-                    <img src="assets/portfolio_2.png" class="ov-img ov-2" alt="Street">
-                    <img src="assets/gallery_4.png" class="ov-img ov-3" alt="Street">
+                    <img src="https://i.ibb.co/MDFzyJcW/5O7A6852.webp" class="ov-img ov-1" alt="The Bride's Tale by Sudip Mondal" loading="lazy" decoding="async">
+                    <img src="https://i.ibb.co/S7VTYdwZ/IMG-5193.webp" class="ov-img ov-2" alt="The Bride's Tale by Sudip Mondal" loading="lazy" decoding="async">
+                    <img src="https://i.ibb.co/ks0jkrZY/IMG-5198.webp" class="ov-img ov-3" alt="The Bride's Tale by Sudip Mondal" loading="lazy" decoding="async">
                 </div>
 
                 <h2 class="editorial-title mt-40 portfolio-heading border-accent" data-aos="fade-up" data-aos-delay="100"
                     style="display: block !important; border-left: 4px solid #F5C518; padding-left: 16px;"><span
-                        style="border-radius: 6px !important; display: inline-block !important; width: fit-content !important; margin-left: 20px !important; background: #F5C518 !important; padding: 14px 28px !important; color: var(--dark) !important;">STREET
-                        & MOODY</span><span class="heading-dot-hidden">.</span></h2>
+                        style="border-radius: 6px !important; display: inline-block !important; width: fit-content !important; margin-left: 20px !important; background: #F5C518 !important; padding: 14px 28px !important; color: var(--dark) !important;">The Bride's Tale</span><span class="heading-dot-hidden">.</span></h2>
                 <div class="row-3-images" data-aos="fade-up" data-aos-delay="200">
-                    <img src="assets/gallery_4.png" class="square-img" alt="Moody">
-                    <img src="assets/gallery_3.png" class="square-img" alt="Moody">
-                    <img src="assets/portfolio_2.png" class="square-img" alt="Moody">
+                    <img src="https://i.ibb.co/mrC3sfM5/IMG-5199.webp" class="square-img" alt="The Bride's Tale by Sudip Mondal" loading="lazy" decoding="async">
+                    <img src="https://i.ibb.co/pvLbJcrS/IMG-5197.webp" class="square-img" alt="The Bride's Tale by Sudip Mondal" loading="lazy" decoding="async">
+                    <img src="https://i.ibb.co/fzvT1KD9/5O7A6870.webp" class="square-img" alt="The Bride's Tale by Sudip Mondal" loading="lazy" decoding="async">
                 </div>
             </div>
 
             <div class="middle-right" style="position: relative;">
                 <h2 class="editorial-title portfolio-heading border-accent" data-aos="fade-up" data-aos-delay="100"
                     style="display: block !important; border-left: 4px solid #F5C518; padding-left: 16px;"><span
-                        style="border-radius: 6px !important; display: inline-block !important; width: fit-content !important; margin-left: 20px !important; background: #F5C518 !important; padding: 14px 28px !important; color: var(--dark) !important;">ELEGANT
-                        MOMENTS</span><span class="heading-dot-hidden">.</span></h2>
+                        style="border-radius: 6px !important; display: inline-block !important; width: fit-content !important; margin-left: 20px !important; background: #F5C518 !important; padding: 14px 28px !important; color: var(--dark) !important;">Portraits in Motion</span><span class="heading-dot-hidden">.</span></h2>
                 <div class="grid-3x2" data-aos="fade-up" data-aos-delay="200">
-                    <img src="assets/gallery_4.png" class="square-img" alt="Grid">
-                    <img src="assets/gallery_2.png" class="square-img" alt="Grid">
-                    <img src="assets/portfolio_1.png" class="square-img" alt="Grid">
-                    <img src="assets/gallery_1.png" class="square-img" alt="Grid">
-                    <img src="assets/portfolio_3.png" class="square-img" alt="Grid">
+                    <img src="assets/gallery_4.png" class="square-img" alt="Editorial photography by Sudip Mondal, Kolkata" loading="lazy" decoding="async">
+                    <img src="assets/gallery_2.png" class="square-img" alt="Editorial photography by Sudip Mondal, Kolkata" loading="lazy" decoding="async">
+                    <img src="assets/portfolio_1.png" class="square-img" alt="Editorial photography by Sudip Mondal, Kolkata" loading="lazy" decoding="async">
+                    <img src="assets/gallery_1.png" class="square-img" alt="Editorial photography by Sudip Mondal, Kolkata" loading="lazy" decoding="async">
+                    <img src="assets/portfolio_3.png" class="square-img" alt="Editorial photography by Sudip Mondal, Kolkata" loading="lazy" decoding="async">
                 </div>
             </div>
         </div>
@@ -555,7 +650,7 @@ font-size:13px;font-family:Arial;">Ps</div>
         <!-- BOTTOM AREA: Editorial Selection -->
         <div class="photo-block block-bottom" style="position: relative;">
             <div class="bottom-left">
-                <h2 class="editorial-title portfolio-heading" data-aos="fade-up" data-aos-delay="100"><span>EDITORIAL SHOTS</span><span
+                <h2 class="editorial-title portfolio-heading" data-aos="fade-up" data-aos-delay="100"><span>Under the Spotlight</span><span
                         class="heading-dot-hidden">.</span>
                 </h2>
                 <p class="editorial-desc">Editorial photography, for me, is more than just creating stylish images. It’s
@@ -569,11 +664,19 @@ font-size:13px;font-family:Arial;">Ps</div>
 
             <div class="bottom-right diagonal-gallery" data-aos="fade-up" data-aos-delay="200">
                 <div class="diag-wrap">
-                    <div class="diag-img d-1"><img src="assets/gallery_2.png" alt="Diagonal 1"></div>
-                    <div class="diag-img d-2"><img src="assets/portfolio_1.png" alt="Diagonal 2"></div>
-                    <div class="diag-img d-3"><img src="assets/gallery_1.png" alt="Diagonal 3"></div>
-                    <div class="diag-img d-4"><img src="assets/sudip-portrait.png" alt="Diagonal 4"></div>
+                    <div class="diag-img d-1"><img src="https://i.ibb.co/20C7kbzv/fejk0givhrojzppzdxra.webp" alt="Under the Spotlight - Sudip Mondal" loading="lazy" decoding="async"></div>
+                    <div class="diag-img d-2"><img src="https://i.ibb.co/KjRzn31K/kme5yf0r7jqrto5jg79w.webp" alt="Under the Spotlight - Sudip Mondal" loading="lazy" decoding="async"></div>
+                    <div class="diag-img d-3"><img src="https://i.ibb.co/Z6zYkvmW/qttlhjnrplfvoqpxao5h.webp" alt="Under the Spotlight - Sudip Mondal" loading="lazy" decoding="async"></div>
+                    <div class="diag-img d-4"><img src="https://i.ibb.co/v6HhbL4c/thjjaegv13vwrdtrtj8b.webp" alt="Under the Spotlight - Sudip Mondal" loading="lazy" decoding="async"></div>
                 </div>
+            </div>
+
+            <!-- Mobile-only fallback for diagonal gallery -->
+            <div class="mobile-editorial-grid">
+                <img src="https://i.ibb.co/20C7kbzv/fejk0givhrojzppzdxra.webp" alt="Under the Spotlight - Sudip Mondal" loading="lazy">
+                <img src="https://i.ibb.co/KjRzn31K/kme5yf0r7jqrto5jg79w.webp" alt="Under the Spotlight - Sudip Mondal" loading="lazy">
+                <img src="https://i.ibb.co/Z6zYkvmW/qttlhjnrplfvoqpxao5h.webp" alt="Under the Spotlight - Sudip Mondal" loading="lazy">
+                <img src="https://i.ibb.co/v6HhbL4c/thjjaegv13vwrdtrtj8b.webp" alt="Under the Spotlight - Sudip Mondal" loading="lazy">
             </div>
         </div>
     </section>
@@ -589,7 +692,7 @@ font-size:13px;font-family:Arial;">Ps</div>
 
         <div class="video-block block-reels"
             style="display: flex !important; align-items: flex-start !important; gap: 40px;">
-            <div class="reels-left" style="width: 45%; align-self: flex-start !important;">
+            <div class="reels-left" style="align-self: flex-start !important;">
                 <h2 class="editorial-title portfolio-heading border-accent" data-aos="fade-up" data-aos-delay="100"
                     style="display: block !important; margin-top: 0 !important;">
                     <span
@@ -609,14 +712,17 @@ font-size:13px;font-family:Arial;">Ps</div>
                     <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: #666; font-family: 'Inter', sans-serif;">After Effects</div>
                 </div>
             </div>
-            <div class="reels-right" style="width: 55%;">
+            <div class="reels-right">
                 <div class="massive-yellow-box"
                     style="margin-top: 0 !important; border: none !important; background: transparent !important; box-shadow: none !important; padding: 0 !important;">
                     <div class="reels-grid" data-aos="fade-up" data-aos-delay="200" style="grid-template-columns: repeat(2, 1fr) !important;">
-                        <img src="assets/reel_cover.png" class="reel-item" alt="Reel">
-                        <img src="assets/bts_shot.png" class="reel-item" alt="BTS">
-                        <img src="assets/cinematic_frame.png" class="reel-item" alt="Cinematic Frame">
-                        <img src="assets/timeline_ui.png" class="reel-item" alt="Timeline">
+                        <picture>
+                            <source srcset="assets/reel_cover.webp" type="image/webp">
+                            <img src="assets/reel_cover.png" class="reel-item" alt="Cinematic reel - Sudip Mondal filmmaker" loading="lazy" decoding="async">
+                        </picture>
+                        <img src="assets/bts_shot.png" class="reel-item" alt="Behind the scenes filmmaking - Sudip Mondal" loading="lazy" decoding="async">
+                        <img src="assets/cinematic_frame.png" class="reel-item" alt="Cinematic frame from Sudip Mondal production" loading="lazy" decoding="async">
+                        <img src="assets/timeline_ui.png" class="reel-item" alt="Video editing timeline - post production work" loading="lazy" decoding="async">
                     </div>
                 </div>
             </div>
@@ -627,7 +733,7 @@ font-size:13px;font-family:Arial;">Ps</div>
             <h3>Filmmaking Showcase</h3>
         </div>
 
-        <div class="video-block block-projects" style="display: block !important; max-width: 100% !important; padding: 0 60px !important; border: none !important; outline: none !important; overflow: visible !important;">
+        <div class="video-block block-projects" style="display: block !important; max-width: 100% !important; padding: 0 60px; border: none !important; outline: none !important; overflow: visible !important;">
             <h2 class="editorial-title portfolio-heading border-accent" data-aos="fade-up" data-aos-delay="100" style="display: inline-block !important; width: fit-content !important; margin-bottom: 40px !important;">
                 <span
                     style="border-radius: 6px !important; display: inline-block !important; width: fit-content !important; background: #F5C518 !important; padding: 14px 28px !important; color: var(--dark) !important;">SHORT
@@ -639,7 +745,7 @@ font-size:13px;font-family:Arial;">Ps</div>
                 <div class="cinematography-carousel-track">
                     <!-- Card 1 (Side Card) -->
                     <div class="carousel-card side-card">
-                        <img src="assets/gallery_1.png" alt="Chasing Shadows">
+                        <img src="assets/gallery_1.png" alt="Chasing Shadows" loading="lazy" decoding="async">
                         <div class="carousel-card-overlay">
                             <div class="carousel-card-title">Chasing Shadows</div>
                             <div class="carousel-card-category">Cinematography</div>
@@ -648,7 +754,7 @@ font-size:13px;font-family:Arial;">Ps</div>
 
                     <!-- Card 2 (Side Card) -->
                     <div class="carousel-card side-card">
-                        <img src="assets/gallery_2.png" alt="The Silent Echo">
+                        <img src="assets/gallery_2.png" alt="The Silent Echo" loading="lazy" decoding="async">
                         <div class="carousel-card-overlay">
                             <div class="carousel-card-title">The Silent Echo</div>
                             <div class="carousel-card-category">Short Film</div>
@@ -657,7 +763,7 @@ font-size:13px;font-family:Arial;">Ps</div>
 
                     <!-- Card 3 (Center Card) -->
                     <div class="carousel-card center-card">
-                        <img src="assets/bts_shot.png" alt="Beyond The Lens">
+                        <img src="assets/bts_shot.png" alt="Beyond The Lens" loading="lazy" decoding="async">
                         <div class="carousel-card-overlay">
                             <div class="carousel-card-title">Beyond The Lens</div>
                             <div class="carousel-card-category">Director's Cut</div>
@@ -666,7 +772,7 @@ font-size:13px;font-family:Arial;">Ps</div>
 
                     <!-- Card 4 (Side Card) -->
                     <div class="carousel-card side-card">
-                        <img src="assets/cinematic_frame.png" alt="Nocturnal Run">
+                        <img src="assets/cinematic_frame.png" alt="Nocturnal Run" loading="lazy" decoding="async">
                         <div class="carousel-card-overlay">
                             <div class="carousel-card-title">Nocturnal Run</div>
                             <div class="carousel-card-category">Music Video</div>
@@ -675,7 +781,7 @@ font-size:13px;font-family:Arial;">Ps</div>
 
                     <!-- Card 5 (Side Card) -->
                     <div class="carousel-card side-card">
-                        <img src="assets/portfolio_1.png" alt="Monochrome Beats">
+                        <img src="assets/portfolio_1.png" alt="Monochrome Beats" loading="lazy" decoding="async">
                         <div class="carousel-card-overlay">
                             <div class="carousel-card-title">Monochrome Beats</div>
                             <div class="carousel-card-category">Documentary</div>
@@ -721,15 +827,15 @@ font-size:13px;font-family:Arial;">Ps</div>
 
                     <div class="timeline-card t-1">
                         <span class="t-badge">Node Tree</span>
-                        <img src="assets/timeline_ui.png" alt="Timeline">
+                        <img src="assets/timeline_ui.png" alt="Video editing timeline - post production work" loading="lazy" decoding="async">
                     </div>
                     <div class="timeline-card t-2">
                         <span class="t-badge">Final Render</span>
-                        <img src="assets/cinematic_frame.png" alt="Timeline">
+                        <img src="assets/cinematic_frame.png" alt="Video editing timeline - post production work" loading="lazy" decoding="async">
                     </div>
                     <div class="timeline-card t-3">
                         <span class="t-badge">Editing Timeline</span>
-                        <img src="assets/timeline_ui.png" alt="Timeline">
+                        <img src="assets/timeline_ui.png" alt="Video editing timeline - post production work" loading="lazy" decoding="async">
                     </div>
                 </div>
             </div>
@@ -779,7 +885,10 @@ font-size:13px;font-family:Arial;">Ps</div>
     <!-- ===== WOW SECTION: CINEMATIC SHOWCASE ===== -->
     <section class="wow-section">
         <div class="wow-parallax-wrap">
-            <img src="assets/wow_cinematic.png" alt="Cinematic Showcase" class="wow-image">
+            <picture>
+                <source srcset="assets/wow_cinematic.webp" type="image/webp">
+                <img src="assets/wow_cinematic.png" alt="Cinematic Showcase" class="wow-image" loading="lazy" decoding="async">
+            </picture>
             <div class="wow-overlay"></div>
             <div style="position: relative; z-index: 10;">
                 <h2 class="wow-text reveal-up portfolio-heading">
@@ -792,7 +901,10 @@ font-size:13px;font-family:Arial;">Ps</div>
     <section class="philosophy" id="philosophy" style="position: relative;">
         <div class="philosophy-container">
             <div class="phil-left reveal-right">
-                <img src="assets/philosophy_portrait.png" alt="Director" class="phil-img cinematic-shadow">
+                <picture>
+                    <source srcset="assets/philosophy_portrait.webp" type="image/webp">
+                    <img src="assets/philosophy_portrait.png" alt="Sudip Mondal - Director and filmmaker" class="phil-img cinematic-shadow" loading="lazy" decoding="async">
+                </picture>
             </div>
             <div class="phil-right reveal-left">
                 <h2 class="editorial-title portfolio-heading" data-aos="fade-up" data-aos-delay="100"><span class="vision-dot-left-1" style="display: none !important;">.</span> <span>THE
@@ -809,109 +921,132 @@ font-size:13px;font-family:Arial;">Ps</div>
     </section>
 
     <!-- ===== CONTACT ME ===== -->
-    <section class="contact" id="contact" style="max-width: 1400px; margin: 0 auto;">
-        <div class="contact-container"
-            style="display: grid; grid-template-columns: 5fr 7fr; gap: 80px; align-items: center;">
+    <section class="contact" id="contact">
 
-            <!-- Left Side: Cinematic Image + Info -->
-            <div class="contact-left reveal-right">
-                <div class="contact-img-wrap"
-                    style="position: relative; border-radius: 12px !important; overflow: hidden; margin-bottom: 40px; border: none !important;">
-                    <div class="contact-glass-bg floating"
-                        style="position: absolute; top: -20px; right: -20px; width: 100%; height: 100%; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 12px !important; z-index: 0;">
-                    </div>
-                    <img src="assets/contact_cinematic.png" alt="Let's Connect" class="contact-img cinematic-shadow"
-                        style="position: relative; z-index: 2; width: 100%; height: 600px; object-fit: cover; border-radius: 12px !important; filter: grayscale(20%); transition: filter 0.6s ease; display: block;"
-                        onmouseover="this.style.filter='grayscale(0%)'" onmouseout="this.style.filter='grayscale(20%)'">
+        <!-- Decorative background word -->
+        <div class="contact-bg-word" aria-hidden="true">CONTACT</div>
+
+        <div class="contact-container">
+
+            <!-- LEFT: Badge + heading + info cards -->
+            <div class="contact-left" data-aos="fade-right">
+
+                <div class="contact-badge">
+                    <span class="contact-badge-dot"></span>
+                    Contact
                 </div>
 
-                <div class="contact-info" style="display: flex; flex-direction: column; gap: 20px;">
-                    <div class="info-block" style="display: flex; flex-direction: column; gap: 5px;">
-                        <span
-                            style="font-size: 14px; font-weight: 700; color: var(--text-main); text-transform: uppercase; letter-spacing: 1px;">Email</span>
-                        <a href="mailto:sudipxv@gmail.com" class="magnetic-hover"
-                            style="font-family: 'Playfair Display', serif; font-size: 24px; color: var(--dark); text-decoration: none; font-weight: 700; transition: color 0.3s ease;">sudipxv@gmail.com</a>
-                    </div>
-                    <div class="info-block" style="display: flex; flex-direction: column; gap: 5px;">
-                        <span
-                            style="font-size: 14px; font-weight: 700; color: var(--text-main); text-transform: uppercase; letter-spacing: 1px;">Phone</span>
-                        <a href="tel:+917044692706" class="magnetic-hover"
-                            style="font-family: 'Playfair Display', serif; font-size: 24px; color: var(--dark); text-decoration: none; font-weight: 700; transition: color 0.3s ease;">+91
-                            70446 92706</a>
-                    </div>
+                <h2 class="contact-heading">Get in Touch</h2>
+                <p class="contact-sub">Ready to create something cinematic? Let's build a visual story together.</p>
+
+                <div class="contact-cards">
+                    <!-- Email -->
+                    <a href="mailto:sudipxv@gmail.com" class="contact-card">
+                        <div class="contact-card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="4" width="20" height="16" rx="2"/>
+                                <path d="M2 7l10 7 10-7"/>
+                            </svg>
+                        </div>
+                        <div class="contact-card-text">
+                            <span class="contact-card-label">Email us</span>
+                            <span class="contact-card-value">sudipxv@gmail.com</span>
+                        </div>
+                        <div class="contact-card-arrow">
+                            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8">
+                                <path d="M3 13L13 3M13 3H6M13 3v7"/>
+                            </svg>
+                        </div>
+                    </a>
+
+                    <!-- Phone -->
+                    <a href="tel:+917044692706" class="contact-card">
+                        <div class="contact-card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M6.6 10.8a15.4 15.4 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1.02-.24 11.5 11.5 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.5 11.5 0 0 0 .57 3.6 1 1 0 0 1-.25 1.02z"/>
+                            </svg>
+                        </div>
+                        <div class="contact-card-text">
+                            <span class="contact-card-label">Call us</span>
+                            <span class="contact-card-value">+91 70446 92706</span>
+                        </div>
+                        <div class="contact-card-arrow">
+                            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8">
+                                <path d="M3 13L13 3M13 3H6M13 3v7"/>
+                            </svg>
+                        </div>
+                    </a>
+
+                    <!-- Instagram -->
+                    <a href="https://instagram.com/bunnyxdneo" target="_blank" rel="noopener noreferrer" class="contact-card">
+                        <div class="contact-card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="2" width="20" height="20" rx="5"/>
+                                <circle cx="12" cy="12" r="4"/>
+                                <circle cx="17.5" cy="6.5" r="0.8" fill="currentColor"/>
+                            </svg>
+                        </div>
+                        <div class="contact-card-text">
+                            <span class="contact-card-label">Instagram</span>
+                            <span class="contact-card-value">@bunnyxdneo</span>
+                        </div>
+                        <div class="contact-card-arrow">
+                            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8">
+                                <path d="M3 13L13 3M13 3H6M13 3v7"/>
+                            </svg>
+                        </div>
+                    </a>
                 </div>
             </div>
 
-            <!-- Right Side: Form + Headers -->
-            <div class="contact-right reveal-left"
-                style="background: transparent !important; padding: 60px; border-radius: 0 !important; box-shadow: none !important;">
-                <h2 class="editorial-title portfolio-heading" data-aos="fade-up" data-aos-delay="100" style="margin-bottom: 15px;"><span class="contact-dot-left-1" style="display: none !important;">.</span> <span>LET'S BUILD</span><br>VISUAL STORIES.</h2>
-                <p class="phil-desc"
-                    style="font-size: 18px; color: var(--text-main); margin-bottom: 40px; font-style: italic;">Let's
-                    make something people actually feel.</p>
+            <!-- RIGHT: Contact form -->
+            <div class="contact-right" data-aos="fade-left" data-aos-delay="100">
+                <form class="contact-form">
+                    <input type="text" placeholder="Name" required class="form-input">
+                    <input type="email" placeholder="Email" required class="form-input">
+                    <select class="form-input custom-select" required>
+                        <option value="" disabled selected>Select Project Type</option>
+                        <optgroup label="Photography">
+                            <option value="wedding-photography">Wedding Photography</option>
+                            <option value="portrait-photography">Portrait / Cinematic Photography</option>
+                            <option value="editorial-photography">Editorial / Fashion Photography</option>
+                            <option value="event-photography">Event Photography</option>
+                            <option value="product-photography">Product Photography</option>
+                        </optgroup>
+                        <optgroup label="Videography & Film">
+                            <option value="wedding-film">Wedding Film / Highlight Reel</option>
+                            <option value="cinematic-reel">Cinematic Reel / Short Film</option>
+                            <option value="commercial-video">Commercial / Brand Video</option>
+                            <option value="music-video">Music Video</option>
+                            <option value="documentary">Documentary / Story Film</option>
+                        </optgroup>
+                        <optgroup label="Post Production">
+                            <option value="video-editing">Video Editing</option>
+                            <option value="color-grading">Color Grading</option>
+                            <option value="reels-editing">Social Media Reels Editing</option>
+                        </optgroup>
+                        <optgroup label="Graphic Design">
+                            <option value="brand-identity">Brand Identity / Logo Design</option>
+                            <option value="social-media-design">Social Media Graphics</option>
+                            <option value="poster-design">Poster / Flyer Design</option>
+                            <option value="ui-design">UI / Digital Design</option>
+                        </optgroup>
+                        <option value="other">Other / Custom Project</option>
+                    </select>
+                    <textarea placeholder="Tell me about your project..." rows="6" required class="form-input"></textarea>
 
-                <form class="contact-form" data-aos="fade-up" data-aos-delay="150" style="display: flex; flex-direction: column; gap: 25px;">
-                    <div class="form-group">
-                        <input type="text" placeholder="Your Name" required class="form-input"
-                            style="width: 100%; padding: 20px; border: 2px solid #eee; border-radius: 15px; font-family: 'Inter', sans-serif; font-size: 16px; background: #fafafa; transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;">
-                    </div>
-                    <div class="form-group">
-                        <input type="email" placeholder="Your Email" required class="form-input"
-                            style="width: 100%; padding: 20px; border: 2px solid #eee; border-radius: 15px; font-family: 'Inter', sans-serif; font-size: 16px; background: #fafafa; transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;">
-                    </div>
-                    <div class="form-group">
-                        <select class="form-input custom-select" required
-                            style="width: 100%; padding: 20px; border: 2px solid #eee; border-radius: 15px; font-family: 'Inter', sans-serif; font-size: 16px; background: #fafafa; appearance: none; transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s; cursor: pointer;">
-                            <option value="" disabled selected>Select Project Type</option>
-                            <optgroup label="Photography">
-                                <option value="wedding-photography">Wedding Photography</option>
-                                <option value="portrait-photography">Portrait / Cinematic Photography</option>
-                                <option value="editorial-photography">Editorial / Fashion Photography</option>
-                                <option value="event-photography">Event Photography</option>
-                                <option value="product-photography">Product Photography</option>
-                            </optgroup>
-                            <optgroup label="Videography & Film">
-                                <option value="wedding-film">Wedding Film / Highlight Reel</option>
-                                <option value="cinematic-reel">Cinematic Reel / Short Film</option>
-                                <option value="commercial-video">Commercial / Brand Video</option>
-                                <option value="music-video">Music Video</option>
-                                <option value="documentary">Documentary / Story Film</option>
-                            </optgroup>
-                            <optgroup label="Post Production">
-                                <option value="video-editing">Video Editing</option>
-                                <option value="color-grading">Color Grading</option>
-                                <option value="reels-editing">Social Media Reels Editing</option>
-                            </optgroup>
-                            <optgroup label="Graphic Design">
-                                <option value="brand-identity">Brand Identity / Logo Design</option>
-                                <option value="social-media-design">Social Media Graphics</option>
-                                <option value="poster-design">Poster / Flyer Design</option>
-                                <option value="ui-design">UI / Digital Design</option>
-                            </optgroup>
-                            <option value="other">Other / Custom Project</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <textarea placeholder="Tell me about your project..." rows="5" required class="form-input"
-                            style="width: 100%; padding: 20px; border: 2px solid #eee; border-radius: 15px; font-family: 'Inter', sans-serif; font-size: 16px; background: #fafafa; resize: vertical; transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;"></textarea>
-                    </div>
-
-                    <div class="contact-actions" style="display: flex; gap: 20px; margin-top: 10px; flex-wrap: wrap;">
-                        <button type="submit" class="submit-btn magnetic-hover"
-                            style="width: fit-content !important; min-width: 200px !important; padding: 20px 40px; background: var(--yellow) !important; color: #111 !important; border: none; border-radius: 50px; font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">Send
-                            Message</button>
-
-                        <a href="https://wa.me/917044692706" target="_blank" class="whatsapp-btn magnetic-hover"
-                            style="flex: 1; min-width: 200px; padding: 20px 40px; background: #111 !important; color: #fff !important; border: 1px solid #333 !important; border-radius: 50px; font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 700; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 10px; transition: all 0.3s ease; box-shadow: none !important;">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                                <path
-                                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z" />
+                    <div class="contact-actions">
+                        <button type="submit" class="submit-btn">Send Message</button>
+                        <a href="https://wa.me/917044692706" target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
                             </svg>
                             WhatsApp
                         </a>
                     </div>
                 </form>
             </div>
+
         </div>
     </section>
 
@@ -923,9 +1058,9 @@ font-size:13px;font-family:Arial;">Ps</div>
             <div class="footer-links">
                 <a href="#contact" class="start-project-btn footer-btn">Start a Project</a>
                 <div class="social-links">
-                    <a href="https://www.instagram.com/bunnyxdneo" target="_blank" rel="noopener noreferrer">Instagram</a>
-                    <a href="https://linktr.ee/sudip_portfolio" target="_blank" rel="noopener noreferrer">Behance</a>
-                    <a href="https://linktr.ee/sudip_portfolio" target="_blank" rel="noopener noreferrer">Vimeo</a>
+                    <a href="https://instagram.com/bunnyxdneo" target="_blank" rel="noopener noreferrer">Instagram</a>
+                    <a href="https://behance.net/sudipmondal" target="_blank" rel="noopener noreferrer">Behance</a>
+                    <a href="https://vimeo.com/sudipmondal" target="_blank" rel="noopener noreferrer">Vimeo</a>
                 </div>
             </div>
             <div class="footer-bottom">
@@ -935,14 +1070,17 @@ font-size:13px;font-family:Arial;">Ps</div>
         </div>
     </footer>
 
-    <script src="js/script.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/script.js" defer></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
+    <script src="js/mouse-parallax.js" defer></script>
     <script>
-      AOS.init({
-        duration: 800,
-        easing: 'ease-in-out',
-        once: true,
-        offset: 80
+      document.addEventListener('DOMContentLoaded', function () {
+        AOS.init({
+          duration: 800,
+          easing: 'ease-in-out',
+          once: true,
+          offset: 80
+        });
       });
     </script>
     <script>
@@ -1086,10 +1224,64 @@ function applyMobileFixes() {
 applyMobileFixes();
 
 // Run on resize
-window.addEventListener('resize', 
+window.addEventListener('resize',
   applyMobileFixes
 );
 </script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Sudip Mondal",
+  "jobTitle": "Photographer & Filmmaker",
+  "description": "Cinematic photographer and filmmaker based in Kolkata, India.",
+  "url": "https://sudipmondal.in",
+  "email": "sudipxv@gmail.com",
+  "telephone": "+917044692706",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Kolkata",
+    "addressRegion": "West Bengal",
+    "addressCountry": "IN"
+  },
+  "sameAs": [
+    "https://instagram.com/bunnyxdneo"
+  ],
+  "knowsAbout": ["Photography", "Filmmaking", "Video Editing", "Color Grading", "Graphic Design"]
+}
+</script>
+
+<!-- QR code lightbox modal -->
+<div id="qr-modal"
+     class="qr-modal"
+     role="dialog"
+     aria-modal="true"
+     aria-label="QR Code — Scan to view portfolio"
+     aria-hidden="true"
+     hidden>
+    <div class="qr-modal__backdrop" aria-hidden="true"></div>
+    <!-- inner wrapper: close btn above, card below, both animate together -->
+    <div class="qr-modal__inner">
+        <button class="qr-modal__close" aria-label="Close">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+        </button>
+        <div class="qr-modal__box">
+            <p class="qr-modal__label">Scan to Connect</p>
+            <div class="qr-modal__img-wrap">
+                <img src="https://i.ibb.co/VYYKtJ5Y/https-linktr-ee-sudip-portfolio.png"
+                     alt="Scan QR code to view Sudip Mondal's portfolio on Linktree"
+                     class="qr-modal__img"
+                     draggable="false">
+            </div>
+            <p class="qr-modal__caption">All my links, one scan.</p>
+            <span class="qr-modal__url">linktr.ee/sudip-portfolio</span>
+        </div>
+    </div>
+</div>
 </body>
 
 </html>

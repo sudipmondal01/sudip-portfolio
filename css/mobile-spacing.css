@@ -556,6 +556,239 @@
     padding: 0 16px !important;
     font-size: 9px !important;
   }
+
+  /* =======================================================
+     FIX 1 — VIDEOGRAPHY SECTION WIDTHS
+     .block-reels has inline display:flex !important so we
+     can't change display, but flex-direction is unset inline.
+     .reels-left / .reels-right have inline width:45%/55%
+     without !important — CSS !important overrides them.
+     ======================================================= */
+  html body .video-block.block-reels {
+    flex-direction: column !important;
+    gap: 24px !important;
+  }
+
+  html body .reels-left {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-right: 0 !important;
+  }
+
+  html body .reels-right {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .reels-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px !important;
+  }
+
+  /* block-projects: padding:0 60px inline !important was
+     removed (now just padding:0 60px), so CSS wins here */
+  .video-block.block-projects {
+    padding: 0 16px !important;
+  }
+
+  /* =======================================================
+     FIX 2 — OVERLAPPING IMAGES (.overlap-horizontal)
+     Images are absolute with fixed left offsets and !important
+     rotations. Reset to a simple flex row.
+     ======================================================= */
+  .overlap-horizontal {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    gap: 6px !important;
+    height: auto !important;
+    position: relative !important;
+    overflow: hidden !important;
+    justify-content: flex-start !important;
+  }
+
+  .ov-img {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    width: calc(33.33% - 4px) !important;
+    height: 110px !important;
+    object-fit: cover !important;
+    transform: none !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* Override the !important rotations on ov-1/2/3 */
+  .ov-1,
+  .ov-2 {
+    transform: none !important;
+  }
+
+  .ov-3 {
+    width: calc(33.33% - 4px) !important;
+    height: 110px !important;
+    transform: none !important;
+  }
+
+  /* =======================================================
+     FIX 3 — TIMELINE CARDS
+     .complex-materials-layout has height:600px and no flex.
+     Cards are position:absolute — make them flow in column.
+     ======================================================= */
+  html body .complex-materials-layout {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+    height: auto !important;
+    position: relative !important;
+  }
+
+  html body .timeline-card {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    transform: none !important;
+    width: 100% !important;
+    margin-bottom: 0 !important;
+  }
+
+  html body .timeline-card img {
+    width: 100% !important;
+    height: 200px !important;
+    object-fit: cover !important;
+  }
+
+  /* =======================================================
+     FIX 4 — EDITORIAL SHOTS MOBILE EXPERIENCE
+     .block-bottom grid doesn't collapse; diagonal gallery
+     overflows with position:absolute images at right:0/150/
+     300/450px inside a rotated wrap.
+     ======================================================= */
+  html body .photo-block.block-bottom {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 24px !important;
+  }
+
+  .bottom-left,
+  .bottom-right {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .diagonal-gallery {
+    height: auto !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    overflow: hidden !important;
+    perspective: none !important;
+  }
+
+  /* Undo the rotate and turn diag-wrap into a 2-col grid */
+  .diag-wrap {
+    transform: none !important;
+    position: relative !important;
+    height: auto !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 6px !important;
+    width: 100% !important;
+  }
+
+  .diag-img {
+    position: relative !important;
+    top: auto !important;
+    right: auto !important;
+    left: auto !important;
+    bottom: auto !important;
+    width: 100% !important;
+    height: 180px !important;
+    transform: none !important;
+  }
+
+  .diag-img:hover {
+    transform: none !important;
+  }
+
+  /* =======================================================
+     FIX 5 — CONTACT SECTION SPACING
+     Inline grid 5fr 7fr + gap:80px have no !important so
+     CSS wins. contact-right padding:60px and contact-img
+     height:600px also have no !important inline.
+     .contact-glass-bg positioned at top:-20px right:-20px
+     causes overflow — hide it on mobile.
+     ======================================================= */
+  .contact-container {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 32px !important;
+    grid-template-columns: unset !important;
+  }
+
+  .contact-left,
+  .contact-right {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .contact-right {
+    padding: 0 !important;
+  }
+
+  .contact-img-wrap {
+    margin-bottom: 24px !important;
+    overflow: hidden !important;
+  }
+
+  .contact-img {
+    height: 260px !important;
+    width: 100% !important;
+    object-fit: cover !important;
+  }
+
+  /* Positioned glass bg at top:-20px right:-20px overflows */
+  .contact-glass-bg {
+    display: none !important;
+  }
+
+  .contact-info a {
+    font-size: 18px !important;
+  }
+}
+
+/* ============================================================
+   430px BREAKPOINT — iPhone Pro Max / Plus
+   ============================================================ */
+@media (max-width: 430px) {
+
+  /* Videography */
+  .reels-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 6px !important;
+  }
+
+  /* Overlapping images */
+  .ov-img,
+  .ov-3 {
+    height: 100px !important;
+  }
+
+  /* Timeline cards */
+  html body .timeline-card img {
+    height: 180px !important;
+  }
+
+  /* Editorial diagonal gallery */
+  .diag-img {
+    height: 160px !important;
+  }
+
+  /* Contact */
+  .contact-img {
+    height: 240px !important;
+  }
 }
 
 /* ============================================================
@@ -611,6 +844,32 @@
 
   footer {
     padding: 32px 16px 20px !important;
+  }
+
+  /* Videography */
+  .video-block.block-projects {
+    padding: 0 12px !important;
+  }
+
+  /* Overlapping images */
+  .ov-img,
+  .ov-3 {
+    height: 90px !important;
+  }
+
+  /* Timeline cards */
+  html body .timeline-card img {
+    height: 160px !important;
+  }
+
+  /* Editorial diagonal gallery */
+  .diag-img {
+    height: 140px !important;
+  }
+
+  /* Contact */
+  .contact-img {
+    height: 220px !important;
   }
 }
 
