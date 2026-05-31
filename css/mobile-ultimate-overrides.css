@@ -166,4 +166,13 @@
   *[style*="rotate("], *[style*="transform:"] {
     transform: none !important;
   }
+
+  /* Corporate photography grid — stack to single column on mobile */
+  .corporate-photo-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .block-corporate {
+    padding: 0 20px !important;
+  }
 }

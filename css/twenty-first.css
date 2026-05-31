@@ -1,0 +1,638 @@
+/* ================================================================
+   TWENTY-FIRST.CSS
+   21st.dev component patterns adapted for plain HTML/CSS
+   2026 Premium Portfolio Design System
+   ================================================================ */
+
+/* ── DESIGN TOKENS ───────────────────────────────────────────── */
+:root {
+  /* 21st.dev refined palette — warm dark + gold */
+  --tf-bg:         #0f0e0d;
+  --tf-surface:    #1a1815;
+  --tf-border:     rgba(255, 255, 255, 0.07);
+  --tf-text:       #f0ece6;
+  --tf-muted:      rgba(240, 236, 230, 0.45);
+  --tf-gold:       #f5ab00;
+  --tf-gold-glow:  rgba(245, 171, 0, 0.25);
+  --tf-gold-dim:   rgba(245, 171, 0, 0.08);
+
+  /* Easing presets from 21st.dev */
+  --tf-ease-out:   cubic-bezier(0.16, 1, 0.3, 1);
+  --tf-ease-in:    cubic-bezier(0.7, 0, 0.84, 0);
+  --tf-ease-circ:  cubic-bezier(0.76, 0, 0.24, 1);
+  --tf-spring:     cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ================================================================
+   1. ANIMATED GRADIENT TEXT BADGE (21st.dev: magicui/animated-gradient-text)
+   Continuous colour-shift through the border of the pill label.
+   ================================================================ */
+
+@keyframes tf-gradient-shift {
+  0%   { background-position: 0%   50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0%   50%; }
+}
+
+.tf-gradient-badge {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 18px;
+  border-radius: 100px;
+  background: transparent;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dark);
+  isolation: isolate;
+}
+
+.tf-gradient-badge::before {
+  content: '';
+  position: absolute;
+  inset: -1.5px;
+  border-radius: inherit;
+  background: linear-gradient(
+    90deg,
+    var(--tf-gold) 0%,
+    #ffcc44 25%,
+    #e69900 50%,
+    #ffcc44 75%,
+    var(--tf-gold) 100%
+  );
+  background-size: 300% 100%;
+  animation: tf-gradient-shift 4s linear infinite;
+  z-index: -1;
+}
+
+.tf-gradient-badge::after {
+  content: '';
+  position: absolute;
+  inset: 1.5px;
+  border-radius: 100px;
+  background: var(--bg-color, #e5e5e5);
+  z-index: -1;
+}
+
+/* ================================================================
+   2. WORD-BY-WORD TEXT REVEAL (21st.dev: ibelick text reveals)
+   Each word wraps in .tf-word, staggered opacity+y entrance.
+   ================================================================ */
+
+.tf-reveal-text {
+  overflow: visible;
+}
+
+.tf-word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  line-height: inherit;
+}
+
+.tf-word-inner {
+  display: inline-block;
+  transform: translateY(110%);
+  opacity: 0;
+  transition:
+    transform 0.75s var(--tf-ease-out),
+    opacity 0.6s ease;
+}
+
+.tf-reveal-text.revealed .tf-word-inner {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* ================================================================
+   3. GLARE CARD (21st.dev: aceternity/glare-card)
+   3D perspective tilt + radial glare using CSS custom properties.
+   Applied via JS: adds --r-x, --r-y, --m-x, --m-y, --opacity.
+   ================================================================ */
+
+.tf-glare-card {
+  position: relative;
+  transform-style: preserve-3d;
+  transform: perspective(700px)
+    rotateX(var(--r-y, 0deg))
+    rotateY(var(--r-x, 0deg));
+  transition:
+    transform 0.08s linear,
+    box-shadow 0.35s var(--tf-ease-out);
+  will-change: transform;
+  overflow: hidden;
+}
+
+/* Glare overlay layer */
+.tf-glare-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    farthest-corner circle at var(--m-x, 50%) var(--m-y, 50%),
+    rgba(255, 255, 255, 0.14) 0%,
+    rgba(255, 255, 255, 0.05) 40%,
+    transparent 70%
+  );
+  opacity: var(--opacity, 0);
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  border-radius: inherit;
+  z-index: 2;
+}
+
+/* On leave — smooth reset */
+.tf-glare-card.tf-leaving {
+  transform: perspective(700px) rotateX(0deg) rotateY(0deg);
+  transition:
+    transform 0.55s var(--tf-ease-out),
+    box-shadow 0.55s var(--tf-ease-out);
+}
+
+/* ================================================================
+   4. SPOTLIGHT (21st.dev: aceternity/spotlight)
+   SVG ellipse with Gaussian blur — overlaid on the hero section.
+   ================================================================ */
+
+.tf-spotlight-wrap {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.tf-spotlight {
+  position: absolute;
+  top: -30%;
+  right: -10%;
+  width: 80%;
+  height: auto;
+  opacity: 0;
+  animation: tf-spotlight-in 1.4s var(--tf-ease-out) 0.5s forwards;
+}
+
+@keyframes tf-spotlight-in {
+  from { opacity: 0; transform: translateX(40px) scale(0.95); }
+  to   { opacity: 1; transform: translateX(0)    scale(1); }
+}
+
+/* ================================================================
+   5. INFINITE MARQUEE (21st.dev: aceternity/infinite-moving-cards)
+   CSS-only scroll animation with edge fade mask.
+   ================================================================ */
+
+.tf-marquee-outer {
+  overflow: hidden;
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    white 12%,
+    white 88%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    white 12%,
+    white 88%,
+    transparent 100%
+  );
+  padding: 20px 0;
+}
+
+.tf-marquee-track {
+  display: flex;
+  gap: 0;
+  width: max-content;
+  animation: tf-marquee-scroll 28s linear infinite;
+  will-change: transform;
+}
+
+.tf-marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes tf-marquee-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.tf-marquee-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 28px;
+  white-space: nowrap;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-main);
+  opacity: 0.5;
+  border-right: 1px solid rgba(51, 51, 51, 0.15);
+  transition: opacity 0.2s;
+}
+
+.tf-marquee-item:hover { opacity: 0.9; }
+
+.tf-marquee-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--yellow);
+  flex-shrink: 0;
+}
+
+/* ================================================================
+   6. AMBIENT GRADIENT BACKGROUND (21st.dev: aceternity/bg-gradient)
+   Animated radial gradient blobs that softly pulse behind sections.
+   ================================================================ */
+
+.tf-ambient {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.tf-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.07;
+  animation: tf-blob-float 12s ease-in-out infinite alternate;
+}
+
+.tf-blob-1 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, #f5ab00 0%, transparent 70%);
+  top: -100px;
+  left: -100px;
+  animation-delay: 0s;
+}
+
+.tf-blob-2 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, #f5ab00 0%, transparent 70%);
+  bottom: -100px;
+  right: 10%;
+  animation-delay: 4s;
+  opacity: 0.04;
+}
+
+.tf-blob-3 {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, #e69900 0%, transparent 70%);
+  top: 40%;
+  left: 60%;
+  animation-delay: 8s;
+  opacity: 0.05;
+}
+
+@keyframes tf-blob-float {
+  0%   { transform: translate(0, 0)      scale(1); }
+  33%  { transform: translate(30px,-20px) scale(1.05); }
+  66%  { transform: translate(-20px,15px) scale(0.97); }
+  100% { transform: translate(10px, 30px) scale(1.03); }
+}
+
+/* ================================================================
+   7. SHIMMER BUTTON (21st.dev style premium CTA)
+   Animated shimmer sweep across the button surface.
+   ================================================================ */
+
+.tf-shimmer-btn {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 32px;
+  background: var(--dark);
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform 0.22s var(--tf-ease-out), box-shadow 0.22s ease;
+}
+
+.tf-shimmer-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.12) 50%,
+    transparent 100%
+  );
+  transform: skewX(-20deg);
+  animation: tf-shimmer-sweep 3.5s ease-in-out infinite;
+}
+
+@keyframes tf-shimmer-sweep {
+  0%   { left: -80%; }
+  60%  { left: 130%; }
+  100% { left: 130%; }
+}
+
+.tf-shimmer-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+}
+
+/* Gold variant */
+.tf-shimmer-btn.gold {
+  background: var(--yellow);
+  color: var(--dark);
+}
+.tf-shimmer-btn.gold::before {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.25) 50%,
+    transparent 100%
+  );
+}
+.tf-shimmer-btn.gold:hover {
+  box-shadow: 0 12px 30px rgba(245, 171, 0, 0.4);
+}
+
+/* ================================================================
+   8. SECTION BORDER REVEAL (21st.dev: borders category)
+   Animated border that draws itself in as the section enters view.
+   ================================================================ */
+
+.tf-border-draw {
+  position: relative;
+}
+
+.tf-border-draw::before,
+.tf-border-draw::after {
+  content: '';
+  position: absolute;
+  background: var(--yellow);
+  transition: none;
+  opacity: 0;
+}
+
+/* Top border — horizontal */
+.tf-border-draw::before {
+  top: 0; left: 0;
+  height: 1.5px;
+  width: 0;
+}
+
+/* Left border — vertical */
+.tf-border-draw::after {
+  top: 0; left: 0;
+  width: 1.5px;
+  height: 0;
+}
+
+.tf-border-draw.tf-border-animated::before {
+  opacity: 1;
+  width: 100%;
+  transition: width 0.8s var(--tf-ease-circ) 0.1s;
+}
+
+.tf-border-draw.tf-border-animated::after {
+  opacity: 1;
+  height: 100%;
+  transition: height 0.8s var(--tf-ease-circ) 0.1s;
+}
+
+/* ================================================================
+   9. NUMBER TICKER (21st.dev: magicui/number-ticker)
+   Slot-machine style number count-up.
+   ================================================================ */
+
+.tf-ticker {
+  display: inline-block;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum';
+}
+
+/* ================================================================
+   10. FROSTED GLASS CARD (21st.dev: glassmorphism pattern)
+   Used for overlay cards and floating info boxes.
+   ================================================================ */
+
+.tf-glass {
+  background: rgba(229, 229, 229, 0.55);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.tf-glass-dark {
+  background: rgba(26, 24, 21, 0.72);
+  backdrop-filter: blur(20px) saturate(1.2);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* ================================================================
+   11. HERO TYPOGRAPHY REFINEMENTS (2026 editorial premium)
+   ================================================================ */
+
+/* Make hero title truly editorial scale */
+.hero-title.tf-display {
+  font-size: clamp(64px, 10vw, 130px) !important;
+  font-weight: 900 !important;
+  line-height: 0.92 !important;
+  letter-spacing: -0.04em !important;
+}
+
+/* Pill label — apply gradient badge treatment */
+.pill-label {
+  /* Fallback if gradient badge isn't applied */
+  border: 1.5px solid rgba(245, 171, 0, 0.4);
+  background: rgba(245, 171, 0, 0.06);
+}
+
+/* ================================================================
+   12. SECTION HEADING IMPROVEMENTS (2026 editorial typography)
+   ================================================================ */
+
+/* Tighter tracking on large portfolio headings */
+.portfolio-heading {
+  letter-spacing: -0.02em !important;
+}
+
+/* Yellow badge pill — refined border radius */
+.editorial-title span[style*="background: #F5C518"],
+.editorial-title span[style*="background:#F5C518"] {
+  border-radius: 6px !important;
+  box-shadow: 0 2px 12px rgba(245, 171, 0, 0.2) !important;
+}
+
+/* ================================================================
+   13. SERVICE CARD — GLASS TREATMENT
+   Replaces solid bg with frosted glass on service cards
+   ================================================================ */
+
+.service-card {
+  background: rgba(255, 255, 255, 0.45) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.55) !important;
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7) !important;
+  transition:
+    transform 0.35s var(--tf-ease-out),
+    box-shadow 0.35s var(--tf-ease-out),
+    background 0.25s ease !important;
+}
+
+.service-card:hover {
+  background: rgba(255, 255, 255, 0.7) !important;
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+  transform: translateY(-5px) !important;
+}
+
+/* ================================================================
+   14. TESTIMONIAL CARDS — ELEVATED PREMIUM STYLE
+   ================================================================ */
+
+.testimonial-card {
+  background: rgba(255, 255, 255, 0.5) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.6) !important;
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.65) !important;
+}
+
+/* ================================================================
+   15. IMAGE HOVER — 21st.dev premium scale-in-container
+   Pairs with .tf-img-wrap added via HTML
+   ================================================================ */
+
+.tf-img-wrap {
+  overflow: hidden;
+  display: block;
+  position: relative;
+}
+
+.tf-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.0);
+  transition: transform 0.8s var(--tf-ease-out), filter 0.5s ease;
+  will-change: transform;
+}
+
+.tf-img-wrap:hover img {
+  transform: scale(1.06);
+  filter: brightness(1.04) saturate(1.08);
+}
+
+/* Overlay shimmer on hover */
+.tf-img-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0) 30%,
+    rgba(255, 255, 255, 0.06) 50%,
+    rgba(255, 255, 255, 0) 70%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.tf-img-wrap:hover::after { opacity: 1; }
+
+/* ================================================================
+   16. SCROLL PROGRESS INDICATOR (21st.dev: scroll areas)
+   Thin gold line at the top (replaces current progress bar)
+   ================================================================ */
+
+#tf-scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--yellow), #ffcc44, var(--yellow));
+  background-size: 200% 100%;
+  animation: tf-gradient-shift 2s linear infinite;
+  z-index: 99999;
+  transform-origin: left;
+  transition: width 0.05s linear;
+}
+
+/* ================================================================
+   17. FOOTER — EDITORIAL UPGRADE
+   ================================================================ */
+
+.cinematic-footer .footer-title {
+  font-size: clamp(48px, 8vw, 100px) !important;
+  letter-spacing: -0.04em !important;
+  line-height: 0.9 !important;
+}
+
+/* ================================================================
+   18. MOBILE — contain glare + marquee properly
+   ================================================================ */
+
+@media (max-width: 768px) {
+  .tf-marquee-item { padding: 8px 18px; font-size: 10px; }
+  .tf-blob { display: none; }
+  .tf-gradient-badge { font-size: 10px; padding: 5px 14px; }
+  .hero-title.tf-display { font-size: clamp(52px, 14vw, 90px) !important; }
+  .tf-glare-card {
+    transform: none !important; /* disable 3D on touch */
+  }
+  .tf-glare-card::after { display: none; }
+}
+
+/* ================================================================
+   19. REDUCED MOTION — respect OS preference
+   ================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .tf-gradient-badge::before,
+  .tf-marquee-track,
+  .tf-blob,
+  .tf-shimmer-btn::before {
+    animation: none !important;
+  }
+  .tf-word-inner {
+    transform: none !important;
+    opacity: 1 !important;
+    transition: none !important;
+  }
+}

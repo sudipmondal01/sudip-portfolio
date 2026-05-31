@@ -1,0 +1,632 @@
+/* ================================================================
+   REDESIGN 2026 — Premium Cinematic Portfolio Overhaul
+   Builds on top of the existing design system without breaking it.
+   All rules here intentionally override with specificity, not !important,
+   unless overriding legacy inline styles.
+   ================================================================ */
+
+/* ── GLOBAL ENHANCEMENTS ─────────────────────────────────────── */
+
+/* Improved scroll behaviour */
+html {
+  scroll-padding-top: 80px; /* account for fixed navbar */
+}
+
+/* Subtle film-grain overlay on the page (extends premium-depth.css) */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23g)' opacity='0.025'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 999998;
+  mix-blend-mode: overlay;
+}
+
+/* ── HERO IMPROVEMENTS ───────────────────────────────────────── */
+
+/* Remove the decorative quote that wastes vertical space */
+.hero-quote { display: none !important; }
+
+/* Subheading scale up — previously too small */
+.hero-subtext {
+  font-size: clamp(13px, 1.4vw, 16px) !important;
+  letter-spacing: 0.2em !important;
+  opacity: 0.65;
+  line-height: 1.8 !important;
+}
+
+/* Hero CTA group breathing room */
+.hero-cta-group { margin: 24px 0 10px; }
+
+/* Availability strip alignment */
+.hero-availability { margin-top: 0; margin-bottom: 8px; }
+
+/* Hero video reel embed container */
+.hero-reel-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: 28px;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.18), 0 0 0 1px rgba(0,0,0,0.06);
+}
+.hero-reel-wrap iframe {
+  width: 100%;
+  aspect-ratio: 16/9;
+  border: none;
+  display: block;
+}
+.hero-reel-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(0,0,0,0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.hero-reel-badge::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: #f5ab00;
+  border-radius: 50%;
+  display: inline-block;
+  animation: pulse-dot 1.8s ease-in-out infinite;
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(0.7); }
+}
+
+/* ── PHOTO CATEGORY FILTER ───────────────────────────────────── */
+
+.photo-filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 48px;
+  padding: 0 60px;
+}
+
+.filter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  border: 1.5px solid rgba(51,51,51,0.2);
+  border-radius: 100px;
+  background: transparent;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-main);
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  white-space: nowrap;
+}
+.filter-btn:hover {
+  border-color: var(--yellow);
+  color: var(--dark);
+  transform: translateY(-1px);
+}
+.filter-btn.active {
+  background: var(--dark);
+  border-color: var(--dark);
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(51,51,51,0.2);
+}
+.filter-btn .filter-count {
+  font-size: 10px;
+  opacity: 0.6;
+  font-weight: 400;
+}
+
+/* Gallery item hidden state for filter */
+.gallery-filterable {
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+.gallery-filterable.filter-hidden {
+  opacity: 0;
+  transform: scale(0.97);
+  pointer-events: none;
+  position: absolute;
+  visibility: hidden;
+}
+
+/* Photo block filter wrapper (contains each filterable sub-block) */
+.photo-filter-block {
+  transition: all 0.35s ease;
+}
+.photo-filter-block.filter-hidden {
+  display: none;
+}
+
+/* Featured image caption */
+.featured-img-caption {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-main);
+  opacity: 0.5;
+  margin-top: 12px;
+  padding-left: 4px;
+}
+
+/* ── VIDEOGRAPHY: VIDEO EMBED ────────────────────────────────── */
+
+.video-reel-featured {
+  width: 100%;
+  max-width: 860px;
+  margin: 0 auto 60px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.15), 0 0 0 1px rgba(0,0,0,0.06);
+  position: relative;
+}
+.video-reel-featured iframe {
+  width: 100%;
+  aspect-ratio: 16/9;
+  border: none;
+  display: block;
+}
+.video-reel-featured-label {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, transparent 100%);
+  padding: 32px 24px 20px;
+  pointer-events: none;
+}
+.video-reel-featured-label h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 4px;
+}
+.video-reel-featured-label p {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  margin: 0;
+}
+
+/* ── WOW SECTION CTA ─────────────────────────────────────────── */
+
+.wow-cta-wrap {
+  margin-top: 32px;
+  display: flex;
+  justify-content: center;
+}
+.wow-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 36px;
+  background: var(--yellow);
+  color: var(--dark);
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
+  box-shadow: 0 8px 30px rgba(245,171,0,0.35);
+}
+.wow-cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 40px rgba(245,171,0,0.5);
+}
+.wow-cta-btn svg { transition: transform 0.2s ease; }
+.wow-cta-btn:hover svg { transform: translateX(3px); }
+
+/* ── SERVICES: DELIVERABLES + PRICING ───────────────────────── */
+
+.service-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+  overflow: hidden;
+}
+.service-card::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--yellow);
+  transition: width 0.4s cubic-bezier(0.76, 0, 0.24, 1);
+}
+.service-card:hover::before { width: 100%; }
+
+.service-price {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--yellow);
+  margin: 10px 0 6px;
+  text-transform: uppercase;
+}
+
+.service-deliverables {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 8px;
+}
+.service-deliverables li {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  color: var(--text-main);
+  opacity: 0.75;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  line-height: 1.5;
+}
+.service-deliverables li::before {
+  content: '';
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--yellow);
+  flex-shrink: 0;
+}
+
+/* Services responsive grid fix */
+@media (min-width: 769px) and (max-width: 1100px) {
+  .services-grid { grid-template-columns: repeat(2, 1fr) !important; }
+}
+
+/* ── TESTIMONIALS: STAR RATINGS ─────────────────────────────── */
+
+.testimonial-stars {
+  display: flex;
+  gap: 3px;
+  margin-bottom: 16px;
+}
+.testimonial-stars svg {
+  width: 14px;
+  height: 14px;
+  fill: var(--yellow);
+  flex-shrink: 0;
+}
+
+.testimonial-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.testimonial-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.09) !important;
+}
+
+/* Pull quote marks improved */
+.testimonial-quote-mark {
+  font-family: 'Playfair Display', serif;
+  font-size: 72px;
+  line-height: 0.5;
+  color: var(--yellow);
+  position: absolute;
+  top: 28px;
+  left: 28px;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* Testimonials grid responsive */
+@media (max-width: 900px) {
+  .testimonials-grid-inner { grid-template-columns: 1fr !important; }
+}
+
+/* ── CONTACT FORM: LABELS + STATES ──────────────────────────── */
+
+.form-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 14px;
+}
+.form-field-group label {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-main);
+  opacity: 0.7;
+}
+.form-field-group label .required-mark {
+  color: var(--yellow);
+  margin-left: 2px;
+}
+.form-field-group .form-input {
+  margin-bottom: 0 !important;
+}
+.form-field-group .form-input:focus {
+  border-color: var(--yellow);
+  outline: none;
+}
+
+/* Form input error state */
+.form-input.input-error { border-color: #dc2626 !important; }
+.form-field-error {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  color: #dc2626;
+  display: none;
+  margin-top: 3px;
+}
+.form-field-error.visible { display: block; }
+
+/* Form success state */
+.form-success {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 40px;
+  gap: 16px;
+}
+.form-success.visible { display: flex; }
+.form-success-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(34,197,94,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.form-success-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--dark);
+  margin: 0;
+}
+.form-success-sub {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: var(--text-main);
+  opacity: 0.7;
+  margin: 0;
+  max-width: 300px;
+  line-height: 1.6;
+}
+
+/* Submit button states */
+.submit-btn { position: relative; overflow: hidden; }
+.submit-btn.loading { pointer-events: none; opacity: 0.8; }
+.submit-btn.loading::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 25%, rgba(255,255,255,0.3) 50%, transparent 75%);
+  animation: shimmer 1.2s infinite;
+}
+@keyframes shimmer {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Date input minimum fix styling */
+input[type="date"] { color-scheme: light; }
+
+/* ── NAVBAR IMPROVEMENTS ─────────────────────────────────────── */
+
+/* Dropdown-free nav — just ensure all links visible */
+.nav-links .nav-link {
+  position: relative;
+}
+.nav-links .nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1.5px;
+  background: var(--yellow);
+  transition: width 0.25s ease;
+}
+.nav-links .nav-link:hover::after,
+.nav-links .nav-link.active::after {
+  width: 100%;
+}
+
+/* ── GALLERY HOVER EFFECTS ───────────────────────────────────── */
+
+/* Premium hover reveal on portfolio images */
+.tall-featured-wrap {
+  position: relative;
+  overflow: hidden;
+}
+.tall-featured-wrap::after {
+  content: 'View Full';
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(245,171,0,0.92);
+  color: var(--dark);
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 7px 14px;
+  border-radius: 3px;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  pointer-events: none;
+}
+.tall-featured-wrap:hover::after {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Grid image hover overlay */
+.grid-3x2,
+.row-3-images {
+  position: relative;
+}
+.square-img {
+  position: relative;
+}
+.square-img-wrap {
+  position: relative;
+  overflow: hidden;
+  display: block;
+}
+.square-img-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.5));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.square-img-wrap:hover::after { opacity: 1; }
+
+/* ── ABOUT SECTION IMPROVEMENTS ─────────────────────────────── */
+
+/* Remove software/tool grid — hidden via CSS as backup to HTML removal */
+.ref-software-grid { display: none !important; }
+.ref-detail-block:has(.ref-software-grid) { display: none !important; }
+
+/* Improved about layout — more breathing room */
+.ref-about-desc p {
+  font-size: clamp(15px, 1.4vw, 17px) !important;
+  line-height: 1.85 !important;
+  margin-bottom: 18px !important;
+}
+
+/* About credibility strip */
+.about-cred-strip {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(51,51,51,0.1);
+}
+.about-cred-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.about-cred-number {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--dark);
+  line-height: 1;
+}
+.about-cred-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-main);
+  opacity: 0.55;
+}
+
+/* ── PHILOSOPHY SECTION ──────────────────────────────────────── */
+
+/* Personal touch — make the vision heading feel ownable */
+.vision-heading-rewrite {
+  font-family: 'Playfair Display', serif !important;
+  font-style: italic !important;
+  color: var(--dark) !important;
+}
+
+/* ── FOOTER IMPROVEMENTS ─────────────────────────────────────── */
+
+.footer-brand-tagline {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-main);
+  opacity: 0.45;
+  margin: 0 0 32px;
+  display: block;
+}
+
+/* ── MOTION — Premium hover & reveal CSS fallbacks ───────────── */
+
+/* Stagger entrance on service cards */
+.service-card:nth-child(1) { animation-delay: 0.05s; }
+.service-card:nth-child(2) { animation-delay: 0.10s; }
+.service-card:nth-child(3) { animation-delay: 0.15s; }
+.service-card:nth-child(4) { animation-delay: 0.20s; }
+.service-card:nth-child(5) { animation-delay: 0.25s; }
+.service-card:nth-child(6) { animation-delay: 0.30s; }
+
+/* Premium image scale on hover (layered over animations.css) */
+.tall-featured-img:hover,
+.phil-img:hover {
+  transform: scale(1.025) !important;
+  filter: grayscale(0%) !important;
+  transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              filter 0.5s ease !important;
+}
+
+/* ── MOBILE OVERRIDES ────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .photo-filter-bar { padding: 0 20px; }
+  .filter-btn { font-size: 10px; padding: 7px 14px; }
+  .video-reel-featured { border-radius: 6px; }
+  .hero-reel-wrap { max-width: 100%; margin-top: 20px; }
+  .form-field-group { margin-bottom: 12px; }
+  .about-cred-strip { gap: 16px; }
+  .about-cred-number { font-size: 22px; }
+  .services-grid { grid-template-columns: 1fr !important; }
+}
+
+/* ── SCROLL SNAP HINTS for Photography section ───────────────── */
+
+.photography {
+  scroll-margin-top: 80px;
+}
+.videography {
+  scroll-margin-top: 80px;
+}
+.about {
+  scroll-margin-top: 80px;
+}
