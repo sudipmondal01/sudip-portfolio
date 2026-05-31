@@ -423,4 +423,24 @@
     init();
   }
 
+  /* ── Dead-man's switch — force-reveal any images still hidden ───
+     If inView never fires (e.g., element off-screen + browser quirk),
+     this resets any portfolio image stuck at opacity:0 after 5s.    */
+  setTimeout(function () {
+    var IMG_SEL = [
+      '.tall-featured-img', '.square-img', '.reel-item',
+      '.diag-img img', '.phil-img', '.corporate-photo-grid img',
+      '.ov-img', '.mobile-editorial-grid img'
+    ].join(', ');
+
+    document.querySelectorAll(IMG_SEL).forEach(function (img) {
+      var computed = window.getComputedStyle(img);
+      if (parseFloat(computed.opacity) < 0.1) {
+        img.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        img.style.opacity    = '1';
+        img.style.transform  = 'scale(1)';
+      }
+    });
+  }, 5000);
+
 }());

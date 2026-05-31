@@ -2695,18 +2695,18 @@ img:not(.hero__icon):not(.doodle-icon) {
     /* pulseBg removed — saves a continuous GPU repaint on every section */
 }
 
-/* Image Hover Grayscale to Color */
+/* Image Hover — subtle saturation boost on hover only */
 .vertical-card img,
 .square-img,
 .tall-featured-img {
-    filter: grayscale(40%);
+    filter: none;
     transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.25s ease, box-shadow 0.25s ease;
 }
 
 .vertical-card:hover img,
 .square-img:hover,
 .tall-featured-wrap:hover .tall-featured-img {
-    filter: grayscale(0%);
+    filter: brightness(1.03) saturate(1.08);
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
 }
 
