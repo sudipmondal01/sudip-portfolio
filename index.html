@@ -48,6 +48,8 @@
     <link rel="stylesheet" href="css/mobile-ultimate-overrides.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="css/cursor.css">
+    <!-- SM-2026: clean enhancement layer — must load LAST -->
+    <link rel="stylesheet" href="css/sm-2026.css">
 
     <!-- JSON-LD Person Schema -->
     <script type="application/ld+json">
@@ -363,16 +365,22 @@
                     class="hero-portrait-img hero-image cinematic-shadow magnetic-hover"
                     fetchpriority="high" decoding="async">
 
-                <!-- Featured reel embed — plays inline below portrait on desktop -->
+                <!-- ▶ HERO REEL — plays in lightbox on click.
+                     ⚠️ SWAP POINT: put your YouTube video ID in data-yt below.
+                     (From youtube.com/watch?v=abc123 → data-yt="abc123") -->
                 <div class="hero-reel-wrap reveal-up" style="animation-delay: 0.7s;" data-aos="fade-up" data-aos-delay="400">
                     <div class="hero-reel-badge">Featured Reel 2024</div>
-                    <iframe
-                        src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=0&mute=1&rel=0&modestbranding=1"
-                        title="Sudip Mondal — Cinematic Reel 2024"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen
-                        loading="lazy">
-                    </iframe>
+                    <button type="button" class="sm-reel"
+                            data-yt="REPLACE_WITH_HERO_REEL_ID"
+                            style="background-image:url('https://i.ibb.co/MDFzyJcW/5O7A6852.webp');"
+                            aria-label="Play Sudip Mondal's featured reel">
+                        <span class="sm-reel__inner">
+                            <span class="sm-reel__play">
+                                <svg viewBox="0 0 24 24" fill="#fff" stroke="#fff" aria-hidden="true"><polygon points="6,4 20,12 6,20"/></svg>
+                            </span>
+                            <span class="sm-reel__label">Watch Reel</span>
+                        </span>
+                    </button>
                 </div>
             </div>
         </div>
@@ -412,10 +420,10 @@
 
         <!-- Category Filter Bar -->
         <div class="photo-filter-bar" role="group" aria-label="Filter photography by category">
-            <button class="filter-btn active" data-filter="all" aria-pressed="true">All Work <span class="filter-count">(4)</span></button>
-            <button class="filter-btn" data-filter="portrait" aria-pressed="false">Portrait <span class="filter-count">(1)</span></button>
-            <button class="filter-btn" data-filter="wedding" aria-pressed="false">Wedding <span class="filter-count">(2)</span></button>
-            <button class="filter-btn" data-filter="editorial" aria-pressed="false">Editorial <span class="filter-count">(1)</span></button>
+            <button class="filter-btn active" data-filter="all" aria-pressed="true">All Work</button>
+            <button class="filter-btn" data-filter="portrait" aria-pressed="false">Portrait</button>
+            <button class="filter-btn" data-filter="wedding" aria-pressed="false">Wedding</button>
+            <button class="filter-btn" data-filter="editorial" aria-pressed="false">Editorial</button>
         </div>
 
         <!-- TOP AREA: Cinematic Portraits -->
@@ -539,17 +547,23 @@
     <section class="videography" id="videography" style="border: none !important; outline: none !important;">
         <div class="bg-number bg-number--video">04</div>
 
-        <!-- FEATURED REEL — top of section hero video -->
+        <!-- FEATURED REEL — plays in lightbox on click.
+             ⚠️ SWAP POINT: put your YouTube video ID in data-yt below. -->
         <div style="padding: 0 60px; margin-bottom: 60px;" data-aos="fade-up" data-aos-delay="100">
             <p class="section-overline" style="font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--text-main);margin-bottom:12px;opacity:0.6;">Featured Reel</p>
             <div class="video-reel-featured">
-                <iframe
-                    src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0&modestbranding=1&color=white"
-                    title="Sudip Mondal — Cinematic Showreel 2024"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen
-                    loading="lazy">
-                </iframe>
+                <button type="button" class="sm-reel"
+                        data-yt="REPLACE_WITH_SHOWREEL_ID"
+                        style="background-image:url('https://i.ibb.co/fzvT1KD9/5O7A6870.webp');"
+                        aria-label="Play Sudip Mondal's Showreel 2024">
+                    <span class="sm-reel__inner">
+                        <span class="sm-reel__play">
+                            <svg viewBox="0 0 24 24" fill="#fff" stroke="#fff" aria-hidden="true"><polygon points="6,4 20,12 6,20"/></svg>
+                        </span>
+                        <span class="sm-reel__title">Showreel 2024</span>
+                        <span class="sm-reel__label">Play</span>
+                    </span>
+                </button>
                 <div class="video-reel-featured-label">
                     <h3>Showreel 2024</h3>
                     <p>Weddings · Portraits · Corporate · Short Films</p>
@@ -571,18 +585,7 @@
                     <span
                         style="border-radius: 6px !important; display: inline-block !important; width: fit-content !important; background: #F5C518 !important; padding: 14px 28px !important; color: var(--dark) !important;">The Art of Hospitality</span>
                 </h2>
-                <p class="editorial-desc">This collection showcases my work in cinematic reels and short-form video
-                    editing. I love creating content that combines storytelling, motion, music, and visuals into edits
-                    that feel immersive and impactful.</p>
-                <p class="editorial-desc">Using creative pacing, cinematic tones, and modern editing styles, I turn
-                    ideas into videos that feel expressive, engaging, and visually memorable. For me, great editing is
-                    about making people feel something through every second of the frame.</p>
-
-                <div class="floating-icons mt-40" style="display: flex; gap: 25px; align-items: center;">
-                    <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: #666; font-family: 'Inter', sans-serif;">Premiere Pro</div>
-                    <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: #666; font-family: 'Inter', sans-serif;">DaVinci</div>
-                    <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: #666; font-family: 'Inter', sans-serif;">After Effects</div>
-                </div>
+                <p class="editorial-desc">Every frame of hospitality is a story waiting to happen — the handshake before the deal, the toast that no one rehearsed, the moment a room comes alive. I document the culture behind great organisations and the people who build them.</p>
             </div>
             <div class="reels-right">
                 <div class="massive-yellow-box"
@@ -606,7 +609,7 @@
             <p class="section-overline" style="font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--text-main);margin-bottom:10px;opacity:0.6;">Short Films & Cinematography</p>
             <h2 class="editorial-title portfolio-heading border-accent" data-aos="fade-up" data-aos-delay="100" style="display: inline-block !important; width: fit-content !important; margin-bottom: 40px !important;">
                 <span
-                    style="border-radius: 6px !important; display: inline-block !important; width: fit-content !important; background: #F5C518 !important; padding: 14px 28px !important; color: var(--dark) !important;">Moments That Matter</span>
+                    style="border-radius: 6px !important; display: inline-block !important; width: fit-content !important; background: #F5C518 !important; padding: 14px 28px !important; color: var(--dark) !important;">Light. Motion. Story.</span>
             </h2>
 
             <!-- Horizontal snap carousel container -->
@@ -614,7 +617,7 @@
                 <div class="cinematography-carousel-track">
                     <!-- Card 1 (Side Card) -->
                     <div class="carousel-card side-card">
-                        <img src="assets/gallery_1.png" alt="Chasing Shadows" loading="lazy" decoding="async">
+                        <img src="https://i.ibb.co/1fCSQML0/osamainthemountains-1778341960-3893332748001781918-48508808717.webp" alt="Hospitality film by Sudip Mondal" loading="lazy" decoding="async">
                         <div class="carousel-card-overlay">
                             <div class="carousel-card-title">Chasing Shadows</div>
                             <div class="carousel-card-category">Cinematography</div>
@@ -623,7 +626,7 @@
 
                     <!-- Card 2 (Side Card) -->
                     <div class="carousel-card side-card">
-                        <img src="assets/gallery_2.png" alt="The Silent Echo" loading="lazy" decoding="async">
+                        <img src="https://i.ibb.co/4npcH7CF/osamainthemountains-1778341960-3893332846442115097-48508808717.webp" alt="Short film by Sudip Mondal" loading="lazy" decoding="async">
                         <div class="carousel-card-overlay">
                             <div class="carousel-card-title">The Silent Echo</div>
                             <div class="carousel-card-category">Short Film</div>
@@ -632,7 +635,7 @@
 
                     <!-- Card 3 (Center Card) -->
                     <div class="carousel-card center-card">
-                        <img src="assets/bts_shot.png" alt="Beyond The Lens" loading="lazy" decoding="async">
+                        <img src="https://i.ibb.co/ZRmxGRMQ/5-O7-A2320-Original.webp" alt="Portrait film by Sudip Mondal" loading="lazy" decoding="async">
                         <div class="carousel-card-overlay">
                             <div class="carousel-card-title">Beyond The Lens</div>
                             <div class="carousel-card-category">Director's Cut</div>
@@ -641,7 +644,7 @@
 
                     <!-- Card 4 (Side Card) -->
                     <div class="carousel-card side-card">
-                        <img src="assets/cinematic_frame.png" alt="Nocturnal Run" loading="lazy" decoding="async">
+                        <img src="https://i.ibb.co/20C7kbzv/fejk0givhrojzppzdxra.webp" alt="Cinematic reel by Sudip Mondal" loading="lazy" decoding="async">
                         <div class="carousel-card-overlay">
                             <div class="carousel-card-title">Nocturnal Run</div>
                             <div class="carousel-card-category">Music Video</div>
@@ -650,7 +653,7 @@
 
                     <!-- Card 5 (Side Card) -->
                     <div class="carousel-card side-card">
-                        <img src="assets/portfolio_1.png" alt="Monochrome Beats" loading="lazy" decoding="async">
+                        <img src="https://i.ibb.co/v6HhbL4c/thjjaegv13vwrdtrtj8b.webp" alt="Documentary by Sudip Mondal" loading="lazy" decoding="async">
                         <div class="carousel-card-overlay">
                             <div class="carousel-card-title">Monochrome Beats</div>
                             <div class="carousel-card-category">Documentary</div>
@@ -659,17 +662,6 @@
                 </div>
             </div>
 
-            <!-- Existing description & software icons placed below carousel -->
-            <div class="cinematography-info-footer" style="margin-top: 40px;">
-                <p class="editorial-desc">This section showcases my work in short films and cinematography, where
-                    storytelling meets visual emotion. From framing to lighting, every detail is shaped to create
-                    immersive and meaningful cinematic experiences.</p>
-
-                <div class="floating-icons" style="margin-bottom: 20px; display: flex; gap: 25px; align-items: center;">
-                    <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: #666; font-family: 'Inter', sans-serif;">Premiere Pro</div>
-                    <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: #666; font-family: 'Inter', sans-serif;">DaVinci</div>
-                </div>
-            </div>
         </div>
 
         <!-- CORPORATE PHOTOGRAPHY: Moments That Matter -->
@@ -723,16 +715,16 @@
                     </svg>
 
                     <div class="timeline-card t-1">
-                        <span class="t-badge">Node Tree</span>
-                        <img src="assets/timeline_ui.png" alt="Video editing timeline - post production work" loading="lazy" decoding="async">
+                        <span class="t-badge">Colour Grade</span>
+                        <img src="https://i.ibb.co/VYBYmGCy/osamainthemountains-1778341960-3893332883175819611-48508808717.webp" alt="Colour graded cinematic work by Sudip Mondal" loading="lazy" decoding="async">
                     </div>
                     <div class="timeline-card t-2">
-                        <span class="t-badge">Final Render</span>
-                        <img src="assets/cinematic_frame.png" alt="Video editing timeline - post production work" loading="lazy" decoding="async">
+                        <span class="t-badge">Final Cut</span>
+                        <img src="https://i.ibb.co/1DswVkJ/osamainthemountains-1778341960-3893332984795420230-48508808717.webp" alt="Cinematic film work by Sudip Mondal" loading="lazy" decoding="async">
                     </div>
                     <div class="timeline-card t-3">
-                        <span class="t-badge">Editing Timeline</span>
-                        <img src="assets/timeline_ui.png" alt="Video editing timeline - post production work" loading="lazy" decoding="async">
+                        <span class="t-badge">Delivered</span>
+                        <img src="https://i.ibb.co/fzvT1KD9/5O7A6870.webp" alt="Wedding cinematography by Sudip Mondal" loading="lazy" decoding="async">
                     </div>
                 </div>
             </div>
@@ -790,39 +782,22 @@
                                     <span class="c-val">+91 70446 92706</span>
                                 </div>
                             </li>
-                            <li>
-                                <div class="contact-text">
-                                    <span class="c-lbl">Website</span>
-                                    <span class="c-val">sudipmondal.in</span>
-                                </div>
-                            </li>
                         </ul>
 
-                        <!-- QR code block -->
-                        <div class="ref-qr-block">
-                            <div class="ref-qr-white"
-                                 id="qr-trigger"
-                                 role="button"
-                                 tabindex="0"
-                                 aria-haspopup="dialog"
-                                 aria-label="Click to expand QR code">
-                                <img src="https://i.ibb.co/VYYKtJ5Y/https-linktr-ee-sudip-portfolio.png"
-                                     alt="Scan QR code to view Sudip Mondal's portfolio on Linktree"
-                                     loading="lazy" decoding="async">
-                            </div>
-                            <div class="ref-qr-cta">
-                                <svg class="ref-qr-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                    <rect x="2" y="2" width="6" height="6" rx="1"/>
-                                    <rect x="12" y="2" width="6" height="6" rx="1"/>
-                                    <rect x="2" y="12" width="6" height="6" rx="1"/>
-                                    <rect x="13" y="13" width="2" height="2"/>
-                                    <rect x="16" y="13" width="2" height="2"/>
-                                    <rect x="13" y="16" width="2" height="2"/>
-                                    <rect x="16" y="16" width="2" height="2"/>
-                                </svg>
-                                <p class="ref-qr-caption">All my links, one scan.</p>
-                                <span class="ref-qr-sub">linktr.ee/sudip-portfolio</span>
-                            </div>
+                        <!-- Social links -->
+                        <div style="display:flex;flex-direction:column;gap:10px;margin-top:8px;">
+                            <a href="https://www.instagram.com/bunnyxdneo" target="_blank" rel="noopener noreferrer"
+                               style="display:inline-flex;align-items:center;gap:8px;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--dark);text-decoration:none;opacity:0.7;transition:opacity 0.2s;"
+                               onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                                @bunnyxdneo
+                            </a>
+                            <a href="https://www.youtube.com/@bunnyxdneo" target="_blank" rel="noopener noreferrer"
+                               style="display:inline-flex;align-items:center;gap:8px;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--dark);text-decoration:none;opacity:0.7;transition:opacity 0.2s;"
+                               onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.4a2.78 2.78 0 0 0 1.95-1.97A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/></svg>
+                                YouTube
+                            </a>
                         </div>
 
                     </div>
@@ -1010,13 +985,10 @@
                     <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                 </div>
                     <span style="font-family:'Playfair Display',serif;font-size:64px;line-height:0.6;color:var(--yellow);position:absolute;top:24px;left:28px;opacity:0.5;" aria-hidden="true">"</span>
-                    <p style="font-family:'Inter',sans-serif;font-size:14px;line-height:1.75;color:var(--text-main);margin-top:32px;margin-bottom:28px;">Sudip captured our wedding day in a way that still makes us emotional every time we watch the film. Every frame felt intentional. He was calm, professional, and invisible in the best way possible.</p>
-                    <div style="display:flex;align-items:center;gap:12px;">
-                        <div style="width:38px;height:38px;border-radius:50%;background:var(--yellow);display:flex;align-items:center;justify-content:center;font-family:'Inter',sans-serif;font-weight:700;font-size:14px;color:var(--dark);flex-shrink:0;">R</div>
-                        <div>
-                            <p style="font-family:'Inter',sans-serif;font-size:13px;font-weight:700;color:var(--dark);margin:0;">Ritika & Arjun S.</p>
-                            <p style="font-family:'Inter',sans-serif;font-size:11px;color:var(--text-main);margin:0;opacity:0.6;text-transform:uppercase;letter-spacing:0.08em;">Wedding — Kolkata</p>
-                        </div>
+                    <p style="font-family:'Inter',sans-serif;font-size:14px;line-height:1.75;color:var(--text-main);margin-top:32px;margin-bottom:24px;">Sudip captured our wedding day in a way that still makes us emotional every time we watch the film. Every frame felt intentional. He was calm, professional, and invisible in the best way possible.</p>
+                    <div style="border-top:1px solid rgba(0,0,0,0.07);padding-top:18px;">
+                        <p style="font-family:'Inter',sans-serif;font-size:13px;font-weight:700;color:var(--dark);margin:0 0 3px;">Ritika &amp; Arjun S.</p>
+                        <p style="font-family:'Inter',sans-serif;font-size:11px;color:var(--text-main);margin:0;opacity:0.55;text-transform:uppercase;letter-spacing:0.08em;">Wedding — Kolkata</p>
                     </div>
                 </div>
 
@@ -1030,13 +1002,10 @@
                     <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                 </div>
                     <span style="font-family:'Playfair Display',serif;font-size:64px;line-height:0.6;color:var(--yellow);position:absolute;top:24px;left:28px;opacity:0.5;" aria-hidden="true">"</span>
-                    <p style="font-family:'Inter',sans-serif;font-size:14px;line-height:1.75;color:var(--text-main);margin-top:32px;margin-bottom:28px;">We hired Sudip for our brand campaign and the results exceeded every expectation. The colour grades were cinematic, the compositions editorial. Our Instagram engagement doubled after the shoot went live.</p>
-                    <div style="display:flex;align-items:center;gap:12px;">
-                        <div style="width:38px;height:38px;border-radius:50%;background:var(--yellow);display:flex;align-items:center;justify-content:center;font-family:'Inter',sans-serif;font-weight:700;font-size:14px;color:var(--dark);flex-shrink:0;">P</div>
-                        <div>
-                            <p style="font-family:'Inter',sans-serif;font-size:13px;font-weight:700;color:var(--dark);margin:0;">Priya Sharma</p>
-                            <p style="font-family:'Inter',sans-serif;font-size:11px;color:var(--text-main);margin:0;opacity:0.6;text-transform:uppercase;letter-spacing:0.08em;">Brand Director — FyTrips</p>
-                        </div>
+                    <p style="font-family:'Inter',sans-serif;font-size:14px;line-height:1.75;color:var(--text-main);margin-top:32px;margin-bottom:24px;">We hired Sudip for our brand campaign and the results exceeded every expectation. The colour grades were cinematic, the compositions editorial. Our Instagram engagement doubled after the shoot went live.</p>
+                    <div style="border-top:1px solid rgba(0,0,0,0.07);padding-top:18px;">
+                        <p style="font-family:'Inter',sans-serif;font-size:13px;font-weight:700;color:var(--dark);margin:0 0 3px;">Priya Sharma</p>
+                        <p style="font-family:'Inter',sans-serif;font-size:11px;color:var(--text-main);margin:0;opacity:0.55;text-transform:uppercase;letter-spacing:0.08em;">Brand Director — FyTrips</p>
                     </div>
                 </div>
 
@@ -1050,13 +1019,10 @@
                     <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                 </div>
                     <span style="font-family:'Playfair Display',serif;font-size:64px;line-height:0.6;color:var(--yellow);position:absolute;top:24px;left:28px;opacity:0.5;" aria-hidden="true">"</span>
-                    <p style="font-family:'Inter',sans-serif;font-size:14px;line-height:1.75;color:var(--text-main);margin-top:32px;margin-bottom:28px;">The portrait session was an experience in itself. Sudip made us feel at ease immediately, and the final images had a depth I've never seen from any other photographer. Absolutely worth every rupee.</p>
-                    <div style="display:flex;align-items:center;gap:12px;">
-                        <div style="width:38px;height:38px;border-radius:50%;background:var(--yellow);display:flex;align-items:center;justify-content:center;font-family:'Inter',sans-serif;font-weight:700;font-size:14px;color:var(--dark);flex-shrink:0;">A</div>
-                        <div>
-                            <p style="font-family:'Inter',sans-serif;font-size:13px;font-weight:700;color:var(--dark);margin:0;">Anika Bose</p>
-                            <p style="font-family:'Inter',sans-serif;font-size:11px;color:var(--text-main);margin:0;opacity:0.6;text-transform:uppercase;letter-spacing:0.08em;">Portrait Session — Kolkata</p>
-                        </div>
+                    <p style="font-family:'Inter',sans-serif;font-size:14px;line-height:1.75;color:var(--text-main);margin-top:32px;margin-bottom:24px;">The portrait session was an experience in itself. Sudip made us feel at ease immediately, and the final images had a depth I've never seen from any other photographer. Absolutely worth every rupee.</p>
+                    <div style="border-top:1px solid rgba(0,0,0,0.07);padding-top:18px;">
+                        <p style="font-family:'Inter',sans-serif;font-size:13px;font-weight:700;color:var(--dark);margin:0 0 3px;">Anika Bose</p>
+                        <p style="font-family:'Inter',sans-serif;font-size:11px;color:var(--text-main);margin:0;opacity:0.55;text-transform:uppercase;letter-spacing:0.08em;">Portrait Session — Kolkata</p>
                     </div>
                 </div>
 
@@ -1217,51 +1183,21 @@
                         <input type="email" id="contact-email" name="email" placeholder="your@email.com" required class="form-input" autocomplete="email">
                         <span class="form-field-error" role="alert"></span>
                     </div>
-                    <select class="form-input custom-select" name="project-type" id="contact-project" required>
-                        <option value="" disabled selected>Select Project Type</option>
-                        <optgroup label="Photography">
-                            <option value="wedding-photography">Wedding Photography</option>
-                            <option value="portrait-photography">Portrait / Cinematic Photography</option>
-                            <option value="editorial-photography">Editorial / Fashion Photography</option>
-                            <option value="event-photography">Event Photography</option>
-                            <option value="product-photography">Product Photography</option>
-                        </optgroup>
-                        <optgroup label="Videography & Film">
-                            <option value="wedding-film">Wedding Film / Highlight Reel</option>
-                            <option value="cinematic-reel">Cinematic Reel / Short Film</option>
-                            <option value="commercial-video">Commercial / Brand Video</option>
-                            <option value="music-video">Music Video</option>
-                            <option value="documentary">Documentary / Story Film</option>
-                        </optgroup>
-                        <optgroup label="Post Production">
-                            <option value="video-editing">Video Editing</option>
-                            <option value="color-grading">Color Grading</option>
-                            <option value="reels-editing">Social Media Reels Editing</option>
-                        </optgroup>
-                        <optgroup label="Graphic Design">
-                            <option value="brand-identity">Brand Identity / Logo Design</option>
-                            <option value="social-media-design">Social Media Graphics</option>
-                            <option value="poster-design">Poster / Flyer Design</option>
-                            <option value="ui-design">UI / Digital Design</option>
-                        </optgroup>
-                        <option value="other">Other / Custom Project</option>
-                    </select>
-                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
-                        <div class="form-field-group" style="margin-bottom:0;">
-                            <label for="contact-budget">Budget Range</label>
-                            <select class="form-input custom-select" id="contact-budget" name="budget">
-                                <option value="" disabled selected>Select budget</option>
-                                <option value="under-15k">Under ₹15,000</option>
-                                <option value="15k-30k">₹15,000 – ₹30,000</option>
-                                <option value="30k-60k">₹30,000 – ₹60,000</option>
-                                <option value="60k-1l">₹60,000 – ₹1,00,000</option>
-                                <option value="above-1l">Above ₹1,00,000</option>
-                            </select>
-                        </div>
-                        <div class="form-field-group" style="margin-bottom:0;">
-                            <label for="contact-date">Preferred Date</label>
-                            <input type="date" id="contact-date" name="date" class="form-input" style="cursor:pointer;">
-                        </div>
+                    <div class="form-field-group">
+                        <label for="contact-project">Project Type <span class="required-mark">*</span></label>
+                        <select class="form-input custom-select" name="project-type" id="contact-project" required>
+                            <option value="" disabled selected>What are you looking for?</option>
+                            <option value="wedding">Wedding Photography &amp; Film</option>
+                            <option value="portrait">Portrait Session</option>
+                            <option value="corporate">Corporate &amp; Events</option>
+                            <option value="film">Short Film / Commercial Reel</option>
+                            <option value="other">Something else — I'll explain below</option>
+                        </select>
+                        <span class="form-field-error" role="alert"></span>
+                    </div>
+                    <div class="form-field-group">
+                        <label for="contact-date">Preferred Date <span style="opacity:0.5;font-weight:400;">(if known)</span></label>
+                        <input type="date" id="contact-date" name="date" class="form-input" style="cursor:pointer;">
                     </div>
                     <div class="form-field-group">
                         <label for="contact-message">Your Project <span class="required-mark">*</span></label>
@@ -1317,6 +1253,7 @@
     <script src="js/premium-animations.js" defer></script>
     <script src="js/redesign-2026.js" defer></script>
     <script src="js/twenty-first.js" defer></script>
+    <script src="js/sm-2026.js" defer></script>
     <script>
       document.addEventListener('DOMContentLoaded', function () {
         AOS.init({

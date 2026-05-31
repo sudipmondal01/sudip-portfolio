@@ -269,63 +269,9 @@
     document.addEventListener('mouseleave', function() { ring.classList.add('is-hidden'); });
     document.addEventListener('mouseenter', function() { ring.classList.remove('is-hidden'); });
 
-    // Contact form — validation + success message
-    const contactForm = document.querySelector('.contact-form');
-    if (contactForm) {
-        // Inject error and success message containers once
-        const msgEl = document.createElement('div');
-        msgEl.style.cssText = 'margin-top:12px;padding:12px 16px;border-radius:8px;font-size:14px;font-weight:600;display:none;';
-        contactForm.appendChild(msgEl);
-
-        function showMsg(text, isError) {
-            msgEl.textContent = text;
-            msgEl.style.display = 'block';
-            msgEl.style.background = isError ? '#ffe0e0' : '#e6f9f0';
-            msgEl.style.color      = isError ? '#c0392b' : '#1a7a4a';
-        }
-
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            msgEl.style.display = 'none';
-
-            const nameField    = contactForm.querySelector('input[type="text"]');
-            const emailField   = contactForm.querySelector('input[type="email"]');
-            const messageField = contactForm.querySelector('textarea');
-            const name         = nameField.value.trim();
-            const email        = emailField.value.trim();
-            const project      = contactForm.querySelector('select').value;
-            const message      = messageField.value.trim();
-
-            // Validation
-            if (!name) { showMsg('Please enter your name.', true); nameField.focus(); return; }
-            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                showMsg('Please enter a valid email address.', true); emailField.focus(); return;
-            }
-            if (!message) { showMsg('Please tell me about your project.', true); messageField.focus(); return; }
-
-            // Open mailto
-            const subject = encodeURIComponent('Project Inquiry: ' + (project || 'General') + ' — ' + name);
-            const body    = encodeURIComponent(
-                'Name: ' + name + '\n' +
-                'Email: ' + email + '\n' +
-                'Project: ' + (project || 'Not specified') + '\n\n' +
-                message
-            );
-            window.location.href = 'mailto:sudipxv@gmail.com?subject=' + subject + '&body=' + body;
-
-            // Success state
-            showMsg("Thanks! I'll get back to you soon.", false);
-            const btn = contactForm.querySelector('.submit-btn');
-            btn.textContent = 'Message Sent ✓';
-            btn.disabled = true;
-            setTimeout(function() {
-                contactForm.reset();
-                btn.textContent = 'Send Message';
-                btn.disabled = false;
-                msgEl.style.display = 'none';
-            }, 4000);
-        });
-    }
+    // Contact form submit handler lives in redesign-2026.js (initContactForm),
+    // which owns the styled .form-success state + field-level validation.
+    // Single source of truth — avoids a duplicate submit binding / double-POST.
 
     // Progress bar is created and updated inside the consolidated scroll listener
 

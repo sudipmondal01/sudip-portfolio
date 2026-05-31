@@ -137,15 +137,14 @@
       if (!validateForm()) return;
 
       /* Loading state */
+      var btnText = submitBtn ? submitBtn.textContent : 'Send Message';
       if (submitBtn) {
         submitBtn.classList.add('loading');
         submitBtn.textContent = 'Sending…';
         submitBtn.disabled = true;
       }
 
-      /* Simulate async send (replace with real fetch/formspree call) */
-      setTimeout(function () {
-        /* Show success */
+      function showSuccess() {
         if (successDiv) {
           form.style.display = 'none';
           successDiv.classList.add('visible');
@@ -160,7 +159,7 @@
           submitBtn.style.background = '#22c55e';
           submitBtn.style.color = '#fff';
           setTimeout(function () {
-            submitBtn.textContent = 'Send Message';
+            submitBtn.textContent = btnText;
             submitBtn.style.background = '';
             submitBtn.style.color = '';
             submitBtn.classList.remove('loading');
@@ -168,7 +167,55 @@
             form.reset();
           }, 3500);
         }
-      }, 1600);
+      }
+
+      function resetBtn() {
+        if (submitBtn) {
+          submitBtn.classList.remove('loading');
+          submitBtn.textContent = btnText;
+          submitBtn.disabled = false;
+        }
+      }
+
+      /* =========================================================
+         BACKEND ENDPOINT — ⚠️ SWAP POINT
+         1. Sign up free at https://formspree.io using sudipxv@gmail.com
+         2. Create a form, copy its ID (formspree.io/f/abcdwxyz → "abcdwxyz")
+         3. Replace REPLACE_WITH_FORMSPREE_ID below.
+         Until then: hand off to the visitor's email app — NEVER fake "sent".
+      ========================================================= */
+      var FORM_ENDPOINT = 'https://formspree.io/f/REPLACE_WITH_FORMSPREE_ID';
+
+      if (FORM_ENDPOINT.indexOf('REPLACE_WITH_') !== -1) {
+        var nm = (form.querySelector('input[name="name"], input[type="text"]') || {}).value || '';
+        var em = (form.querySelector('input[name="email"], input[type="email"]') || {}).value || '';
+        var pr = (form.querySelector('select') || {}).value || '';
+        var dt = (form.querySelector('input[type="date"]') || {}).value || '';
+        var ms = (form.querySelector('textarea') || {}).value || '';
+        var subject = encodeURIComponent('Project Inquiry: ' + (pr || 'General') + ' — ' + nm);
+        var body = encodeURIComponent(
+          'Name: ' + nm + '\nEmail: ' + em + '\nProject: ' + (pr || 'Not specified') +
+          (dt ? '\nPreferred date: ' + dt : '') + '\n\n' + ms
+        );
+        window.location.href = 'mailto:sudipxv@gmail.com?subject=' + subject + '&body=' + body;
+        resetBtn();
+        return;
+      }
+
+      /* REAL SEND — success ONLY on HTTP ok */
+      fetch(FORM_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(form)
+      }).then(function (response) {
+        if (response.ok) { showSuccess(); }
+        else { throw new Error('HTTP ' + response.status); }
+      }).catch(function (err) {
+        console.error('[contact] send failed:', err);
+        resetBtn();
+        var msgInput = form.querySelector('textarea');
+        if (msgInput) showError(msgInput, "Couldn't send — please WhatsApp +91 70446 92706 or email sudipxv@gmail.com.");
+      });
     });
 
     /* Clear error on input change */

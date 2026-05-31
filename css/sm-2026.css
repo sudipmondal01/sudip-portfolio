@@ -1,0 +1,193 @@
+/* ============================================================
+   SM-2026 — Clean enhancement layer
+   Loaded LAST so it wins the cascade without !important.
+   Contains: video lightbox, reel posters, unified heading
+   accent, IntersectionObserver reveal states.
+   ============================================================ */
+
+/* ── VIDEO LIGHTBOX ─────────────────────────────────────────── */
+.sm-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(16px, 4vw, 48px);
+  background: rgba(10, 10, 10, 0.92);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.28s ease, visibility 0.28s ease;
+}
+.sm-lightbox.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.sm-lightbox__frame {
+  position: relative;
+  width: min(100%, 1100px);
+  aspect-ratio: 16 / 9;
+  background: #000;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
+  transform: scale(0.96);
+  transition: transform 0.28s ease;
+}
+.sm-lightbox.is-open .sm-lightbox__frame {
+  transform: scale(1);
+}
+.sm-lightbox__frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.sm-lightbox__close {
+  position: absolute;
+  top: -14px;
+  right: -14px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--yellow, #f5ab00);
+  color: #1a1a1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  transition: transform 0.2s ease;
+}
+.sm-lightbox__close:hover,
+.sm-lightbox__close:focus-visible {
+  transform: scale(1.08);
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+.sm-lightbox__close svg { width: 20px; height: 20px; }
+
+@media (max-width: 640px) {
+  .sm-lightbox__close { top: -52px; right: 0; }
+}
+
+/* ── REEL POSTER (click-to-play trigger) ───────────────────── */
+.sm-reel {
+  display: block;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 6px;
+  background: #0f0f0f center / cover no-repeat;
+}
+.sm-reel::after {
+  /* subtle cinematic darken for play-button contrast */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.15), rgba(0,0,0,0.45));
+  transition: background 0.3s ease;
+}
+.sm-reel:hover::after,
+.sm-reel:focus-visible::after {
+  background: linear-gradient(180deg, rgba(0,0,0,0.05), rgba(0,0,0,0.35));
+}
+.sm-reel:focus-visible {
+  outline: 2px solid var(--yellow, #f5ab00);
+  outline-offset: 3px;
+}
+.sm-reel__inner {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  text-align: center;
+}
+.sm-reel__play {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid rgba(255, 255, 255, 0.5);
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+.sm-reel:hover .sm-reel__play {
+  transform: scale(1.08);
+  background: var(--yellow, #f5ab00);
+  border-color: var(--yellow, #f5ab00);
+}
+.sm-reel:hover .sm-reel__play svg { stroke: #1a1a1a; fill: #1a1a1a; }
+.sm-reel__play svg { width: 22px; height: 22px; margin-left: 3px; }
+.sm-reel__label {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.85);
+}
+.sm-reel__title {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+}
+
+/* ── UNIFIED HEADING ACCENT — thin underline, not fill ─────── */
+/* One treatment sitewide. Overrides legacy inline fill blocks
+   (those inline styles are stripped from the HTML separately). */
+.editorial-title {
+  display: block !important;
+  border-left: none !important;
+  padding-left: 0 !important;
+}
+.editorial-title span {
+  display: inline-block !important;
+  position: relative;
+  background: none !important;
+  color: var(--dark, #333) !important;
+  padding: 0 0 10px 0 !important;
+  margin-left: 0 !important;
+  border-radius: 0 !important;
+}
+.editorial-title span::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 56px;
+  height: 3px;
+  background: var(--yellow, #f5ab00);
+  border-radius: 2px;
+}
+
+/* ── INTERSECTION-OBSERVER REVEALS (replaces AOS) ──────────── */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .sm-lightbox, .sm-lightbox__frame { transition: none !important; }
+}
