@@ -21,8 +21,8 @@
         });
     }
 
-    // Close mobile menu on link click
-    document.querySelectorAll('.nav-link').forEach(link => {
+    // Close mobile menu on any overlay link click (nav links + CTA)
+    document.querySelectorAll('.nav-links a').forEach(link => {
         link.addEventListener('click', () => {
             if (navLinks.classList.contains('active')) {
                 mobileToggle.click();
@@ -177,63 +177,152 @@
         advancedObserver.observe(el);
     });
 
-    // Magnetic Hover Effect for Buttons/Images
-    const magneticElements = document.querySelectorAll('.magnetic-hover, .footer-btn, .submit-btn');
-    
-    magneticElements.forEach(el => {
-        el.addEventListener('mousemove', function(e) {
-            const position = el.getBoundingClientRect();
-            const x = e.pageX - position.left - position.width / 2;
-            const y = e.pageY - position.top - position.height / 2;
-            
-            el.style.transform = `translate(${x * 0.04}px, ${y * 0.04}px)`;
-        });
+    // Magnetic Hover Effect
+    // CTA buttons use a stronger pull; image/nav elements stay subtle
+    const magneticCTAs = document.querySelectorAll(
+        '.hero-cv-btn, .hero-secondary-btn, .footer-btn, .submit-btn, .wow-cta-btn, .nav-cta'
+    );
+    const magneticSubtle = document.querySelectorAll('.magnetic-hover');
 
-        el.addEventListener('mouseout', function() {
+    function applyMagnetic(el, factor) {
+        el.addEventListener('mousemove', function(e) {
+            const r = el.getBoundingClientRect();
+            const x = e.clientX - r.left - r.width  / 2;
+            const y = e.clientY - r.top  - r.height / 2;
+            el.classList.add('is-magnetic');
+            el.style.transform = 'translate(' + (x * factor) + 'px,' + (y * factor) + 'px)';
+        });
+        el.addEventListener('mouseleave', function() {
+            el.classList.remove('is-magnetic');
             el.style.transform = 'translate(0px, 0px)';
         });
+    }
+
+    magneticCTAs.forEach(function(el) { applyMagnetic(el, 0.28); });
+    magneticSubtle.forEach(function(el) {
+        // Skip elements already handled by magneticCTAs
+        if (!el.matches('.hero-cv-btn, .hero-secondary-btn, .footer-btn, .submit-btn, .wow-cta-btn, .nav-cta')) {
+            applyMagnetic(el, 0.05);
+        }
     });
 
     // WOW section parallax is handled by the consolidated scroll listener
 
-    // ── Premium cursor: snapping dot + lagging ring ─────────────────────────
-    const dot  = document.createElement('div');
-    const ring = document.createElement('div');
-    dot.id  = 'cursor-dot';
-    ring.id = 'cursor-ring';
+    // ── Premium cursor: minimal dot · contextual ring · cinematic label ──────
+    const dot   = document.createElement('div');
+    const ring  = document.createElement('div');
+    const label = document.createElement('div');
+    dot.id   = 'cursor-dot';
+    ring.id  = 'cursor-ring';
+    label.id = 'cursor-label';
     document.body.appendChild(dot);
     document.body.appendChild(ring);
+    document.body.appendChild(label);
+
+    // ── Inverted cursor circle (from React component port) ──────────────
+    // Vanilla-JS equivalent of the React <Cursor size={60} /> component:
+    //   • 60×60 white circle, mix-blend-mode:difference → colour inversion
+    //   • Smooth follow: lerp factor 0.2, runs on every rAF frame
+    //   • Separate from the dot/ring so both can coexist
+    var invertEl = document.createElement('div');
+    invertEl.id = 'cursor-invert';
+    document.body.appendChild(invertEl);
+
+    var invertX = -60, invertY = -60;   // start off-screen (matches component)
+    var invertTargetX = -60, invertTargetY = -60;
+    var invertRafId = null;
+
+    function animateInvert() {
+        // lerp 0.2 — identical to the React component's `(target - current) * 0.2`
+        invertX += (invertTargetX - invertX) * 0.2;
+        invertY += (invertTargetY - invertY) * 0.2;
+        // centre-offset: half of 60px = 30
+        invertEl.style.transform = 'translate(' + (invertX - 30) + 'px,' + (invertY - 30) + 'px)';
+        invertRafId = requestAnimationFrame(animateInvert);
+    }
+    // Start the rAF loop immediately (runs off-screen until first mousemove)
+    invertRafId = requestAnimationFrame(animateInvert);
+
+    // Show / hide on viewport enter / leave
+    document.documentElement.addEventListener('mouseenter', function() {
+        invertEl.classList.add('is-visible');
+    });
+    document.documentElement.addEventListener('mouseleave', function() {
+        invertEl.classList.remove('is-visible');
+    });
+
+    // Click feedback on the invert circle
+    document.addEventListener('mousedown', function() { invertEl.classList.add('is-clicking'); });
+    document.addEventListener('mouseup',   function() { invertEl.classList.remove('is-clicking'); });
+    // ── End inverted cursor ─────────────────────────────────────────────
 
     let curMouseX = 0, curMouseY = 0;
-    let ringX = 0,     ringY = 0;
-    let ringRafId  = null;
+    let ringX = 0, ringY = 0;
+    let ringRafId = null;
     let cursorReady = false;
+    let cursorState = 'default'; // 'default' | 'hover' | 'view' | 'play'
+
+    // Tag photography images with data-cursor="view"
+    document.querySelectorAll(
+        '.vertical-card, .portrait-thumb, .tall-featured-img, .tall-featured-wrap,' +
+        '.reel-item, .carousel-card, .wow-image, #portrait-showcase,' +
+        '.hero-portrait-img, .gallery-item, .photo-block img, .reels-grid img'
+    ).forEach(function(el) { if (!el.dataset.cursor) el.dataset.cursor = 'view'; });
+
+    // Tag video triggers with data-cursor="play"
+    document.querySelectorAll('.sm-reel, [data-yt]')
+        .forEach(function(el) { el.dataset.cursor = 'play'; });
+
+    function setCursorState(state, text) {
+        cursorState = state;
+        dot.classList.remove('is-hovering', 'is-label-active');
+        ring.classList.remove('is-hovering', 'is-label-active');
+        label.classList.remove('is-visible');
+
+        if (state === 'hover') {
+            dot.classList.add('is-hovering');
+            ring.classList.add('is-hovering');
+        } else if (state === 'view' || state === 'play') {
+            dot.classList.add('is-label-active');
+            ring.classList.add('is-label-active');
+            label.textContent = text;
+            label.classList.add('is-visible');
+        }
+    }
 
     document.addEventListener('mousemove', function(e) {
         curMouseX = e.clientX;
         curMouseY = e.clientY;
 
+        // Update inverted cursor target — rAF loop lerps toward this each frame
+        invertTargetX = curMouseX;
+        invertTargetY = curMouseY;
+        if (!invertEl.classList.contains('is-visible')) {
+            invertEl.classList.add('is-visible');
+        }
+
         if (!cursorReady) {
-            // First move: teleport ring so it doesn't sweep in from (0,0)
             cursorReady = true;
             ringX = curMouseX;
             ringY = curMouseY;
             dot.classList.add('is-ready');
-            ring.classList.add('is-ready');
         }
 
-        // Dot: half of 8px size = 4px centre-offset
-        dot.style.transform = 'translate(' + (curMouseX - 4) + 'px,' + (curMouseY - 4) + 'px)';
+        // Dot: 6px → 3px centre-offset
+        dot.style.transform = 'translate(' + (curMouseX - 3) + 'px,' + (curMouseY - 3) + 'px)';
+        // Label: CSS centers via translate(-50%,-50%); JS sets position
+        label.style.left = curMouseX + 'px';
+        label.style.top  = curMouseY + 'px';
 
         if (!ringRafId) ringRafId = requestAnimationFrame(animateRing);
     }, { passive: true });
 
     function animateRing() {
-        var ease = 0.13;
+        var ease = 0.12;
         ringX += (curMouseX - ringX) * ease;
         ringY += (curMouseY - ringY) * ease;
-        // Half of 36px base ring size = 18px centre-offset
-        ring.style.transform = 'translate(' + (ringX - 18) + 'px,' + (ringY - 18) + 'px)';
+        // 28px ring → 14px centre-offset
+        ring.style.transform = 'translate(' + (ringX - 14) + 'px,' + (ringY - 14) + 'px)';
 
         if (Math.abs(curMouseX - ringX) > 0.2 || Math.abs(curMouseY - ringY) > 0.2) {
             ringRafId = requestAnimationFrame(animateRing);
@@ -242,20 +331,29 @@
         }
     }
 
-    // Hover state on interactive elements
-    const hoverables = document.querySelectorAll('a, button, .magnetic-hover, input, textarea, select');
-    hoverables.forEach(function(el) {
+    // VIEW / PLAY labels — highest priority
+    document.querySelectorAll('[data-cursor]').forEach(function(el) {
         el.addEventListener('mouseenter', function() {
-            dot.classList.add('is-hovering');
-            ring.classList.add('is-hovering');
+            var type = el.dataset.cursor;
+            setCursorState(type, type === 'play' ? '▶ PLAY' : 'VIEW');
         });
         el.addEventListener('mouseleave', function() {
-            dot.classList.remove('is-hovering');
-            ring.classList.remove('is-hovering');
+            setCursorState('default');
         });
     });
 
-    // Click: ring squeezes on press, springs back on release
+    // Generic hover (links, buttons) — only fires when no label context is active
+    var hoverables = document.querySelectorAll('a, button, .magnetic-hover, input, textarea, select');
+    hoverables.forEach(function(el) {
+        el.addEventListener('mouseenter', function() {
+            if (cursorState === 'default') setCursorState('hover');
+        });
+        el.addEventListener('mouseleave', function() {
+            if (cursorState === 'hover') setCursorState('default');
+        });
+    });
+
+    // Click feedback
     document.addEventListener('mousedown', function() {
         dot.classList.add('is-clicking');
         ring.classList.add('is-clicking');

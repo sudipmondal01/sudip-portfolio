@@ -64,7 +64,7 @@
     -webkit-filter: none !important;
 }
 
-/* ── Hide system cursor on all elements (pointer devices only) ── */
+/* ── Hide system cursor (pointer devices only — preserves touch/mobile) ── */
 @media (pointer: fine) {
     *,
     *::before,
@@ -73,7 +73,7 @@
     }
 }
 
-/* ── Shared base ── */
+/* ── Dot + Ring: shared base ── */
 #cursor-dot,
 #cursor-ring {
     position: fixed !important;
@@ -84,77 +84,130 @@
     padding: 0 !important;
     box-sizing: border-box !important;
     will-change: transform;
-    /* Hidden until JS fires first mousemove and adds .is-ready */
     opacity: 0 !important;
-    visibility: visible !important;
 }
 
-#cursor-dot.is-ready,
-#cursor-ring.is-ready {
-    opacity: 1 !important;
-}
-
-/* ── Dot: solid amber, snaps instantly ── */
+/* ── Dot: 6px amber core, dark outline keeps it visible on light bg ── */
 #cursor-dot {
-    width: 8px !important;
-    height: 8px !important;
+    width: 6px !important;
+    height: 6px !important;
     background: #f5ab00 !important;
     border-radius: 50% !important;
     z-index: 2147483647 !important;
-    box-shadow: 0 0 10px rgba(245, 171, 0, 0.75) !important;
+    /* Dark outline ring — visible on white, unobtrusive on dark */
+    box-shadow: 0 0 0 1.5px rgba(0, 0, 0, 0.25) !important;
     transition:
-        width   0.15s ease,
-        height  0.15s ease,
-        opacity 0.3s ease !important;
+        width      0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+        height     0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+        box-shadow 0.2s ease,
+        opacity    0.25s ease !important;
 }
 
-#cursor-dot.is-hovering {
-    width: 5px !important;
-    height: 5px !important;
-}
+#cursor-dot.is-ready     { opacity: 1 !important; }
+#cursor-dot.is-hovering  { width: 4px !important; height: 4px !important; }
+#cursor-dot.is-clicking  { box-shadow: 0 0 0 1.5px rgba(0, 0, 0, 0.25), 0 0 8px rgba(245, 171, 0, 0.6) !important; }
+/* Dot disappears when a label is active */
+#cursor-dot.is-label-active { opacity: 0 !important; }
 
-#cursor-dot.is-clicking {
-    width: 4px !important;
-    height: 4px !important;
-    box-shadow: 0 0 18px rgba(245, 171, 0, 1) !important;
-}
-
-/* ── Ring: amber outline, lags behind cursor ── */
+/* ── Ring: hidden by default, shown only on link/button hover ── */
 #cursor-ring {
-    width: 36px !important;
-    height: 36px !important;
-    border: 1.5px solid rgba(245, 171, 0, 0.65) !important;
+    width: 28px !important;
+    height: 28px !important;
+    border: 1px solid rgba(245, 171, 0, 0.55) !important;
     border-radius: 50% !important;
     background: transparent !important;
     z-index: 2147483646 !important;
     transition:
-        width        0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
-        height       0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
-        border-color 0.22s ease,
-        background   0.22s ease,
-        opacity      0.25s ease !important;
+        width        0.28s cubic-bezier(0.2, 0.8, 0.2, 1),
+        height       0.28s cubic-bezier(0.2, 0.8, 0.2, 1),
+        border-color 0.2s ease,
+        opacity      0.2s ease !important;
 }
 
+/* Ring only appears on interactive hover */
 #cursor-ring.is-hovering {
-    width: 52px !important;
-    height: 52px !important;
-    border-color: rgba(245, 171, 0, 0.95) !important;
-    background: rgba(245, 171, 0, 0.06) !important;
+    opacity: 0.85 !important;
+    width: 36px !important;
+    height: 36px !important;
+    border-color: rgba(245, 171, 0, 0.85) !important;
 }
 
 #cursor-ring.is-clicking {
-    width: 22px !important;
-    height: 22px !important;
-    border-color: #f5ab00 !important;
-    background: rgba(245, 171, 0, 0.14) !important;
-    transition:
-        width        0.08s ease,
-        height       0.08s ease,
-        border-color 0.08s ease,
-        background   0.08s ease !important;
+    width: 20px !important;
+    height: 20px !important;
+    background: rgba(245, 171, 0, 0.08) !important;
+    transition: width 0.08s ease, height 0.08s ease !important;
 }
 
-/* is-hidden wins over is-ready when cursor leaves the window */
-#cursor-ring.is-hidden {
-    opacity: 0 !important;
+/* Ring hides when label is active or cursor leaves viewport */
+#cursor-ring.is-label-active,
+#cursor-ring.is-hidden { opacity: 0 !important; }
+
+/* ── Label: cinematic pill — VIEW / PLAY ── */
+/* Position via left/top in JS. CSS handles centering + scale animation.
+   IMPORTANT: no !important on transform — JS must not touch it.
+   left/top also have no !important — JS sets these via inline style. */
+#cursor-label {
+    position: fixed !important;
+    pointer-events: none !important;
+    box-sizing: border-box !important;
+    z-index: 2147483647 !important;
+    /* Center on cursor position set by JS */
+    transform: translate(-50%, -50%) scale(0.82);
+    padding: 8px 18px !important;
+    background: rgba(14, 14, 14, 0.88) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 100px !important;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-size: 10px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.22em !important;
+    text-transform: uppercase !important;
+    color: rgba(255, 255, 255, 0.92) !important;
+    white-space: nowrap !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    opacity: 0;
+    transition:
+        opacity 0.2s ease,
+        transform 0.26s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+#cursor-label.is-visible {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* ── Inverted cursor: 60px white circle, mix-blend-mode: difference ──
+   Sits BELOW the dot / ring / label in z-order (2147483645).
+   The white fill inverts whatever colour is behind it — light text
+   becomes dark on white sections, dark text becomes light on dark ones.
+   Only rendered on pointer-capable devices (same guard as cursor: none).   */
+@media (pointer: fine) {
+    #cursor-invert {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 60px !important;
+        height: 60px !important;
+        border-radius: 50% !important;
+        background: #ffffff !important;
+        mix-blend-mode: difference !important;
+        pointer-events: none !important;
+        z-index: 2147483645 !important;
+        opacity: 0 !important;
+        will-change: transform;
+        /* Only opacity transitions — transform is driven by JS every rAF frame */
+        transition: opacity 0.3s ease !important;
+    }
+
+    #cursor-invert.is-visible {
+        opacity: 1 !important;
+    }
+
+    /* Subtle scale-down on click — 0.08s snap in, 0.28s spring out */
+    #cursor-invert.is-clicking {
+        opacity: 0.85 !important;
+        transition: opacity 0.08s ease !important;
+    }
 }

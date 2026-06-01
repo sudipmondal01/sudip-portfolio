@@ -10,10 +10,10 @@
     <meta name="theme-color" content="#333333">
     <meta name="msapplication-TileColor" content="#f5ab00">
     <meta name="format-detection" content="telephone=no">
-    <title>Sudip Mondal | Photographer &amp; Filmmaker in Kolkata</title>
+    <title>Sudip Mondal | Photographer &amp; Visual Storyteller, Kolkata</title>
 
     <!-- SEO -->
-    <meta name="description" content="Sudip Mondal is a cinematic photographer and filmmaker based in Kolkata. Specializing in wedding photography, portrait photography, short films, and video editing. Available for bookings across India.">
+    <meta name="description" content="Sudip Mondal — cinematic photographer &amp; filmmaker based in Kolkata. Weddings, portraits, events, short films and brand stories told with depth and visual intent. Available across India.">
     <meta name="keywords" content="photographer Kolkata, filmmaker Kolkata, wedding photographer, cinematic photography, portrait photographer, video editing, Sudip Mondal">
     <meta name="author" content="Sudip Mondal">
     <link rel="canonical" href="https://sudipmondal.in">
@@ -130,6 +130,7 @@
   .cinematic-hero {
     flex-direction: column !important;
     display: flex !important;
+    padding-top: max(120px, 10vh) !important;
   }
   .hero-portrait-area {
     width: 100% !important;
@@ -213,6 +214,58 @@
     display: none !important;
   }
 }
+
+@media (max-width: 1200px) {
+  .hero-content {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: clamp(24px, 4vw, 48px) !important;
+    align-items: flex-start !important;
+  }
+
+  .hero-text-area {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-top: clamp(32px, 4vw, 60px) !important;
+    margin-bottom: 0 !important;
+  }
+
+  .hero-portrait-area {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+  .hero-portrait-img {
+    width: min(100%, 450px) !important;
+    max-width: 100% !important;
+    height: auto !important;
+    margin: 0 auto !important;
+  }
+
+  .hero-stats,
+  .hero-stats.stats-row {
+    position: relative !important;
+    bottom: auto !important;
+    left: auto !important;
+    width: 100% !important;
+    margin-top: 32px !important;
+    justify-content: center !important;
+    flex-wrap: wrap !important;
+    gap: 24px !important;
+  }
+
+  .hero-stat {
+    min-width: 120px !important;
+  }
+
+  .pill-label {
+    margin-left: 0 !important;
+    margin-bottom: 20px !important;
+  }
+}
 </style>
 </head>
 
@@ -262,14 +315,16 @@
 
             <nav class="nav-links">
                 <a href="#hero" class="nav-link">Home</a>
-                <a href="#photography" class="nav-link">Photography</a>
+                <a href="#photography" class="nav-link">Work</a>
                 <a href="#videography" class="nav-link">Films</a>
                 <a href="#about" class="nav-link">About</a>
                 <a href="#services" class="nav-link">Services</a>
                 <a href="#contact" class="nav-link">Contact</a>
+                <!-- Prominent CTA shown only inside the full-screen mobile overlay -->
+                <a href="#contact" class="nav-cta-mobile">Book a Session</a>
             </nav>
 
-            <a href="#contact" class="nav-cta magnetic-hover">Let's Talk</a>
+            <a href="#contact" class="nav-cta magnetic-hover">Book a Session</a>
 
             <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Menu">
                 <span></span>
@@ -405,8 +460,19 @@
         <div class="bg-number bg-number--photo reveal-fade">03</div>
 
         <!-- 21st.dev: Infinite Marquee — category labels as service strip -->
+        <!-- Duplicate set required: animation goes translateX(-50%), so the
+             track must be 2× the visible content for a seamless loop reset. -->
         <div class="tf-marquee-outer" aria-hidden="true">
             <div class="tf-marquee-track">
+                <span class="tf-marquee-item"><span class="tf-marquee-dot"></span>Wedding Photography</span>
+                <span class="tf-marquee-item"><span class="tf-marquee-dot"></span>Portrait Sessions</span>
+                <span class="tf-marquee-item"><span class="tf-marquee-dot"></span>Cinematic Films</span>
+                <span class="tf-marquee-item"><span class="tf-marquee-dot"></span>Editorial Photography</span>
+                <span class="tf-marquee-item"><span class="tf-marquee-dot"></span>Corporate Events</span>
+                <span class="tf-marquee-item"><span class="tf-marquee-dot"></span>Color Grading</span>
+                <span class="tf-marquee-item"><span class="tf-marquee-dot"></span>Short Films</span>
+                <span class="tf-marquee-item"><span class="tf-marquee-dot"></span>Brand Stories</span>
+                <!-- duplicate for seamless loop -->
                 <span class="tf-marquee-item"><span class="tf-marquee-dot"></span>Wedding Photography</span>
                 <span class="tf-marquee-item"><span class="tf-marquee-dot"></span>Portrait Sessions</span>
                 <span class="tf-marquee-item"><span class="tf-marquee-dot"></span>Cinematic Films</span>
@@ -420,10 +486,15 @@
 
         <!-- Category Filter Bar -->
         <div class="photo-filter-bar" role="group" aria-label="Filter photography by category">
-            <button class="filter-btn active" data-filter="all" aria-pressed="true">All Work</button>
-            <button class="filter-btn" data-filter="portrait" aria-pressed="false">Portrait</button>
-            <button class="filter-btn" data-filter="wedding" aria-pressed="false">Wedding</button>
-            <button class="filter-btn" data-filter="editorial" aria-pressed="false">Editorial</button>
+            <button class="filter-btn active" data-filter="all"          aria-pressed="true" >All Work</button>
+            <button class="filter-btn"        data-filter="portrait"     aria-pressed="false">Portrait</button>
+            <button class="filter-btn"        data-filter="wedding"      aria-pressed="false">Wedding</button>
+            <button class="filter-btn"        data-filter="editorial"    aria-pressed="false">Editorial</button>
+            <button class="filter-btn"        data-filter="corporate"    aria-pressed="false">Corporate</button>
+            <button class="filter-btn"        data-filter="color-grading" aria-pressed="false">Color Grading</button>
+            <button class="filter-btn"        data-filter="short-film"   aria-pressed="false">Short Film</button>
+            <button class="filter-btn"        data-filter="brand"        aria-pressed="false">Brand</button>
+            <button class="filter-btn"        data-filter="cinematic"    aria-pressed="false">Cinematic</button>
         </div>
 
         <!-- TOP AREA: Cinematic Portraits -->
@@ -431,7 +502,12 @@
             <h3>Photography Showcase</h3>
         </div>
 
-        <div class="photo-block block-top photo-filter-block" data-category="portrait" style="position: relative;">
+        <!-- lim-perspective-wrap: provides perspective depth for the 3D
+             scroll card animation on the "Love in Motion" block.
+             JS in scroll-card.js drives rotateX(16→0deg) on .lim-scroll-card
+             as the block enters the viewport. -->
+        <div class="lim-perspective-wrap">
+        <div class="photo-block block-top photo-filter-block lim-scroll-card" data-category="portrait" style="position: relative;">
             <div class="top-left reveal-right">
                 <div class="tall-featured-wrap" data-aos="fade-up" data-aos-delay="200">
                     <img id="portrait-showcase"
@@ -472,41 +548,35 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div><!-- /lim-scroll-card -->
+        </div><!-- /lim-perspective-wrap -->
 
-        <!-- MIDDLE AREA: Visual Stories -->
-        <div class="photo-block block-middle photo-filter-block" data-category="wedding">
-            <div class="middle-left" id="brides-tale-section">
-                <div class="overlap-horizontal" data-aos="fade-up" data-aos-delay="200">
-                    <img src="https://i.ibb.co/MDFzyJcW/5O7A6852.webp" class="ov-img ov-1" alt="The Bride's Tale by Sudip Mondal" loading="lazy" decoding="async">
-                    <img src="https://i.ibb.co/S7VTYdwZ/IMG-5193.webp" class="ov-img ov-2" alt="The Bride's Tale by Sudip Mondal" loading="lazy" decoding="async">
-                    <img src="https://i.ibb.co/ks0jkrZY/IMG-5198.webp" class="ov-img ov-3" alt="The Bride's Tale by Sudip Mondal" loading="lazy" decoding="async">
-                </div>
+        <!-- MIDDLE AREA: Wedding Masonry Showcase -->
+        <div class="wedding-showcase photo-filter-block" data-category="wedding" data-aos="fade-up">
 
-                <p class="section-overline" style="font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--text-main);margin-bottom:10px;opacity:0.6;">Wedding Photography</p>
-                <h2 class="editorial-title mt-40 portfolio-heading border-accent" data-aos="fade-up" data-aos-delay="100"
-                    style="display: block !important; border-left: 4px solid #F5C518; padding-left: 16px;"><span
-                        style="border-radius: 6px !important; display: inline-block !important; width: fit-content !important; margin-left: 20px !important; background: #F5C518 !important; padding: 14px 28px !important; color: var(--dark) !important;">The Bride's Tale</span></h2>
-                <div class="row-3-images" data-aos="fade-up" data-aos-delay="200">
-                    <img src="https://i.ibb.co/mrC3sfM5/IMG-5199.webp" class="square-img" alt="The Bride's Tale by Sudip Mondal" loading="lazy" decoding="async">
-                    <img src="https://i.ibb.co/pvLbJcrS/IMG-5197.webp" class="square-img" alt="The Bride's Tale by Sudip Mondal" loading="lazy" decoding="async">
-                    <img src="https://i.ibb.co/fzvT1KD9/5O7A6870.webp" class="square-img" alt="The Bride's Tale by Sudip Mondal" loading="lazy" decoding="async">
-                </div>
+            <!-- Left: heading + CTA -->
+            <div class="ws-header">
+                <p class="ws-overline">Wedding Photography</p>
+                <h2 class="ws-heading">The Bride's<br>Tale &amp;<br>Forever<br>Begins Here</h2>
+                <p class="ws-desc">Every love story deserves a frame that holds feeling — from quiet rituals to the moment everything changes.</p>
+                <a href="#contact" class="ws-cta">Book Your Wedding &rarr;</a>
             </div>
 
-            <div class="middle-right" style="position: relative;">
-                <p class="section-overline" style="font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--text-main);margin-bottom:10px;opacity:0.6;">Wedding Photography</p>
-                <h2 class="editorial-title portfolio-heading border-accent" data-aos="fade-up" data-aos-delay="100"
-                    style="display: block !important; border-left: 4px solid #F5C518; padding-left: 16px;"><span
-                        style="border-radius: 6px !important; display: inline-block !important; width: fit-content !important; margin-left: 20px !important; background: #F5C518 !important; padding: 14px 28px !important; color: var(--dark) !important;">Forever Begins Here</span></h2>
-                <div class="grid-3x2" data-aos="fade-up" data-aos-delay="200">
-                    <img src="https://i.ibb.co/1Gd1GKrT/sacredshaadi-1765892397-3788902506811265235-8657727871.webp" class="square-img" alt="Wedding photography by Sudip Mondal, Kolkata" loading="lazy" decoding="async">
-                    <img src="https://i.ibb.co/mFrMrKQQ/sacredshaadi-1765892397-3788902506819621660-8657727871.webp" class="square-img" alt="Wedding photography by Sudip Mondal, Kolkata" loading="lazy" decoding="async">
-                    <img src="https://i.ibb.co/FkRJXzMK/sacredshaadi-1765892397-3788902506819672315-8657727871.webp" class="square-img" alt="Wedding photography by Sudip Mondal, Kolkata" loading="lazy" decoding="async">
-                    <img src="https://i.ibb.co/XfCT1KKM/sacredshaadi-1765892397-3788902507155225154-8657727871.webp" class="square-img" alt="Wedding photography by Sudip Mondal, Kolkata" loading="lazy" decoding="async">
-                    <img src="https://i.ibb.co/7tPr3SyK/sacredshaadi-1765892397-3788902506819639957-8657727871.webp" class="square-img" alt="Wedding photography by Sudip Mondal, Kolkata" loading="lazy" decoding="async">
-                </div>
+            <!-- Right: masonry photo grid (all 11 wedding photos) -->
+            <div class="ws-masonry">
+                <img src="https://i.ibb.co/MDFzyJcW/5O7A6852.webp"         class="ws-img" alt="The Bride's Tale — Sudip Mondal" loading="lazy" decoding="async">
+                <img src="https://i.ibb.co/1Gd1GKrT/sacredshaadi-1765892397-3788902506811265235-8657727871.webp" class="ws-img" alt="Wedding photography — Sudip Mondal" loading="lazy" decoding="async">
+                <img src="https://i.ibb.co/S7VTYdwZ/IMG-5193.webp"         class="ws-img" alt="The Bride's Tale — Sudip Mondal" loading="lazy" decoding="async">
+                <img src="https://i.ibb.co/mFrMrKQQ/sacredshaadi-1765892397-3788902506819621660-8657727871.webp" class="ws-img" alt="Wedding photography — Sudip Mondal" loading="lazy" decoding="async">
+                <img src="https://i.ibb.co/ks0jkrZY/IMG-5198.webp"         class="ws-img" alt="The Bride's Tale — Sudip Mondal" loading="lazy" decoding="async">
+                <img src="https://i.ibb.co/FkRJXzMK/sacredshaadi-1765892397-3788902506819672315-8657727871.webp" class="ws-img" alt="Wedding photography — Sudip Mondal" loading="lazy" decoding="async">
+                <img src="https://i.ibb.co/mrC3sfM5/IMG-5199.webp"         class="ws-img" alt="The Bride's Tale — Sudip Mondal" loading="lazy" decoding="async">
+                <img src="https://i.ibb.co/XfCT1KKM/sacredshaadi-1765892397-3788902507155225154-8657727871.webp" class="ws-img" alt="Wedding photography — Sudip Mondal" loading="lazy" decoding="async">
+                <img src="https://i.ibb.co/pvLbJcrS/IMG-5197.webp"         class="ws-img" alt="The Bride's Tale — Sudip Mondal" loading="lazy" decoding="async">
+                <img src="https://i.ibb.co/7tPr3SyK/sacredshaadi-1765892397-3788902506819639957-8657727871.webp" class="ws-img" alt="Wedding photography — Sudip Mondal" loading="lazy" decoding="async">
+                <img src="https://i.ibb.co/fzvT1KD9/5O7A6870.webp"         class="ws-img" alt="The Bride's Tale — Sudip Mondal" loading="lazy" decoding="async">
             </div>
+
         </div>
 
         <!-- BOTTOM AREA: Editorial Selection -->
@@ -571,163 +641,262 @@
             </div>
         </div>
 
-        <!-- TOP AREA: Cinematic Reels -->
-        <div class="video-section-header reveal-left">
-            <h3>Hospitality & Events</h3>
-        </div>
+        <!-- TOP AREA: Cinematic Reels — Fan Gallery -->
+        <div class="hosp-fan-section" data-aos="fade-up" data-aos-delay="80">
 
-        <div class="video-block block-reels"
-            style="display: flex !important; align-items: flex-start !important; gap: 40px;">
-            <div class="reels-left" style="align-self: flex-start !important;">
-                <p class="section-overline" style="font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--text-main);margin-bottom:10px;opacity:0.6;">Cinematic Reels & Video</p>
-                <h2 class="editorial-title portfolio-heading border-accent" data-aos="fade-up" data-aos-delay="100"
-                    style="display: block !important; margin-top: 0 !important;">
-                    <span
-                        style="border-radius: 6px !important; display: inline-block !important; width: fit-content !important; background: #F5C518 !important; padding: 14px 28px !important; color: var(--dark) !important;">The Art of Hospitality</span>
+            <!-- Centred text header -->
+            <div class="hosp-fan-header">
+                <p class="hosp-fan-overline">Cinematic Reels &amp; Video</p>
+                <h2 class="editorial-title portfolio-heading hosp-fan-title">
+                    <span class="hosp-heading-text">The Art of Hospitality</span>
                 </h2>
-                <p class="editorial-desc">Every frame of hospitality is a story waiting to happen — the handshake before the deal, the toast that no one rehearsed, the moment a room comes alive. I document the culture behind great organisations and the people who build them.</p>
+                <p class="hosp-fan-desc">Every frame of hospitality is a story waiting to happen — the handshake before the deal, the toast that no one rehearsed, the moment a room comes alive.</p>
             </div>
-            <div class="reels-right">
-                <div class="massive-yellow-box"
-                    style="margin-top: 0 !important; border: none !important; background: transparent !important; box-shadow: none !important; padding: 0 !important;">
-                    <div class="reels-grid" data-aos="fade-up" data-aos-delay="200" style="grid-template-columns: repeat(2, 1fr) !important;">
-                        <img src="https://i.ibb.co/1fCSQML0/osamainthemountains-1778341960-3893332748001781918-48508808717.webp" class="reel-item" alt="The Art of Hospitality - Sudip Mondal" loading="lazy" decoding="async">
-                        <img src="https://i.ibb.co/4npcH7CF/osamainthemountains-1778341960-3893332846442115097-48508808717.webp" class="reel-item" alt="The Art of Hospitality - Sudip Mondal" loading="lazy" decoding="async">
-                        <img src="https://i.ibb.co/VYBYmGCy/osamainthemountains-1778341960-3893332883175819611-48508808717.webp" class="reel-item" alt="The Art of Hospitality - Sudip Mondal" loading="lazy" decoding="async">
-                        <img src="https://i.ibb.co/1DswVkJ/osamainthemountains-1778341960-3893332984795420230-48508808717.webp" class="reel-item" alt="The Art of Hospitality - Sudip Mondal" loading="lazy" decoding="async">
+
+            <!-- Fan carousel -->
+            <div class="hosp-fan-wrap">
+                <div class="hosp-fan" id="hospFan">
+                    <div class="hosp-card" data-pos="0">
+                        <img src="https://i.ibb.co/cKyH53Jt/ARC5.webp" alt="The Art of Hospitality — Sudip Mondal" loading="lazy" decoding="async">
+                    </div>
+                    <div class="hosp-card" data-pos="1">
+                        <img src="https://i.ibb.co/cKdPGk2Q/ARC4.webp" alt="The Art of Hospitality — Sudip Mondal" loading="lazy" decoding="async">
+                    </div>
+                    <div class="hosp-card" data-pos="2">
+                        <img src="https://i.ibb.co/pvPH4x8n/ARC3.webp" alt="The Art of Hospitality — Sudip Mondal" loading="lazy" decoding="async">
+                    </div>
+                    <div class="hosp-card" data-pos="3">
+                        <img src="https://i.ibb.co/7x4Qgz8G/ARC2.webp" alt="The Art of Hospitality — Sudip Mondal" loading="lazy" decoding="async">
+                    </div>
+                    <div class="hosp-card" data-pos="4">
+                        <img src="https://i.ibb.co/G4cq4SPw/ARC.webp" alt="The Art of Hospitality — Sudip Mondal" loading="lazy" decoding="async">
+                    </div>
+                </div>
+                <div class="hosp-fade hosp-fade--l" aria-hidden="true"></div>
+                <div class="hosp-fade hosp-fade--r" aria-hidden="true"></div>
+            </div>
+
+            <!-- Prev / Next navigation -->
+            <div class="hosp-nav">
+                <button class="hosp-nav-btn" id="hospPrev" type="button" aria-label="Previous image">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+                </button>
+                <button class="hosp-nav-btn" id="hospNext" type="button" aria-label="Next image">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+                </button>
+            </div>
+
+        </div>
+
+        <!-- MIDDLE AREA: Light. Motion. Story. — Bento Grid -->
+        <div class="lms-section" data-aos="fade-up" data-aos-delay="80">
+
+            <div class="lms-bento">
+
+                <!-- HERO: large image, title overlay — col 1 row 1 -->
+                <div class="lms-cell lms-hero">
+                    <img src="https://i.ibb.co/ZRmxGRMQ/5-O7-A2320-Original.webp" alt="Beyond The Lens — Sudip Mondal" loading="lazy" decoding="async">
+                    <div class="lms-hero-overlay">
+                        <span class="lms-hero-title">Beyond The Lens</span>
+                        <span class="lms-hero-sub">Iceland, the Land of Fire and Ice</span>
+                    </div>
+                </div>
+
+                <!-- TAGLINE: text card — col 1 row 2 -->
+                <div class="lms-cell lms-tagline">
+                    <h2 class="lms-tagline-heading">Light.<br>Motion.<br>Story.</h2>
+                    <p class="lms-tagline-body">Every frame is a decision. I turn raw footage into cinematic scenes with rich tones, atmosphere, and a strong visual identity — from short films to brand reels.</p>
+                </div>
+
+                <!-- CTA STRIP — col 1 row 3 -->
+                <div class="lms-cell lms-cta">
+                    <a href="#contact" class="lms-cta-btn">Book a Session</a>
+                    <a href="#photography" class="lms-cta-link">PREVIOUS</a>
+                    <a href="#services"    class="lms-cta-link">NEXT</a>
+                </div>
+
+                <!-- EXPLORE: info card — col 2 row 1 -->
+                <div class="lms-cell lms-info lms-explore">
+                    <span class="lms-info-label">Short Films</span>
+                    <h3 class="lms-info-title">Chasing Shadows</h3>
+                    <p class="lms-info-body">Cinematography · Colour Grade · Sound Design</p>
+                </div>
+
+                <!-- FILM: tall image — col 2 rows 2–3 -->
+                <div class="lms-cell lms-film">
+                    <img src="https://i.ibb.co/1fCSQML0/osamainthemountains-1778341960-3893332748001781918-48508808717.webp" alt="Chasing Shadows — Sudip Mondal" loading="lazy" decoding="async">
+                </div>
+
+                <!-- FAUNA: image — col 3 row 1 -->
+                <div class="lms-cell lms-fauna">
+                    <img src="https://i.ibb.co/4npcH7CF/osamainthemountains-1778341960-3893332846442115097-48508808717.webp" alt="The Silent Echo — Sudip Mondal" loading="lazy" decoding="async">
+                </div>
+
+                <!-- CUISINE: info card — col 3 row 2 -->
+                <div class="lms-cell lms-info lms-cuisine">
+                    <span class="lms-info-label">Music Video</span>
+                    <h3 class="lms-info-title">Nocturnal Run</h3>
+                    <p class="lms-info-body">Colour Shift · Motion Cut · Visual FX</p>
+                </div>
+
+                <!-- FOOD: image — col 3 row 3 -->
+                <div class="lms-cell lms-food">
+                    <img src="https://i.ibb.co/v6HhbL4c/thjjaegv13vwrdtrtj8b.webp" alt="Monochrome Beats — Sudip Mondal" loading="lazy" decoding="async">
+                </div>
+
+            </div>
+        </div>
+
+        <!-- CORPORATE PHOTOGRAPHY: Moments That Matter — Fan Gallery -->
+        <div class="corp-section" data-aos="fade-up">
+
+            <!-- Light header band -->
+            <div class="corp-header">
+                <div class="corp-header-left">
+                    <p class="corp-overline">Corporate Photography</p>
+                    <h2 class="corp-title">Moments<br>That Matter</h2>
+                </div>
+                <div class="corp-header-right">
+                    <p class="corp-header-desc">Corporate photography that goes beyond the boardroom — I capture the energy, culture, and people behind great organisations with clarity and cinematic intent.</p>
+                </div>
+            </div>
+
+            <!-- Dark panel -->
+            <div class="corp-dark-panel">
+
+                <!-- Giant background text -->
+                <p class="corp-bg-text" aria-hidden="true">OUR&nbsp;WORKS</p>
+
+                <!-- Panel description top-left -->
+                <p class="corp-panel-desc">Sudip's combination of candid and editorial style helps create imagery that's as unique as your brand.</p>
+
+                <!-- Fan carousel -->
+                <div class="corp-fan-wrap">
+                    <div class="corp-fan" id="corpFan">
+
+                        <div class="corp-card" data-pos="0">
+                            <img src="https://i.ibb.co/MxB8QSGs/tellatalestudios-1682524657-3089563215116438098-3620764332.webp" alt="Brand story photography — Sudip Mondal" loading="lazy" decoding="async">
+                            <div class="corp-card-info">
+                                <span class="corp-card-title">BRAND STORIES</span>
+                            </div>
+                        </div>
+
+                        <div class="corp-card" data-pos="1">
+                            <img src="https://i.ibb.co/n8Rx4cnW/tellatalestudios-1682524657-3089563215259101907-3620764332.webp" alt="Team portraits — Sudip Mondal" loading="lazy" decoding="async">
+                            <div class="corp-card-info">
+                                <span class="corp-card-title">TEAM PORTRAITS</span>
+                            </div>
+                        </div>
+
+                        <div class="corp-card" data-pos="2">
+                            <img src="https://i.ibb.co/8DzDpwDb/tellatalestudios-1682524657-3089563215108211895-3620764332.webp" alt="Corporate events — Sudip Mondal" loading="lazy" decoding="async">
+                            <span class="corp-card-tag">Corporate</span>
+                            <div class="corp-card-info">
+                                <span class="corp-card-title">EVENTS &amp; CULTURE</span>
+                            </div>
+                        </div>
+
+                        <div class="corp-card" data-pos="3">
+                            <img src="https://i.ibb.co/ZRmxGRMQ/5-O7-A2320-Original.webp" alt="Professional headshots — Sudip Mondal" loading="lazy" decoding="async">
+                            <div class="corp-card-info">
+                                <span class="corp-card-title">HEADSHOTS</span>
+                            </div>
+                        </div>
+
+                        <div class="corp-card" data-pos="4">
+                            <img src="https://i.ibb.co/MDFzyJcW/5O7A6852.webp" alt="Editorial photography — Sudip Mondal" loading="lazy" decoding="async">
+                            <div class="corp-card-info">
+                                <span class="corp-card-title">EDITORIAL</span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="corp-fade corp-fade--l" aria-hidden="true"></div>
+                    <div class="corp-fade corp-fade--r" aria-hidden="true"></div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="corp-nav">
+                    <button class="corp-nav-btn corp-nav-btn--prev" id="corpPrev" type="button" aria-label="Previous">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+                    </button>
+                    <button class="corp-nav-btn corp-nav-btn--next" id="corpNext" type="button" aria-label="Next">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ===== COLOR GRADING: Before/After Slider ===== -->
+        <div class="cg-section" data-aos="fade-up" data-aos-delay="80">
+
+            <!-- Big cinematic title -->
+            <div class="cg-title-wrap">
+                <p class="cg-overline">Post Production</p>
+                <h2 class="cg-title">POST PRODUCTION<br>&amp; <span>COLOR GRADING</span></h2>
+            </div>
+
+            <!-- Before / After slider -->
+            <div class="cg-slider" id="cgSlider" role="img" aria-label="Drag to compare raw footage with final color grade">
+
+                <!-- RAW layer — base, always behind, desaturated -->
+                <div class="cg-side cg-raw">
+                    <img src="https://i.ibb.co/20C7kbzv/fejk0givhrojzppzdxra.webp" alt="Raw footage" draggable="false" loading="lazy" decoding="async">
+                    <span class="cg-corner-tag cg-tl">RAW FOOTAGE</span>
+                    <div class="cg-caption cg-caption--l">
+                        <span class="cg-cap-title">RAW FOOTAGE</span>
+                        <span class="cg-cap-meta">LOG C &nbsp;·&nbsp; ISO 800 &nbsp;·&nbsp; f/1.8</span>
+                    </div>
+                </div>
+
+                <!-- GRADED layer — colour-enhanced, clipped to right of handle -->
+                <div class="cg-side cg-graded" id="cgGraded">
+                    <img src="https://i.ibb.co/20C7kbzv/fejk0givhrojzppzdxra.webp" alt="Final color grade" draggable="false" loading="lazy" decoding="async">
+                    <span class="cg-corner-tag cg-tr">FINAL GRADE</span>
+                    <div class="cg-caption cg-caption--r">
+                        <span class="cg-cap-title">FINAL GRADE</span>
+                        <span class="cg-cap-meta">Rec.709 &nbsp;·&nbsp; Contrast +30 &nbsp;·&nbsp; Saturation +20</span>
+                    </div>
+                </div>
+
+                <!-- Drag handle -->
+                <div class="cg-handle" id="cgHandle" aria-hidden="true">
+                    <div class="cg-handle-line"></div>
+                    <button class="cg-handle-btn" type="button" tabindex="-1">
+                        <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36" aria-hidden="true">
+                            <path d="M13 18l-6-5m0 0l6-5m-6 5h22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M23 18l6-5m0 0l-6-5m6 5H7"  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Signature Look -->
+            <div class="cg-signature">
+                <div class="cg-sig-left">
+                    <p class="cg-sig-eyebrow">SUDIP MONDAL'S</p>
+                    <h3 class="cg-sig-heading">SIGNATURE<br>LOOK</h3>
+                    <p class="cg-sig-body">Artistic precision, lens mastery, colour craft — every frame is a conscious decision shaped by light, mood, and emotional intent.</p>
+                </div>
+                <div class="cg-sig-cards">
+                    <div class="cg-sig-card">
+                        <div class="cg-sig-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22" aria-hidden="true"><path d="M9 19V6l12-3v13M9 19c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2zm12-3c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2z"/></svg>
+                        </div>
+                        <h4>Emotionally Resonant</h4>
+                        <p>Meticulous colour timing and a dedication to preserving the emotional intent of every scene.</p>
+                    </div>
+                    <div class="cg-sig-card">
+                        <div class="cg-sig-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M8 4v16M16 4v16M2 9h20M2 15h20"/></svg>
+                        </div>
+                        <h4>Film Emulation</h4>
+                        <p>Custom LUTs and film-stock recipes that give digital footage the grain, warmth, and soul of analogue.</p>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- MIDDLE AREA: Filmmaking Projects -->
-        <div class="video-section-header reveal-left" style="margin-top: 60px;">
-            <h3>Short Films & Cinematography</h3>
-        </div>
-
-        <div class="video-block block-projects" style="display: block !important; max-width: 100% !important; padding: 0 60px; border: none !important; outline: none !important; overflow: visible !important;">
-            <p class="section-overline" style="font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--text-main);margin-bottom:10px;opacity:0.6;">Short Films & Cinematography</p>
-            <h2 class="editorial-title portfolio-heading border-accent" data-aos="fade-up" data-aos-delay="100" style="display: inline-block !important; width: fit-content !important; margin-bottom: 40px !important;">
-                <span
-                    style="border-radius: 6px !important; display: inline-block !important; width: fit-content !important; background: #F5C518 !important; padding: 14px 28px !important; color: var(--dark) !important;">Light. Motion. Story.</span>
-            </h2>
-
-            <!-- Horizontal snap carousel container -->
-            <div class="cinematography-carousel-container" data-aos="fade-up" data-aos-delay="200">
-                <div class="cinematography-carousel-track">
-                    <!-- Card 1 (Side Card) -->
-                    <div class="carousel-card side-card">
-                        <img src="https://i.ibb.co/1fCSQML0/osamainthemountains-1778341960-3893332748001781918-48508808717.webp" alt="Hospitality film by Sudip Mondal" loading="lazy" decoding="async">
-                        <div class="carousel-card-overlay">
-                            <div class="carousel-card-title">Chasing Shadows</div>
-                            <div class="carousel-card-category">Cinematography</div>
-                        </div>
-                    </div>
-
-                    <!-- Card 2 (Side Card) -->
-                    <div class="carousel-card side-card">
-                        <img src="https://i.ibb.co/4npcH7CF/osamainthemountains-1778341960-3893332846442115097-48508808717.webp" alt="Short film by Sudip Mondal" loading="lazy" decoding="async">
-                        <div class="carousel-card-overlay">
-                            <div class="carousel-card-title">The Silent Echo</div>
-                            <div class="carousel-card-category">Short Film</div>
-                        </div>
-                    </div>
-
-                    <!-- Card 3 (Center Card) -->
-                    <div class="carousel-card center-card">
-                        <img src="https://i.ibb.co/ZRmxGRMQ/5-O7-A2320-Original.webp" alt="Portrait film by Sudip Mondal" loading="lazy" decoding="async">
-                        <div class="carousel-card-overlay">
-                            <div class="carousel-card-title">Beyond The Lens</div>
-                            <div class="carousel-card-category">Director's Cut</div>
-                        </div>
-                    </div>
-
-                    <!-- Card 4 (Side Card) -->
-                    <div class="carousel-card side-card">
-                        <img src="https://i.ibb.co/20C7kbzv/fejk0givhrojzppzdxra.webp" alt="Cinematic reel by Sudip Mondal" loading="lazy" decoding="async">
-                        <div class="carousel-card-overlay">
-                            <div class="carousel-card-title">Nocturnal Run</div>
-                            <div class="carousel-card-category">Music Video</div>
-                        </div>
-                    </div>
-
-                    <!-- Card 5 (Side Card) -->
-                    <div class="carousel-card side-card">
-                        <img src="https://i.ibb.co/v6HhbL4c/thjjaegv13vwrdtrtj8b.webp" alt="Documentary by Sudip Mondal" loading="lazy" decoding="async">
-                        <div class="carousel-card-overlay">
-                            <div class="carousel-card-title">Monochrome Beats</div>
-                            <div class="carousel-card-category">Documentary</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- CORPORATE PHOTOGRAPHY: Moments That Matter -->
-        <div class="video-section-header reveal-left" style="margin-top: 80px;">
-            <h3>Corporate Photography</h3>
-        </div>
-
-        <div class="video-block block-corporate" style="display: block !important; max-width: 100% !important; padding: 0 60px; border: none !important; outline: none !important;">
-            <p class="section-overline" style="font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--text-main);margin-bottom:10px;opacity:0.6;">Corporate Photography</p>
-            <h2 class="editorial-title portfolio-heading border-accent" data-aos="fade-up" data-aos-delay="100" style="display: inline-block !important; width: fit-content !important; margin-bottom: 20px !important;">
-                <span style="border-radius: 6px !important; display: inline-block !important; width: fit-content !important; background: #F5C518 !important; padding: 14px 28px !important; color: var(--dark) !important;">Moments That Matter</span>
-            </h2>
-            <p class="editorial-desc" style="max-width: 600px; margin-bottom: 40px;" data-aos="fade-up" data-aos-delay="150">
-                Corporate photography that goes beyond the boardroom. I capture the energy, culture, and people behind
-                great organisations — headshots, events, and brand stories told with clarity and cinematic intent.
-            </p>
-            <div class="corporate-photo-grid" data-aos="fade-up" data-aos-delay="200" style="display: grid !important; grid-template-columns: repeat(3, 1fr) !important; gap: 16px !important;">
-                <img src="https://i.ibb.co/MxB8QSGs/tellatalestudios-1682524657-3089563215116438098-3620764332.webp"
-                     class="square-img" alt="Corporate photography by Sudip Mondal" loading="lazy" decoding="async"
-                     style="width: 100% !important; aspect-ratio: 4/5 !important; object-fit: cover !important; border-radius: 4px !important;">
-                <img src="https://i.ibb.co/n8Rx4cnW/tellatalestudios-1682524657-3089563215259101907-3620764332.webp"
-                     class="square-img" alt="Corporate photography by Sudip Mondal" loading="lazy" decoding="async"
-                     style="width: 100% !important; aspect-ratio: 4/5 !important; object-fit: cover !important; border-radius: 4px !important;">
-                <img src="https://i.ibb.co/8DzDpwDb/tellatalestudios-1682524657-3089563215108211895-3620764332.webp"
-                     class="square-img" alt="Corporate photography by Sudip Mondal" loading="lazy" decoding="async"
-                     style="width: 100% !important; aspect-ratio: 4/5 !important; object-fit: cover !important; border-radius: 4px !important;">
-            </div>
-        </div>
-
-        <!-- BOTTOM AREA: Timeline & Color Grading -->
-        <div class="video-section-header" style="margin-top: 60px; margin-bottom: 20px !important;">
-            <h3 style="font-size: 11px !important; text-transform: uppercase !important; letter-spacing: 0.2em !important; color: #888 !important; font-family: 'Inter', sans-serif !important; font-weight: 500 !important; margin: 0 !important; display: inline-block !important;">Post Production</h3>
-        </div>
-
-        <div class="video-block block-timelines">
-            <div class="timelines-left">
-                <p class="section-overline" style="font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--text-main);margin-bottom:10px;opacity:0.6;">Color Grading & Editing</p>
-                <h2 class="editorial-title portfolio-heading border-accent" data-aos="fade-up" data-aos-delay="100" style="display: inline-block !important; width: fit-content !important; margin-top: 0 !important; margin-bottom: 25px !important;">
-                    <span
-                        style="border-radius: 6px !important; display: inline-block !important; width: fit-content !important; background: #F5C518 !important; padding: 16px 28px !important; color: var(--dark) !important;">Color Grading & Post Production</span>
-                </h2>
-                <p class="editorial-desc">Color grading and post-production play a huge role in defining the mood of a
-                    visual story. This collection highlights my process of turning raw footage into cinematic scenes
-                    with rich tones, atmosphere, and a strong visual identity.</p>
-            </div>
-            <div class="timelines-right">
-                <div class="complex-materials-layout" data-aos="fade-up" data-aos-delay="200">
-                    <svg class="connecting-line" viewBox="0 0 500 500" preserveAspectRatio="none">
-                        <path d="M50 50 C 250 50, 100 450, 450 450" fill="none" stroke="var(--yellow)" stroke-width="40"
-                            stroke-linecap="round" />
-                    </svg>
-
-                    <div class="timeline-card t-1">
-                        <span class="t-badge">Colour Grade</span>
-                        <img src="https://i.ibb.co/VYBYmGCy/osamainthemountains-1778341960-3893332883175819611-48508808717.webp" alt="Colour graded cinematic work by Sudip Mondal" loading="lazy" decoding="async">
-                    </div>
-                    <div class="timeline-card t-2">
-                        <span class="t-badge">Final Cut</span>
-                        <img src="https://i.ibb.co/1DswVkJ/osamainthemountains-1778341960-3893332984795420230-48508808717.webp" alt="Cinematic film work by Sudip Mondal" loading="lazy" decoding="async">
-                    </div>
-                    <div class="timeline-card t-3">
-                        <span class="t-badge">Delivered</span>
-                        <img src="https://i.ibb.co/fzvT1KD9/5O7A6870.webp" alt="Wedding cinematography by Sudip Mondal" loading="lazy" decoding="async">
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -854,8 +1023,8 @@
         </div>
     </section>
 
-    <!-- ===== SERVICES / EXPERTISE SECTION ===== -->
-    <section class="services creative-section" id="services" style="position: relative; overflow: hidden;">
+    <!-- SERVICES SECTION REMOVED -->
+    <section class="services creative-section" id="services" style="display:none;">
         <!-- 21st.dev: Ambient blobs -->
         <div class="tf-ambient" aria-hidden="true">
             <div class="tf-blob tf-blob-1" style="opacity:0.05;width:350px;height:350px;top:-80px;left:-80px;"></div>
@@ -1036,34 +1205,14 @@
         </div>
     </section>
 
-    <!-- ===== WOW SECTION: CINEMATIC SHOWCASE ===== -->
-    <section class="wow-section">
-        <div class="wow-parallax-wrap">
-            <picture>
-                <source srcset="assets/wow_cinematic.webp" type="image/webp">
-                <img src="assets/wow_cinematic.png" alt="Cinematic Showcase" class="wow-image" loading="lazy" decoding="async">
-            </picture>
-            <div class="wow-overlay"></div>
-            <div style="position: relative; z-index: 10;">
-                <h2 class="wow-text reveal-up portfolio-heading">
-                    VISUAL<br><span style="color:var(--yellow)">STORYTELLING.</span></h2>
-                <div class="wow-cta-wrap">
-                    <a href="#contact" class="wow-cta-btn magnetic-hover">
-                        Book Your Session
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- WOW SECTION REMOVED -->
 
     <!-- ===== BRAND PHILOSOPHY ===== -->
     <section class="philosophy" id="philosophy" style="position: relative;">
         <div class="philosophy-container">
             <div class="phil-left reveal-right">
                 <picture>
-                    <source srcset="assets/philosophy_portrait.webp" type="image/webp">
-                    <img src="assets/philosophy_portrait.png" alt="Sudip Mondal - Director and filmmaker" class="phil-img cinematic-shadow" loading="lazy" decoding="async">
+                    <img src="https://i.ibb.co/Y7nQS5bT/sudip-mondal-photographer-filmmaker-kolkata-webp.webp" alt="Sudip Mondal - Director and filmmaker" class="phil-img cinematic-shadow" loading="lazy" decoding="async">
                 </picture>
             </div>
             <div class="phil-right reveal-left">
@@ -1079,7 +1228,42 @@
     </section>
 
     <!-- ===== CONTACT ME ===== -->
-    <section class="contact" id="contact">
+    <section class="contact contact--dark" id="contact">
+
+        <!-- Ambient centre glow -->
+        <div class="contact-glow" aria-hidden="true"></div>
+
+        <!-- Circuit-board decorative corners -->
+        <div class="contact-circuit contact-circuit--tl" aria-hidden="true">
+            <svg width="220" height="220" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 35 L55 35 L55 0" stroke="rgba(245,158,11,0.22)" stroke-width="1.5" fill="none"/>
+                <line x1="0" y1="70" x2="90" y2="70" stroke="rgba(245,158,11,0.12)" stroke-width="1"/>
+                <line x1="90" y1="70" x2="90" y2="130" stroke="rgba(245,158,11,0.12)" stroke-width="1"/>
+                <line x1="90" y1="130" x2="150" y2="130" stroke="rgba(245,158,11,0.08)" stroke-width="1"/>
+                <line x1="0" y1="110" x2="50" y2="110" stroke="rgba(245,158,11,0.08)" stroke-width="1"/>
+                <line x1="50" y1="70" x2="50" y2="110" stroke="rgba(245,158,11,0.08)" stroke-width="1"/>
+                <circle cx="55"  cy="35"  r="3"   fill="rgba(245,158,11,0.35)"/>
+                <circle cx="90"  cy="70"  r="2.5" fill="rgba(245,158,11,0.25)"/>
+                <circle cx="50"  cy="110" r="2"   fill="rgba(245,158,11,0.2)"/>
+                <circle cx="90"  cy="130" r="2.5" fill="rgba(245,158,11,0.2)"/>
+                <circle cx="150" cy="130" r="2"   fill="rgba(245,158,11,0.15)"/>
+            </svg>
+        </div>
+        <div class="contact-circuit contact-circuit--br" aria-hidden="true">
+            <svg width="220" height="220" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M220 185 L165 185 L165 220" stroke="rgba(245,158,11,0.22)" stroke-width="1.5" fill="none"/>
+                <line x1="220" y1="150" x2="130" y2="150" stroke="rgba(245,158,11,0.12)" stroke-width="1"/>
+                <line x1="130" y1="150" x2="130" y2="90"  stroke="rgba(245,158,11,0.12)" stroke-width="1"/>
+                <line x1="130" y1="90"  x2="70"  y2="90"  stroke="rgba(245,158,11,0.08)" stroke-width="1"/>
+                <line x1="220" y1="110" x2="170" y2="110" stroke="rgba(245,158,11,0.08)" stroke-width="1"/>
+                <line x1="170" y1="110" x2="170" y2="150" stroke="rgba(245,158,11,0.08)" stroke-width="1"/>
+                <circle cx="165" cy="185" r="3"   fill="rgba(245,158,11,0.35)"/>
+                <circle cx="130" cy="150" r="2.5" fill="rgba(245,158,11,0.25)"/>
+                <circle cx="170" cy="110" r="2"   fill="rgba(245,158,11,0.2)"/>
+                <circle cx="130" cy="90"  r="2.5" fill="rgba(245,158,11,0.2)"/>
+                <circle cx="70"  cy="90"  r="2"   fill="rgba(245,158,11,0.15)"/>
+            </svg>
+        </div>
 
         <!-- Decorative background word -->
         <div class="contact-bg-word" aria-hidden="true">CONTACT</div>
@@ -1225,22 +1409,71 @@
     </section>
 
     <!-- ===== CINEMATIC FOOTER ===== -->
-    <footer class="cinematic-footer">
-        <div class="footer-noise"></div>
-        <div class="footer-content reveal-up">
-            <h2 class="footer-title" data-aos="fade-up">LET'S CREATE<br><span style="color:var(--yellow)">TOGETHER.</span></h2>
-            <span class="footer-brand-tagline" data-aos="fade-up" data-aos-delay="100">Weddings &nbsp;·&nbsp; Portraits &nbsp;·&nbsp; Films &nbsp;·&nbsp; Corporate</span>
-            <div class="footer-links">
-                <a href="#contact" class="start-project-btn footer-btn">Book a Session</a>
-                <div class="social-links">
-                    <a href="https://instagram.com/sudipmondal" target="_blank" rel="noopener noreferrer">Instagram</a>
-                    <a href="https://wa.me/917044692706" target="_blank" rel="noopener noreferrer">WhatsApp</a>
-                    <a href="https://linktr.ee/sudip-portfolio" target="_blank" rel="noopener noreferrer">All Links</a>
+    <footer class="cinematic-footer sm-footer">
+        <div class="footer-content">
+
+            <!-- TIER 1 — emotional CTA band -->
+            <div class="sm-foot-cta">
+                <p class="sm-foot-eyebrow">Capturing moments that last forever.</p>
+                <h2 class="footer-title">LET'S CREATE<br><span style="color:var(--yellow)">TOGETHER.</span></h2>
+                <div class="sm-foot-reach">
+                    <a href="mailto:sudipxv@gmail.com" class="sm-foot-email">
+                        <span class="sm-foot-email-label">Email Me</span>
+                        sudipxv@gmail.com
+                    </a>
+                    <a href="#contact" class="footer-btn sm-foot-book">Book a Session</a>
                 </div>
             </div>
+
+            <!-- TIER 2 — navigation columns -->
+            <div class="sm-foot-grid">
+                <div class="sm-foot-brand">
+                    <a href="#hero" class="sm-foot-logo">SUDIP<span style="color:var(--yellow)">.</span></a>
+                    <p class="sm-foot-blurb">Cinematic photographer &amp; filmmaker based in Kolkata, crafting wedding films, portraits and brand stories across India.</p>
+                    <div class="sm-foot-socials">
+                        <a href="https://www.instagram.com/bunnyxdneo" target="_blank" rel="noopener noreferrer" class="sm-foot-social" aria-label="Instagram">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                        </a>
+                        <a href="https://www.youtube.com/@bunnyxdneo" target="_blank" rel="noopener noreferrer" class="sm-foot-social" aria-label="YouTube">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.4a2.78 2.78 0 0 0 1.95-1.97A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/></svg>
+                        </a>
+                        <a href="https://wa.me/917044692706" target="_blank" rel="noopener noreferrer" class="sm-foot-social" aria-label="WhatsApp">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <nav class="sm-foot-col" aria-label="Quick links">
+                    <h3 class="sm-foot-col-title">Quick Links</h3>
+                    <a href="#hero">Home</a>
+                    <a href="#photography">Work</a>
+                    <a href="#about">About</a>
+                    <a href="#services">Services</a>
+                    <a href="#contact">Contact</a>
+                </nav>
+
+                <nav class="sm-foot-col" aria-label="Services">
+                    <h3 class="sm-foot-col-title">Services</h3>
+                    <a href="#services">Wedding Photography</a>
+                    <a href="#services">Portrait Sessions</a>
+                    <a href="#videography">Cinematic Films</a>
+                    <a href="#services">Corporate &amp; Events</a>
+                    <a href="#services">Post-Production</a>
+                </nav>
+
+                <nav class="sm-foot-col" aria-label="Social">
+                    <h3 class="sm-foot-col-title">Social</h3>
+                    <a href="https://www.instagram.com/bunnyxdneo" target="_blank" rel="noopener noreferrer">Instagram</a>
+                    <a href="https://www.youtube.com/@bunnyxdneo" target="_blank" rel="noopener noreferrer">YouTube / Reels</a>
+                    <a href="https://wa.me/917044692706" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+                    <a href="https://linktr.ee/sudip-portfolio" target="_blank" rel="noopener noreferrer">All Links</a>
+                </nav>
+            </div>
+
+            <!-- TIER 3 — legal -->
             <div class="footer-bottom">
-                <p>&copy; 2026 SUDIP MONDAL. ALL RIGHTS RESERVED.</p>
-                <p style="opacity:0.5;">Based in Kolkata &mdash; Available across India</p>
+                <p>&copy; 2026 Sudip Mondal. All rights reserved.</p>
+                <p style="opacity:0.55;">Based in Kolkata &mdash; Available across India</p>
             </div>
         </div>
     </footer>
@@ -1254,6 +1487,7 @@
     <script src="js/redesign-2026.js" defer></script>
     <script src="js/twenty-first.js" defer></script>
     <script src="js/sm-2026.js" defer></script>
+    <script src="js/scroll-card.js" defer></script>
     <script>
       document.addEventListener('DOMContentLoaded', function () {
         AOS.init({

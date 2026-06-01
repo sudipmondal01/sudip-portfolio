@@ -1,11 +1,11 @@
-/* ============================================================
-   SM-2026 — Clean enhancement layer
+﻿/* ============================================================
+   SM-2026 â€” Clean enhancement layer
    Loaded LAST so it wins the cascade without !important.
    Contains: video lightbox, reel posters, unified heading
    accent, IntersectionObserver reveal states.
    ============================================================ */
 
-/* ── VIDEO LIGHTBOX ─────────────────────────────────────────── */
+/* â”€â”€ VIDEO LIGHTBOX â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .sm-lightbox {
   position: fixed;
   inset: 0;
@@ -73,7 +73,7 @@
   .sm-lightbox__close { top: -52px; right: 0; }
 }
 
-/* ── REEL POSTER (click-to-play trigger) ───────────────────── */
+/* â”€â”€ REEL POSTER (click-to-play trigger) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .sm-reel {
   display: block;
   position: relative;
@@ -146,7 +146,7 @@
   color: #fff;
 }
 
-/* ── UNIFIED HEADING ACCENT — thin underline, not fill ─────── */
+/* â”€â”€ UNIFIED HEADING ACCENT â€” thin underline, not fill â”€â”€â”€â”€â”€â”€â”€ */
 /* One treatment sitewide. Overrides legacy inline fill blocks
    (those inline styles are stripped from the HTML separately). */
 .editorial-title {
@@ -174,7 +174,7 @@
   border-radius: 2px;
 }
 
-/* ── INTERSECTION-OBSERVER REVEALS (replaces AOS) ──────────── */
+/* â”€â”€ INTERSECTION-OBSERVER REVEALS (replaces AOS) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 [data-reveal] {
   opacity: 0;
   transform: translateY(24px);
@@ -187,7 +187,3055 @@
   transform: none;
 }
 
+/* ===== HERO OVERLAY FIXES ===== */
+.hero-content {
+  gap: clamp(28px, 4vw, 48px);
+  align-items: flex-start;
+}
+
+.hero-text-area {
+  position: relative;
+  z-index: 5;
+  padding-top: clamp(48px, 7vw, 96px);
+  max-width: 100%;
+  /* Reserve room above .hero-bottom-info (position:absolute; bottom:40px;
+     height ~50px). Without this, on 768â€“900px-tall viewports the stats
+     grid-center into the same vertical band as the scroll indicator. */
+  padding-bottom: 96px !important;
+}
+
+.pill-label {
+  margin-left: 0 !important;
+  margin-bottom: 22px !important;
+}
+
+.hero-stats,
+.hero-stats.stats-row {
+  position: relative !important;
+  bottom: auto !important;
+  left: auto !important;
+  width: 100% !important;
+  margin-top: 32px !important;
+  /* Explicit display so gap + justify-content always apply regardless of cascade */
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  flex-wrap: wrap !important;
+  gap: 28px !important;
+}
+
+.hero-stat {
+  /* Ensures the number is always stacked above its label, never side-by-side */
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 5px !important;
+  align-items: flex-start !important;
+  min-width: 80px;
+}
+
+.hero-portrait-area {
+  z-index: 2;
+}
+
+.hero-portrait-img {
+  z-index: 3;
+}
+
+@media (max-width: 1100px) {
+  .hero-content {
+    grid-template-columns: 1fr !important;
+  }
+  .hero-text-area {
+    padding-top: 38px !important;
+  }
+  .hero-stats {
+    justify-content: center !important;
+  }
+}
+
+@media (max-width: 768px) {
+  /* On mobile the hero-bottom-info is hidden â€” no bottom clearance needed */
+  .hero-text-area {
+    padding-bottom: 0 !important;
+  }
+
+  /* Stack stats vertically so they stay readable at narrow widths */
+  .hero-stats,
+  .hero-stats.stats-row {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 14px !important;
+    margin-top: 24px !important;
+  }
+
+  /* Dividers are meaningless in a vertical stack */
+  .stat-divider {
+    display: none !important;
+  }
+}
+
+/* â”€â”€ THEME: re-anchor legacy CSS variables â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+   style.css re-declares --bg-color / --yellow / --dark in its own
+   :root block, which loads after colors_and_type.css and would
+   override the new shadcn values. sm-2026.css loads last so this
+   block wins the cascade and keeps everything on the new palette.
+   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+:root {
+  --bg-color:     var(--secondary);           /* #f3f4f6 */
+  --yellow:       var(--primary);             /* #f59e0b */
+  --dark:         var(--foreground);          /* #262626 */
+  --text-main:    var(--secondary-foreground);/* #4b5563 */
+  --border-color: var(--border);              /* #e5e7eb */
+}
+
+/* Global surface: replace hardcoded #e5e5e5 page bg with new --background */
+html,
+body {
+  background-color: var(--background) !important; /* #ffffff */
+}
+
+/* Hero section: replace hardcoded #f0f0f0 with new secondary surface */
+.cinematic-hero,
+.hero {
+  background: var(--secondary) !important;   /* #f3f4f6 */
+}
+
+/* Photography section bg that was #e5e5e5 */
+.photography,
+.videography,
+.about,
+.services,
+.testimonials {
+  background-color: var(--background) !important;
+}
+
+/* Alternate section tint â€” subtle warm white */
+.photography:nth-of-type(even),
+section.wow-section {
+  background-color: var(--muted) !important; /* #f9fafb */
+}
+
+/* â”€â”€ HEADER / HERO CLEARANCE (desktop only) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+   .cinematic-header is position:fixed; top:0 â€” height ~88px
+   (30px padding-top + ~28px nav line-height + 30px padding-bottom).
+   style.css:3582 sets padding-top:0 !important on .cinematic-hero,
+   so the hero grid starts at y=0, hiding content behind the header.
+   Fix: use border-box sizing so the section stays exactly 100vh,
+   with 90px carved out for the header.
+   Mobile already has padding-top:100px from style.css:3627.
+   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+@media (min-width: 769px) {
+  .cinematic-hero {
+    box-sizing: border-box !important;
+    padding-top: 90px !important;
+  }
+
+  /* Keep portrait filling the remaining viewport height */
+  .hero-portrait-area {
+    height: calc(100vh - 90px) !important;
+  }
+
+  .hero-portrait-img {
+    height: 100% !important;
+  }
+}
+
+/* â”€â”€ NAVBAR: reinforce horizontal flex layout â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+   Defensive rule â€” ensures logo / links / CTA stay in one row
+   regardless of cascade order from other files.
+   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.cinematic-header .nav-container {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+
+/* â”€â”€ MARQUEE: seamless infinite loop â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+   Why gap:0 on track is intentional:
+     translateX(-50%) must land at exactly the start of the
+     duplicate set. With N items and flex gap G, the track total
+     is N*W + (N-1)*G, so -50% = (N*W + (N-1)*G)/2. But the first
+     half spans N/2 items + (N/2-1) gaps â€” a half-gap short. Any
+     non-zero G creates a visible jump. Solution: gap:0 on the
+     track; item padding acts as the trailing space after every
+     item (including the last of each half), so -50% is always
+     exactly one set's worth. 40px horizontal padding = visually
+     identical to gap:80px between text centres.
+   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+
+/* Outer: must be overflow:hidden to clip the scrolling track */
+.tf-marquee-outer {
+  overflow: hidden !important;
+  width: 100% !important;
+}
+
+/* Track: flat flex row, no wrap, no gap, animated */
+.tf-marquee-track {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  gap: 0 !important;
+  width: max-content !important;
+  flex-shrink: 0 !important;
+  animation: tf-marquee-loop 22s linear infinite !important;
+  will-change: transform;
+}
+
+/* Pause when hovering anywhere on the strip (outer hover is more
+   forgiving than track-only hover from twenty-first.css) */
+.tf-marquee-outer:hover .tf-marquee-track {
+  animation-play-state: paused !important;
+}
+
+@keyframes tf-marquee-loop {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Items: must not shrink, must not wrap, padding provides spacing */
+.tf-marquee-item {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  flex-shrink: 0 !important;
+  min-width: max-content !important;
+  white-space: nowrap !important;
+  overflow: visible !important;
+  padding: 10px 40px !important;
+  border-right: 1px solid rgba(51, 51, 51, 0.12) !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+  color: #333333 !important;
+  opacity: 0.85 !important;
+  transition: opacity 0.2s !important;
+}
+.tf-marquee-item:hover {
+  opacity: 1 !important;
+}
+.tf-marquee-dot {
+  width: 4px !important;
+  height: 4px !important;
+  border-radius: 50% !important;
+  background: #F5A623 !important;
+  flex-shrink: 0 !important;
+}
+
+/* â”€â”€ WEDDING SECTION: column alignment + dead-space fix â”€â”€â”€â”€â”€â”€â”€â”€â”€
+   Root cause:
+     â€¢ .overlap-horizontal (250px tall absolute-photo fan) was first
+       child of .middle-left, so the "Wedding Photography" overline
+       appeared 250px below the right column's overline â€” the tops
+       never aligned.
+     â€¢ h2.mt-40 added another 40px gap.
+     â€¢ grid-template-columns:5fr 7fr gave the left column less width.
+   Fix:
+     â€¢ HTML: overlap-horizontal moved after the heading (index.html)
+     â€¢ CSS: equal 1fr 1fr columns, align-items:start, tighter stack
+   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+
+/* Equal-width columns, both starting at the same top baseline */
+.block-middle {
+  grid-template-columns: 1fr 1fr !important;
+  align-items: start !important;
+  gap: 40px !important;
+}
+
+/* No extra top margin needed now that the stack is below the heading */
+.middle-left .mt-40,
+#brides-tale-section .mt-40 {
+  margin-top: 0 !important;
+}
+
+/* Both photo rows in the left column get consistent gap */
+.middle-left .row-3-images {
+  margin-top: 20px !important;
+}
+
+/* â”€â”€ PHOTO FILTER BAR: horizontally centered â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+   redesign-2026.css uses align-items only â€” no justify-content,
+   so buttons were left-aligned. Center them and widen the gap.
+   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.photo-filter-bar {
+  justify-content: center !important;
+  gap: 12px !important;
+}
+
+/* â”€â”€ LOVE IN MOTION: 3D container scroll animation â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+   Mirrors the Aceternity ContainerScroll component in vanilla CSS/JS.
+   JS (scroll-card.js) drives rotateX from 16â†’0deg as the block
+   enters the viewport. perspective MUST live on the PARENT of the
+   transformed element â€” that's .lim-perspective-wrap.
+   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.lim-perspective-wrap {
+  perspective: 1400px;
+  perspective-origin: 50% -10%;  /* slightly above centre for dramatic depth */
+}
+
+.lim-scroll-card {
+  transform-origin: center top;
+  transform: rotateX(16deg) scale(0.96);
+  will-change: transform;
+  /* No CSS transition here â€” JS drives every frame via RAF for butter-smooth
+     tracking. A CSS transition would fight the JS updates and cause lag. */
+}
+
+/* Respect OS reduced-motion: skip the effect entirely */
+@media (prefers-reduced-motion: reduce) {
+  .lim-scroll-card {
+    transform: none !important;
+  }
+}
+
+/* Shallower tilt on mobile â€” the portrait-area stacks, so a large
+   rotateX looks unnatural */
+@media (max-width: 768px) {
+  .lim-perspective-wrap  { perspective: 800px; }
+  .lim-scroll-card       { transform: rotateX(10deg) scale(0.97); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   [data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }
   .sm-lightbox, .sm-lightbox__frame { transition: none !important; }
+}
+
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   ART OF HOSPITALITY â€” Fan Gallery Carousel
+   Reference: "My Visual Diary" fan-card layout with filter pills.
+   Uses absolute-positioned cards within a fixed-height container;
+   JS (sm-2026.js) drives data-pos="0..4" on each card.
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+
+.hosp-fan-section {
+  padding: 0 80px 80px;
+}
+
+/* â”€â”€ Centred text header â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.hosp-fan-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.hosp-fan-overline {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  margin: 0 0 14px;
+}
+
+.hosp-fan-title {
+  display: block !important;
+  text-align: center;
+  border-left: none !important;
+  padding-left: 0 !important;
+  margin-bottom: 18px !important;
+}
+
+.hosp-fan-desc {
+  max-width: 540px;
+  margin: 0 auto;
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.72;
+  color: var(--color-text-body);
+}
+
+/* â”€â”€ Fan carousel wrap â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.hosp-fan-wrap {
+  position: relative;
+  height: 460px;
+  overflow: hidden;
+}
+
+.hosp-fan {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* â”€â”€ Individual cards â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.hosp-card {
+  position: absolute;
+  width: 280px;
+  border-radius: 18px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.18);
+  transition:
+    transform 0.62s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity   0.45s ease,
+    filter    0.45s ease;
+  will-change: transform;
+}
+
+.hosp-card img {
+  width: 100%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* 5 visual positions driven by data-pos attribute set in JS */
+.hosp-card[data-pos="0"] {
+  transform: translateX(-430px) scale(0.65);
+  z-index: 1;
+  opacity: 0.55;
+  filter: brightness(0.65);
+}
+.hosp-card[data-pos="1"] {
+  transform: translateX(-220px) scale(0.82);
+  z-index: 2;
+  opacity: 0.82;
+  filter: brightness(0.82);
+}
+.hosp-card[data-pos="2"] {         /* centre â€” featured */
+  transform: translateX(0) scale(1);
+  z-index: 5;
+  opacity: 1;
+  filter: brightness(1);
+}
+.hosp-card[data-pos="3"] {
+  transform: translateX(220px) scale(0.82);
+  z-index: 2;
+  opacity: 0.82;
+  filter: brightness(0.82);
+}
+.hosp-card[data-pos="4"] {
+  transform: translateX(430px) scale(0.65);
+  z-index: 1;
+  opacity: 0.55;
+  filter: brightness(0.65);
+}
+
+/* Click on a side card â€” subtle scale feedback */
+.hosp-card:not([data-pos="2"]):hover {
+  filter: brightness(0.95);
+}
+
+/* â”€â”€ Edge gradient fades â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.hosp-fade {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 160px;
+  pointer-events: none;
+  z-index: 10;
+}
+.hosp-fade--l {
+  left: 0;
+  background: linear-gradient(to right, var(--background) 0%, transparent 100%);
+}
+.hosp-fade--r {
+  right: 0;
+  background: linear-gradient(to left, var(--background) 0%, transparent 100%);
+}
+
+/* â”€â”€ Prev / Next navigation â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.hosp-nav {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 36px;
+}
+
+.hosp-nav-btn {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(0, 0, 0, 0.18);
+  background: var(--background);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--dark);
+  transition: background 0.22s ease, color 0.22s ease,
+              border-color 0.22s ease, transform 0.18s ease;
+}
+.hosp-nav-btn:hover {
+  background: var(--dark);
+  color: var(--background);
+  border-color: var(--dark);
+  transform: scale(1.08);
+}
+.hosp-nav-btn:active {
+  transform: scale(0.94);
+  transition-duration: 0.08s;
+}
+
+/* â”€â”€ Responsive â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+@media (max-width: 1024px) {
+  .hosp-fan-section { padding: 0 40px 64px; }
+}
+
+@media (max-width: 768px) {
+  .hosp-fan-section { padding: 0 20px 56px; }
+
+  .hosp-fan-wrap { height: 320px; }
+
+  .hosp-card { width: 180px; }
+  .hosp-card[data-pos="0"] { transform: translateX(-275px) scale(0.65); }
+  .hosp-card[data-pos="1"] { transform: translateX(-142px) scale(0.82); }
+  .hosp-card[data-pos="2"] { transform: translateX(0)      scale(1); }
+  .hosp-card[data-pos="3"] { transform: translateX(142px)  scale(0.82); }
+  .hosp-card[data-pos="4"] { transform: translateX(275px)  scale(0.65); }
+
+  .hosp-pills {
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    scrollbar-width: none;
+  }
+  .hosp-pills::-webkit-scrollbar { display: none; }
+
+  .hosp-fade { width: 60px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hosp-card { transition: none !important; }
+}
+
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   HEADER â€” premium sticky nav  (2026 cleanup)
+   ----------------------------------------------------------------
+   Goal: transparent over the hero, then a clean glassy "solid" bar
+   once scrolled. This file loads LAST, so plain selectors here beat
+   the non-!important rules in style.css. Colours use design tokens
+   (color-mix keeps the bar correct in dark mode too).
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+
+/* Smooth ALL the chrome that changes on scroll (incl. border + shadow) */
+.cinematic-header {
+  transition:
+    transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1),
+    padding 0.4s ease,
+    background 0.4s ease,
+    backdrop-filter 0.4s ease,
+    border-color 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+/* Solid, glassy bar after scroll â€” translucent token background */
+.cinematic-header.scrolled {
+  background: color-mix(in srgb, var(--background) 86%, transparent);
+  backdrop-filter: blur(18px) saturate(1.4);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  border-bottom: 1px solid var(--color-border-light);
+  box-shadow: 0 10px 30px -16px rgba(0, 0, 0, 0.25);
+}
+
+/* Desktop CTA â€” premium dark pill, gold on hover (stands out top-right) */
+.cinematic-header .nav-cta {
+  background: var(--dark);
+  color: var(--background);
+  border-radius: 100px;
+  padding: 12px 26px;
+  letter-spacing: 0.12em;
+}
+.cinematic-header .nav-cta:hover {
+  background: var(--yellow);
+  color: var(--dark);
+}
+
+/* CTA that only appears inside the mobile overlay */
+.nav-cta-mobile { display: none; }
+
+/* â”€â”€ MOBILE: full-screen cinematic overlay menu (â‰¤768px) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+   Three earlier files (style.css, mobile-layout-fixes, mobile-
+   ultimate-overrides) each define .nav-links differently, leaving a
+   half-broken top dropdown. We reset it here to one clean full-bleed
+   overlay with a fade + slide. Loaded last â†’ these win.
+   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+@media (max-width: 768px) {
+  .cinematic-header .nav-links {
+    position: fixed !important;
+    inset: 0 !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    height: 100dvh !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 100px 32px 48px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 22px !important;
+    background: color-mix(in srgb, var(--background) 95%, transparent) !important;
+    backdrop-filter: blur(26px) saturate(1.5) !important;
+    -webkit-backdrop-filter: blur(26px) saturate(1.5) !important;
+    border: none !important;
+    box-shadow: none !important;
+    transform: translateX(100%) !important;
+    opacity: 0 !important;
+    overflow-y: auto !important;
+    transition:
+      transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 0.4s ease !important;
+    z-index: 50 !important;          /* below logo + toggle (set to 60 below) */
+  }
+
+  .cinematic-header .nav-links.active {
+    transform: translateX(0) !important;
+    opacity: 1 !important;
+  }
+
+  /* Keep brand + close button tappable ABOVE the overlay */
+  .cinematic-header .nav-logo,
+  .cinematic-header .mobile-toggle {
+    position: relative;
+    z-index: 60 !important;
+  }
+
+  /* Overlay links â€” large, editorial, borderless */
+  .cinematic-header .nav-links .nav-link {
+    display: block !important;
+    border: none !important;
+    padding: 6px 0 !important;
+    font-family: 'Playfair Display', serif !important;
+    font-size: 30px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.01em !important;
+    text-transform: none !important;
+    color: var(--dark) !important;
+  }
+  .cinematic-header .nav-links .nav-link::after { bottom: -2px !important; }
+
+  /* Prominent CTA at the foot of the overlay */
+  .cinematic-header .nav-cta-mobile {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    margin-top: 16px !important;
+    padding: 16px 42px !important;
+    background: var(--yellow) !important;
+    color: var(--dark) !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.16em !important;
+    text-decoration: none !important;
+    border-radius: 100px !important;
+    box-shadow: 0 12px 34px -10px var(--color-accent-shadow) !important;
+    transition: transform 0.2s ease !important;
+  }
+  .cinematic-header .nav-cta-mobile:active { transform: scale(0.97) !important; }
+}
+
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   FOOTER â€” cinematic, multi-column  (Quick Links / Services / Social)
+   ----------------------------------------------------------------
+   Footer background is a fixed dark (#111) regardless of theme, so
+   white/translucent-white text here is intentional and matches the
+   existing footer code; the gold accent uses var(--yellow).
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+
+/* TIER 1 â€” emotional CTA band */
+.sm-foot-cta { margin-bottom: 60px; }
+
+.sm-foot-eyebrow {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-style: italic;
+  font-size: clamp(15px, 2.2vw, 21px);
+  line-height: 1.4;
+  color: var(--yellow);
+  margin: 0 0 18px;
+}
+
+/* Big headline reuses .footer-title; just trim the inherited margin */
+.sm-footer .footer-title { margin: 0 0 8px !important; }
+
+.sm-foot-reach {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  margin-top: 24px;
+}
+
+.sm-foot-email {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 6px;
+  text-decoration: none;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(22px, 4vw, 40px);
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  color: #fff;
+  transition: color 0.25s ease;
+}
+.sm-foot-email-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+}
+.sm-foot-email:hover { color: var(--yellow); }
+
+/* TIER 2 â€” columns */
+.sm-foot-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr 1fr;
+  gap: 48px;
+  padding: 56px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.sm-foot-logo {
+  display: inline-block;
+  margin-bottom: 18px;
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #fff;
+  text-decoration: none;
+}
+.sm-foot-blurb {
+  max-width: 340px;
+  margin: 0 0 26px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.sm-foot-socials { display: flex; gap: 12px; }
+.sm-foot-social {
+  width: 42px;
+  height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 50%;
+  color: rgba(255, 255, 255, 0.7);
+  transition: color 0.25s ease, background 0.25s ease,
+              border-color 0.25s ease, transform 0.25s ease;
+}
+.sm-foot-social svg { width: 18px; height: 18px; }
+.sm-foot-social:hover {
+  color: var(--dark);
+  background: var(--yellow);
+  border-color: var(--yellow);
+  transform: translateY(-3px);
+}
+
+.sm-foot-col { display: flex; flex-direction: column; }
+.sm-foot-col-title {
+  margin: 0 0 20px;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+}
+.sm-foot-col a {
+  position: relative;
+  width: fit-content;
+  padding: 7px 0;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: color 0.22s ease, padding-left 0.22s ease;
+}
+.sm-foot-col a::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 0;
+  height: 1px;
+  background: var(--yellow);
+  transform: translateY(-50%);
+  transition: width 0.22s ease;
+}
+.sm-foot-col a:hover { color: #fff; padding-left: 18px; }
+.sm-foot-col a:hover::before { width: 12px; }
+
+/* TIER 3 â€” legal row (reuses .footer-bottom) */
+.sm-footer .footer-bottom {
+  margin: 0;
+  padding-top: 32px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+/* Explicit colour/size â€” the global `p {}` rule would otherwise tint
+   these gray (near-invisible on the dark footer) and force 16px. */
+.sm-footer .footer-bottom p {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* â”€â”€ Footer responsive â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+@media (max-width: 768px) {
+  .cinematic-footer { padding: 64px 24px 48px !important; }
+
+  .sm-foot-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 36px 24px;
+    padding: 44px 0;
+  }
+  .sm-foot-brand { grid-column: 1 / -1; }
+
+  .sm-foot-reach { flex-direction: column; align-items: flex-start; gap: 22px; }
+  .sm-foot-book  { width: 100%; justify-content: center; }
+
+  .sm-footer .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 12px;
+    text-align: left !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .sm-foot-grid { grid-template-columns: 1fr; }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   COLOR GRADING — Before/After Comparison Slider
+   Reference: cinematic dark section with draggable divider.
+   Left side = RAW (desaturated via CSS filter).
+   Right side = GRADED (warm, enhanced via CSS filter).
+   JS (sm-2026.js) drives the clip-path and handle position.
+   ════════════════════════════════════════════════════════════════ */
+
+.cg-section {
+  background: #0d0d0d;
+  padding: 72px 80px 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── Big title ───────────────────────────────────────────────── */
+.cg-title-wrap {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.cg-overline {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--yellow);
+  margin: 0 0 16px;
+  display: block;
+}
+
+.cg-title {
+  font-family: var(--font-body);
+  font-size: clamp(28px, 4.8vw, 68px);
+  font-weight: 800;
+  line-height: 1.06;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+  color: #e8e8e8;
+  margin: 0;
+}
+
+.cg-title span { color: var(--yellow); }
+
+/* ── Slider container ────────────────────────────────────────── */
+.cg-slider {
+  position: relative;
+  overflow: hidden;
+  border-radius: 14px;
+  aspect-ratio: 16/9;
+  cursor: col-resize;
+  user-select: none;
+  touch-action: pan-y;
+  max-width: 1200px;
+  margin: 0 auto 56px;
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.65);
+}
+
+/* ── Both sides share full-cover positioning ─────────────────── */
+.cg-side {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.cg-side img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* RAW: subtle muted look — slightly flat, not over-processed */
+.cg-raw img {
+  filter: grayscale(0.25) contrast(0.88) brightness(0.9) saturate(0.6);
+}
+
+/* GRADED: real photo, zero filter — exactly as shot */
+.cg-graded {
+  clip-path: inset(0 0 0 50%);  /* show right half initially */
+}
+.cg-graded img {
+  filter: none;
+}
+
+/* ── Corner labels ───────────────────────────────────────────── */
+.cg-corner-tag {
+  position: absolute;
+  top: 16px;
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  background: rgba(0, 0, 0, 0.52);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 4px;
+  pointer-events: none;
+}
+.cg-tl { left: 16px; }
+.cg-tr { right: 16px; }
+
+/* ── Bottom captions ─────────────────────────────────────────── */
+.cg-caption {
+  position: absolute;
+  bottom: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  pointer-events: none;
+}
+.cg-caption--l { left: 18px; }
+.cg-caption--r { right: 18px; align-items: flex-end; }
+
+.cg-cap-title {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #fff;
+}
+.cg-cap-meta {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 0.06em;
+}
+
+/* ── Drag handle ─────────────────────────────────────────────── */
+.cg-handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.cg-handle-line {
+  position: absolute;
+  inset: 0;
+  width: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.cg-handle-btn {
+  position: relative;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #fff;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #111;
+  cursor: col-resize;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+  pointer-events: all;
+  flex-shrink: 0;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.cg-handle-btn:hover {
+  transform: scale(1.12);
+  box-shadow: 0 6px 32px rgba(0, 0, 0, 0.6);
+}
+
+/* ── Signature Look ──────────────────────────────────────────── */
+.cg-signature {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 60px;
+  align-items: start;
+}
+
+.cg-sig-eyebrow {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--yellow);
+  margin: 0 0 10px;
+}
+
+.cg-sig-heading {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 3.5vw, 44px);
+  font-weight: 800;
+  line-height: 1.05;
+  text-transform: uppercase;
+  color: #e8e8e8;
+  margin: 0 0 20px;
+  letter-spacing: -0.5px;
+}
+
+.cg-sig-body {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.72;
+  color: rgba(255, 255, 255, 0.5);
+  max-width: 320px;
+  margin: 0;
+}
+
+.cg-sig-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.cg-sig-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 12px;
+  padding: 28px 24px;
+}
+
+.cg-sig-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--yellow);
+  margin-bottom: 16px;
+}
+
+.cg-sig-card h4 {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  color: #e8e8e8;
+  margin: 0 0 10px;
+  letter-spacing: 0;
+}
+
+.cg-sig-card p {
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.68;
+  color: rgba(255, 255, 255, 0.45);
+  margin: 0;
+}
+
+/* ── Responsive ──────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .cg-section { padding: 56px 40px 64px; }
+}
+
+@media (max-width: 768px) {
+  .cg-section { padding: 48px 20px 56px; }
+  .cg-slider   { aspect-ratio: 4/3; }
+  .cg-signature { grid-template-columns: 1fr; gap: 32px; }
+  .cg-sig-cards { grid-template-columns: 1fr; gap: 16px; }
+  .cg-sig-body  { max-width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cg-handle-btn { transition: none; }
+}
+
+
+/* ════════════════════════════════════════════════════════════════
+   CONTACT SECTION — Dark Cinematic Theme
+   Reference: dark panel, ambient glow, circuit-board corners,
+   dark contact cards, dark form panel, white Submit button.
+   Scoped under .contact--dark so it only affects this section.
+   ════════════════════════════════════════════════════════════════ */
+
+.contact--dark {
+  background: #070d0a !important;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── Ambient glow ────────────────────────────────────────────── */
+.contact-glow {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+  height: 480px;
+  background: radial-gradient(ellipse at center,
+    rgba(18, 72, 38, 0.45) 0%,
+    rgba(10, 40, 20, 0.2)  40%,
+    transparent            70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Circuit-board corners ───────────────────────────────────── */
+.contact-circuit {
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+}
+.contact-circuit--tl { top: 0;    left: 0; }
+.contact-circuit--br { bottom: 0; right: 0; }
+
+/* ── Background "CONTACT" word ───────────────────────────────── */
+.contact--dark .contact-bg-word {
+  color: transparent !important;
+  -webkit-text-stroke: 1px rgba(255,255,255,0.045) !important;
+  opacity: 1 !important;
+  z-index: 1;
+}
+
+/* ── All content above decorations ──────────────────────────── */
+.contact--dark .contact-container {
+  position: relative;
+  z-index: 2;
+}
+
+/* ── Badge ───────────────────────────────────────────────────── */
+.contact--dark .contact-badge {
+  background: rgba(255,255,255,0.07) !important;
+  border: 1px solid rgba(255,255,255,0.14) !important;
+  color: #d0d0d0 !important;
+  border-radius: 100px !important;
+}
+.contact--dark .contact-badge-dot {
+  background: var(--yellow) !important;
+  box-shadow: 0 0 6px var(--yellow) !important;
+}
+
+/* ── Heading & sub-text ──────────────────────────────────────── */
+.contact--dark .contact-heading {
+  color: #f0ede8 !important;
+}
+.contact--dark .contact-sub {
+  color: rgba(255,255,255,0.48) !important;
+}
+
+/* ── Contact cards ───────────────────────────────────────────── */
+.contact--dark .contact-cards {
+  gap: 12px !important;
+}
+.contact--dark .contact-card {
+  background: rgba(255,255,255,0.045) !important;
+  border: 1px solid rgba(255,255,255,0.09) !important;
+  border-radius: 14px !important;
+  transition: background 0.22s ease, border-color 0.22s ease !important;
+}
+.contact--dark .contact-card:hover {
+  background: rgba(255,255,255,0.08) !important;
+  border-color: rgba(245,158,11,0.35) !important;
+}
+.contact--dark .contact-card-icon {
+  background: rgba(255,255,255,0.07) !important;
+  border-radius: 10px !important;
+  color: var(--yellow) !important;
+  border: 1px solid rgba(245,158,11,0.18) !important;
+}
+.contact--dark .contact-card-label {
+  color: rgba(255,255,255,0.42) !important;
+}
+.contact--dark .contact-card-value {
+  color: #edece8 !important;
+}
+.contact--dark .contact-card-arrow {
+  color: rgba(255,255,255,0.3) !important;
+}
+.contact--dark .contact-card:hover .contact-card-arrow {
+  color: var(--yellow) !important;
+}
+
+/* ── Form right panel ────────────────────────────────────────── */
+.contact--dark .contact-right {
+  background: rgba(255,255,255,0.04) !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+  border-radius: 18px !important;
+  padding: 36px !important;
+}
+
+/* ── Form labels ─────────────────────────────────────────────── */
+.contact--dark .form-field-group label {
+  color: rgba(255,255,255,0.48) !important;
+  font-size: 11px !important;
+  letter-spacing: 0.05em !important;
+}
+.contact--dark .required-mark {
+  color: var(--yellow) !important;
+}
+
+/* ── Inputs, selects, textareas ──────────────────────────────── */
+.contact--dark .form-input {
+  background: rgba(255,255,255,0.055) !important;
+  border: 1px solid rgba(255,255,255,0.11) !important;
+  color: #f0ede8 !important;
+  border-radius: 10px !important;
+  caret-color: var(--yellow);
+}
+.contact--dark .form-input:focus {
+  outline: none !important;
+  background: rgba(255,255,255,0.08) !important;
+  border-color: rgba(245,158,11,0.5) !important;
+  box-shadow: 0 0 0 3px rgba(245,158,11,0.1) !important;
+}
+.contact--dark .form-input::placeholder {
+  color: rgba(255,255,255,0.28) !important;
+}
+.contact--dark .custom-select option {
+  background: #1a1f1c;
+  color: #f0ede8;
+}
+
+/* ── Form error messages ─────────────────────────────────────── */
+.contact--dark .form-field-error { color: #ff7070 !important; }
+
+/* ── Submit button — white ───────────────────────────────────── */
+.contact--dark .submit-btn {
+  background: #ffffff !important;
+  color: #111111 !important;
+  border: none !important;
+  border-radius: 10px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.04em !important;
+  transition: background 0.22s ease, color 0.22s ease, transform 0.15s ease !important;
+}
+.contact--dark .submit-btn:hover {
+  background: var(--yellow) !important;
+  color: #111 !important;
+  transform: translateY(-1px) !important;
+}
+.contact--dark .submit-btn:active {
+  transform: translateY(0) !important;
+}
+
+/* ── WhatsApp button ─────────────────────────────────────────── */
+.contact--dark .whatsapp-btn {
+  background: rgba(37,211,102,0.1) !important;
+  border: 1px solid rgba(37,211,102,0.28) !important;
+  color: #25d366 !important;
+  border-radius: 10px !important;
+}
+.contact--dark .whatsapp-btn:hover {
+  background: rgba(37,211,102,0.18) !important;
+}
+
+/* ── Availability notice ─────────────────────────────────────── */
+.contact--dark .contact-form > p {
+  color: rgba(255,255,255,0.28) !important;
+  opacity: 1 !important;
+}
+
+/* ── Success state ───────────────────────────────────────────── */
+.contact--dark .form-success {
+  background: rgba(255,255,255,0.04) !important;
+  border-radius: 12px !important;
+}
+.contact--dark .form-success-title { color: #f0ede8 !important; }
+.contact--dark .form-success-sub   { color: rgba(255,255,255,0.5) !important; }
+
+/* ── Mobile ──────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .contact--dark .contact-right {
+    padding: 24px !important;
+  }
+}
+
+
+/* ════════════════════════════════════════════════════════════════
+   MOMENTS THAT MATTER — Corporate Photography Fan Gallery
+   Reference: light header band + dark fan-card panel with
+   "OUR WORKS" background text, rotated cards, category pills.
+   ════════════════════════════════════════════════════════════════ */
+
+.corp-section {
+  margin-top: 80px;
+}
+
+/* ── Light header band ───────────────────────────────────────── */
+.corp-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: end;
+  padding: 0 80px 48px;
+}
+
+.corp-overline {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  margin: 0 0 14px;
+}
+
+.corp-title {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5vw, 72px);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -1px;
+  color: var(--dark);
+  margin: 0;
+}
+
+.corp-header-desc {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(15px, 1.6vw, 19px);
+  line-height: 1.65;
+  color: var(--color-text-body);
+  margin: 0;
+  padding-bottom: 8px;
+}
+
+/* ── Dark panel ──────────────────────────────────────────────── */
+.corp-dark-panel {
+  background: #0d0d0d;
+  border-radius: 18px 18px 0 0;
+  padding: 64px 0 56px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Giant background "OUR WORKS" text */
+.corp-bg-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-body);
+  font-size: clamp(80px, 14vw, 200px);
+  font-weight: 900;
+  letter-spacing: -4px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: rgba(255, 255, 255, 0.05);
+  pointer-events: none;
+  user-select: none;
+  margin: 0;
+  z-index: 0;
+}
+
+/* Top-left panel description */
+.corp-panel-desc {
+  position: relative;
+  z-index: 1;
+  max-width: 280px;
+  margin: 0 0 40px 64px;
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 13px;
+  line-height: 1.68;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+/* ── Fan carousel wrap ───────────────────────────────────────── */
+.corp-fan-wrap {
+  position: relative;
+  height: 520px;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.corp-fan {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Cards ───────────────────────────────────────────────────── */
+.corp-card {
+  position: absolute;
+  width: 260px;
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 28px 64px rgba(0, 0, 0, 0.5);
+  transition:
+    transform 0.65s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity   0.5s ease,
+    filter    0.5s ease;
+  will-change: transform;
+}
+
+.corp-card img {
+  width: 100%;
+  aspect-ratio: 2/3;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Dark gradient overlay on each card */
+.corp-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 40%,
+    rgba(0, 0, 0, 0.72) 100%
+  );
+  pointer-events: none;
+}
+
+/* Category pill — visible only on center card */
+.corp-card-tag {
+  display: none;
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 3;
+  padding: 5px 14px;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(6px);
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: #fff;
+}
+.corp-card[data-pos="2"] .corp-card-tag { display: block; }
+
+/* Card title overlay */
+.corp-card-info {
+  position: absolute;
+  bottom: 18px;
+  left: 16px;
+  right: 16px;
+  z-index: 3;
+}
+.corp-card-title {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* 5 fan positions — no rotation, matches reference */
+.corp-card[data-pos="0"] {
+  transform: translateX(-430px) scale(0.65);
+  z-index: 1;
+  opacity: 0.5;
+  filter: brightness(0.62);
+}
+.corp-card[data-pos="1"] {
+  transform: translateX(-218px) scale(0.82);
+  z-index: 2;
+  opacity: 0.8;
+  filter: brightness(0.82);
+}
+.corp-card[data-pos="2"] {
+  transform: translateX(0) scale(1);
+  z-index: 5;
+  opacity: 1;
+  filter: brightness(1);
+}
+.corp-card[data-pos="3"] {
+  transform: translateX(218px) scale(0.82);
+  z-index: 2;
+  opacity: 0.8;
+  filter: brightness(0.82);
+}
+.corp-card[data-pos="4"] {
+  transform: translateX(430px) scale(0.65);
+  z-index: 1;
+  opacity: 0.5;
+  filter: brightness(0.62);
+}
+
+/* Side card hover — subtle brightening */
+.corp-card:not([data-pos="2"]):hover {
+  filter: brightness(0.95) !important;
+  cursor: pointer;
+}
+
+/* ── Edge fades ──────────────────────────────────────────────── */
+.corp-fade {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 140px;
+  pointer-events: none;
+  z-index: 10;
+}
+.corp-fade--l {
+  left: 0;
+  background: linear-gradient(to right, #0d0d0d 0%, transparent 100%);
+}
+.corp-fade--r {
+  right: 0;
+  background: linear-gradient(to left, #0d0d0d 0%, transparent 100%);
+}
+
+/* ── Navigation ──────────────────────────────────────────────── */
+.corp-nav {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 40px;
+  position: relative;
+  z-index: 1;
+}
+
+.corp-nav-btn {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.22s ease, color 0.22s ease,
+              border-color 0.22s ease, transform 0.18s ease;
+}
+
+/* Prev: outlined */
+.corp-nav-btn--prev {
+  background: transparent;
+  border: 1.5px solid rgba(255,255,255,0.22);
+  color: rgba(255,255,255,0.7);
+}
+.corp-nav-btn--prev:hover {
+  border-color: rgba(255,255,255,0.5);
+  color: #fff;
+  transform: scale(1.08);
+}
+
+/* Next: filled white */
+.corp-nav-btn--next {
+  background: #fff;
+  border: 1.5px solid #fff;
+  color: #111;
+}
+.corp-nav-btn--next:hover {
+  background: var(--yellow);
+  border-color: var(--yellow);
+  color: #111;
+  transform: scale(1.08);
+}
+
+.corp-nav-btn:active { transform: scale(0.94); }
+
+/* ── Responsive ──────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .corp-header { padding: 0 40px 40px; }
+}
+
+@media (max-width: 768px) {
+  .corp-header {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 0 20px 32px;
+  }
+  .corp-dark-panel   { border-radius: 12px 12px 0 0; padding: 48px 0 44px; }
+  .corp-panel-desc   { margin-left: 20px; }
+  .corp-fan-wrap     { height: 360px; }
+  .corp-card         { width: 170px; }
+  .corp-card[data-pos="0"] { transform: translateX(-265px) scale(0.65); }
+  .corp-card[data-pos="1"] { transform: translateX(-138px) scale(0.82); }
+  .corp-card[data-pos="2"] { transform: translateX(0)      scale(1); }
+  .corp-card[data-pos="3"] { transform: translateX(138px)  scale(0.82); }
+  .corp-card[data-pos="4"] { transform: translateX(265px)  scale(0.65); }
+  .corp-fade { width: 60px; }
+  .corp-bg-text { font-size: clamp(60px, 18vw, 100px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .corp-card { transition: none !important; }
+}
+
+
+/* ════════════════════════════════════════════════════════════════
+   LIGHT. MOTION. STORY. — Bento Grid
+   Reference: 3-col × 3-row bento with dark info cards,
+   image cells, hero overlay, and CTA strip.
+   ════════════════════════════════════════════════════════════════ */
+
+.lms-section {
+  padding: 60px 60px 0;
+}
+
+/* ── Grid ────────────────────────────────────────────────────── */
+.lms-bento {
+  display: grid;
+  grid-template-columns: 2fr 1.4fr 1.4fr;
+  grid-template-rows: 280px 210px 76px;
+  grid-template-areas:
+    "hero    explore  fauna"
+    "tagline film     cuisine"
+    "cta     film     food";
+  gap: 10px;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+/* ── Base cell ───────────────────────────────────────────────── */
+.lms-cell {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+/* ── Image cells: cover fit ──────────────────────────────────── */
+.lms-cell img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ── Grid area assignments ───────────────────────────────────── */
+.lms-hero    { grid-area: hero; }
+.lms-tagline { grid-area: tagline; }
+.lms-cta     { grid-area: cta; }
+.lms-explore { grid-area: explore; }
+.lms-film    { grid-area: film; }
+.lms-fauna   { grid-area: fauna; }
+.lms-cuisine { grid-area: cuisine; }
+.lms-food    { grid-area: food; }
+
+/* ── Hero cell ───────────────────────────────────────────────── */
+.lms-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, transparent 55%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 24px 22px;
+}
+.lms-hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 3vw, 32px);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.15;
+  margin-bottom: 5px;
+}
+.lms-hero-sub {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: rgba(255,255,255,0.7);
+  letter-spacing: 0.04em;
+}
+
+/* ── Tagline text card ───────────────────────────────────────── */
+.lms-tagline {
+  background: #1c1610;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.lms-tagline-heading {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 2.8vw, 34px);
+  font-weight: 700;
+  line-height: 1.15;
+  color: #f0ece5;
+  margin: 0 0 14px;
+}
+.lms-tagline-body {
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  line-height: 1.68;
+  color: rgba(255,255,255,0.48);
+  margin: 0;
+}
+
+/* ── CTA strip ───────────────────────────────────────────────── */
+.lms-cta {
+  background: #1c1610;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  overflow: hidden;
+}
+.lms-cta-btn {
+  flex: 1;
+  height: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--yellow);
+  color: #111;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.22s ease, color 0.22s ease;
+}
+.lms-cta-btn:hover { background: #fff; color: #111; }
+
+.lms-cta-link {
+  flex: 0.6;
+  height: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  text-decoration: none;
+  border-left: 1px solid rgba(255,255,255,0.1);
+  transition: color 0.2s ease;
+}
+.lms-cta-link:hover { color: rgba(255,255,255,0.9); }
+
+/* ── Info cards (explore / cuisine) ─────────────────────────── */
+.lms-info {
+  background: #2b2016;
+  padding: 22px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.lms-info-label {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--yellow);
+  margin-bottom: 8px;
+}
+.lms-info-title {
+  font-family: var(--font-display);
+  font-size: clamp(16px, 1.8vw, 22px);
+  font-weight: 700;
+  color: #f0ece5;
+  margin: 0 0 8px;
+  line-height: 1.2;
+}
+.lms-info-body {
+  font-family: var(--font-body);
+  font-size: 12px;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.45);
+  margin: 0;
+}
+
+/* ── Image cells: subtle hover zoom ─────────────────────────── */
+.lms-hero img,
+.lms-film  img,
+.lms-fauna img,
+.lms-food  img {
+  transition: transform 0.55s cubic-bezier(0.4,0,0.2,1);
+}
+.lms-hero:hover  img,
+.lms-film:hover  img,
+.lms-fauna:hover img,
+.lms-food:hover  img {
+  transform: scale(1.04);
+}
+
+/* ── Responsive ──────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .lms-section { padding: 60px 40px 0; }
+  .lms-bento   { grid-template-rows: 240px 180px 72px; }
+}
+
+@media (max-width: 768px) {
+  .lms-section { padding: 40px 16px 0; }
+  .lms-bento {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 220px 160px 160px 72px 160px;
+    grid-template-areas:
+      "hero    hero"
+      "tagline explore"
+      "film    film"
+      "cta     cta"
+      "fauna   food";
+  }
+  .lms-cuisine { display: none; }
+}
+
+@media (max-width: 480px) {
+  .lms-bento {
+    grid-template-columns: 1fr;
+    grid-template-rows: 220px auto 180px 60px 160px;
+    grid-template-areas:
+      "hero"
+      "tagline"
+      "film"
+      "cta"
+      "fauna";
+  }
+  .lms-explore,
+  .lms-cuisine,
+  .lms-food { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lms-hero img, .lms-film img,
+  .lms-fauna img, .lms-food img { transition: none; }
+}
+
+
+/* ════════════════════════════════════════════════════════════════
+   WEDDING MASONRY SHOWCASE
+   Reference: dark panel, large bold heading left, CSS-columns
+   masonry photo grid right — staggered heights for visual rhythm.
+   ════════════════════════════════════════════════════════════════ */
+
+.wedding-showcase {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  background: #0d0d0d;
+  border-radius: 18px;
+  overflow: hidden;
+  margin-bottom: 60px;
+  min-height: 580px;
+}
+
+/* ── Left heading panel ──────────────────────────────────────── */
+.ws-header {
+  padding: 52px 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 22px;
+  border-right: 1px solid rgba(255,255,255,0.07);
+}
+
+.ws-overline {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  margin: 0;
+}
+
+.ws-heading {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 3vw, 46px);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -1px;
+  color: #f0ece5;
+  margin: 0;
+}
+
+.ws-desc {
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.72;
+  color: rgba(255,255,255,0.46);
+  margin: 0;
+}
+
+.ws-cta {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: 13px 26px;
+  background: var(--yellow);
+  color: #111;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  border-radius: 100px;
+  text-decoration: none;
+  transition: background 0.22s ease, transform 0.2s ease;
+}
+.ws-cta:hover {
+  background: #fff;
+  transform: translateY(-2px);
+}
+
+/* ── Right masonry photo grid ────────────────────────────────── */
+.ws-masonry {
+  columns: 4;
+  column-gap: 8px;
+  padding: 10px 10px 10px 8px;
+  background: #0d0d0d;
+}
+
+.ws-img {
+  width: 100%;
+  display: block;
+  margin-bottom: 8px;
+  border-radius: 12px;
+  break-inside: avoid;
+  object-fit: cover;
+  transition: transform 0.4s cubic-bezier(0.4,0,0.2,1),
+              filter    0.4s ease;
+}
+
+/* Stagger aspect ratios for natural masonry rhythm */
+.ws-img:nth-child(4n+1) { aspect-ratio: 4/5; }
+.ws-img:nth-child(4n+2) { aspect-ratio: 3/4; }
+.ws-img:nth-child(4n+3) { aspect-ratio: 1/1; }
+.ws-img:nth-child(4n+4) { aspect-ratio: 3/4; }
+
+.ws-img:hover {
+  transform: scale(1.025);
+  filter: brightness(1.08);
+}
+
+/* ── Responsive ──────────────────────────────────────────────── */
+@media (max-width: 1200px) {
+  .wedding-showcase { grid-template-columns: 260px 1fr; }
+  .ws-masonry        { columns: 3; }
+}
+
+@media (max-width: 768px) {
+  .wedding-showcase  { grid-template-columns: 1fr; border-radius: 12px; }
+  .ws-header         { padding: 36px 24px 24px; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); }
+  .ws-masonry        { columns: 2; padding: 10px; }
+}
+
+@media (max-width: 480px) {
+  .ws-masonry { columns: 2; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ws-img { transition: none; }
+}
+
+
+/* ════════════════════════════════════════════════════════════════
+   GLOBAL POLISH — 2026 Design System
+   Loaded last. Covers typography, buttons, spacing, section
+   headings, testimonials, footer, forms, mobile, and transitions.
+   All rules here are the final design authority.
+   ════════════════════════════════════════════════════════════════ */
+
+/* ── 1. HTML / BODY BASE ─────────────────────────────────────────
+   DM Sans as the primary UI font, smooth rendering.           */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-ui, 'DM Sans', 'Inter', sans-serif) !important;
+}
+
+/* ── 2. UNIFIED DISPLAY HEADING FONT ────────────────────────────
+   Apply Cormorant Garamond to every editorial/hero heading.   */
+.hero-title,
+.footer-title,
+.contact-heading,
+.ref-hello-text,
+.ref-about-title,
+.corp-title,
+.ws-heading,
+.lms-tagline-heading,
+.cg-title,
+.cg-sig-heading,
+.hosp-fan-title,
+.wow-text,
+.phil-right h2.editorial-title,
+.vision-heading-rewrite span {
+  font-family: var(--font-display, 'Cormorant Garamond', 'Playfair Display', serif) !important;
+  letter-spacing: -0.02em;
+}
+
+/* Section editorial titles (portfolio headings) */
+.editorial-title span,
+h2.editorial-title {
+  font-family: var(--font-display, 'Cormorant Garamond', 'Playfair Display', serif) !important;
+}
+
+/* Nav + UI elements stay DM Sans */
+.nav-link, .nav-cta, .nav-logo,
+.contact-badge, .contact-sub, .contact-card-label,
+.contact-card-value, .form-field-group label,
+.lms-cta-btn, .lms-cta-link, .corp-nav-btn,
+.hosp-nav-btn, .hosp-pill, .ws-cta,
+.submit-btn, .whatsapp-btn, .footer-btn,
+.sm-foot-col a, .sm-foot-col-title,
+.sm-foot-eyebrow, .cg-overline, .corp-overline,
+.lms-overline, .ws-overline, .hosp-fan-overline {
+  font-family: var(--font-ui, 'DM Sans', 'Inter', sans-serif) !important;
+}
+
+/* ── 3. CONSISTENT BUTTON SYSTEM ────────────────────────────────
+   All CTAs share the same size/weight/letterSpacing base.      */
+.nav-cta,
+.ws-cta,
+.hero-cv-btn,
+.footer-btn,
+.submit-btn,
+.corp-nav-btn--next,
+a.footer-btn,
+.wow-cta-btn {
+  font-family: var(--font-ui, 'DM Sans', 'Inter', sans-serif) !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+}
+
+/* ── 4. SECTION HEADINGS — GOLD ACCENT LINE ─────────────────────
+   Small 40px gold rule above every section's editorial title.  */
+.photo-section-header h3,
+.video-section-header h3,
+.section-header h2,
+.ref-about-header h2 {
+  font-family: var(--font-ui, 'DM Sans', 'Inter', sans-serif) !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.25em !important;
+  text-transform: uppercase !important;
+  color: var(--gold, #C8963E) !important;
+}
+
+/* ── 5. SECTION SPACING CONSISTENCY ─────────────────────────────
+   All major content sections get uniform vertical breathing.   */
+.photography,
+.videography,
+.about,
+.testimonials-section,
+.philosophy {
+  padding-top: var(--section-pad, clamp(60px,10vw,120px)) !important;
+  padding-bottom: var(--section-pad, clamp(60px,10vw,120px)) !important;
+}
+
+/* ── 6. TESTIMONIALS — fix inline styles ────────────────────────
+   Cards get equal height and consistent type via CSS override.  */
+.testimonials-section {
+  padding-left:  var(--space-lg, 48px) !important;
+  padding-right: var(--space-lg, 48px) !important;
+}
+
+.testimonials-grid-inner {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: var(--space-md, 24px) !important;
+  align-items: stretch !important;
+}
+
+.testimonial-card {
+  background: rgba(0,0,0,0.03) !important;
+  border: 1px solid rgba(0,0,0,0.08) !important;
+  border-radius: var(--radius-lg, 16px) !important;
+  padding: 36px 28px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  transition: box-shadow 0.3s ease, transform 0.3s ease !important;
+}
+.testimonial-card:hover {
+  box-shadow: var(--shadow-card, 0 4px 24px rgba(0,0,0,0.18)) !important;
+  transform: translateY(-4px) !important;
+}
+
+.testimonial-card p {
+  flex: 1;
+  font-size: var(--text-sm, clamp(0.875rem,2vw,1rem)) !important;
+  line-height: 1.72 !important;
+  color: var(--color-text-body) !important;
+  margin-top: 28px !important;
+  margin-bottom: 20px !important;
+}
+
+.testimonial-card .testimonial-stars svg {
+  fill: var(--gold, #C8963E);
+  width: 14px;
+  height: 14px;
+}
+
+/* The large decorative quote mark */
+.testimonial-card > span[style*="Playfair"] {
+  color: var(--gold, #C8963E) !important;
+  opacity: 0.45 !important;
+}
+
+/* Client name */
+.testimonial-card p[style*="font-weight:700"] {
+  font-family: var(--font-display, 'Cormorant Garamond', serif) !important;
+  font-size: 15px !important;
+}
+
+/* ── 7. ABOUT SECTION — two-column balance ──────────────────────
+   Photo 40% / content 60%, perfectly centred.                 */
+.ref-about-content {
+  align-items: center !important;
+  gap: var(--space-xl, 80px) !important;
+}
+
+.ref-about-left {
+  flex: 0 0 38% !important;
+  max-width: 38% !important;
+}
+
+.ref-about-right {
+  flex: 1 !important;
+}
+
+/* ── 8. PHILOSOPHY / "WHY I SHOOT" ─────────────────────────────
+   Generous type, italic display heading.                       */
+.phil-right h2 .editorial-title span,
+.vision-heading-rewrite span {
+  font-family: var(--font-display, 'Cormorant Garamond', serif) !important;
+  font-style: italic !important;
+  font-weight: 300 !important;
+  font-size: clamp(2.2rem, 5vw, 3.5rem) !important;
+  line-height: 1.12 !important;
+}
+
+.phil-subtitle {
+  font-family: var(--font-display, 'Cormorant Garamond', serif) !important;
+  font-style: italic !important;
+  font-size: var(--text-lg, clamp(1.125rem,3vw,1.375rem)) !important;
+  color: var(--gold, #C8963E) !important;
+  margin-bottom: var(--space-md, 24px) !important;
+}
+
+.phil-desc {
+  font-family: var(--font-ui, 'DM Sans', 'Inter', sans-serif) !important;
+  font-size: var(--text-base, clamp(1rem,2.5vw,1.125rem)) !important;
+  line-height: 1.75 !important;
+  color: var(--color-text-body) !important;
+}
+
+/* ── 9. FOOTER TOGETHER REFINEMENT ─────────────────────────────
+   Cormorant display, tight tracking, gold accent on word.     */
+.footer-title {
+  font-family: var(--font-display, 'Cormorant Garamond', 'Playfair Display', serif) !important;
+  font-size: clamp(56px, 9vw, 120px) !important;
+  font-weight: 300 !important;
+  letter-spacing: -2px !important;
+  line-height: 1.0 !important;
+  margin-bottom: 40px !important;
+}
+
+/* Footer eyebrow */
+.sm-foot-eyebrow {
+  font-family: var(--font-display, 'Cormorant Garamond', serif) !important;
+  font-style: italic !important;
+  color: var(--gold, #C8963E) !important;
+  font-size: clamp(14px, 2vw, 18px) !important;
+  letter-spacing: 0 !important;
+}
+
+/* Footer email big link */
+.sm-foot-email {
+  font-family: var(--font-display, 'Cormorant Garamond', serif) !important;
+  font-weight: 300 !important;
+  letter-spacing: -0.5px !important;
+}
+
+/* ── 10. CONTACT FORM — bottom-border field style ───────────────
+   Inputs get clean underline-only style per the brief.        */
+.contact--dark .form-input {
+  background: transparent !important;
+  border: none !important;
+  border-bottom: 1px solid rgba(255,255,255,0.2) !important;
+  border-radius: 0 !important;
+  padding: 14px 0 !important;
+  font-family: var(--font-ui, 'DM Sans', 'Inter', sans-serif) !important;
+  font-size: var(--text-sm) !important;
+}
+.contact--dark .form-input:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  border-bottom-color: var(--gold, #C8963E) !important;
+  background: transparent !important;
+}
+
+.contact--dark .form-field-group label {
+  font-family: var(--font-ui, 'DM Sans', 'Inter', sans-serif) !important;
+  font-size: 10px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  color: var(--gray-text, #888) !important;
+}
+
+.contact--dark .submit-btn {
+  background: var(--gold, #C8963E) !important;
+  color: #111 !important;
+  border-radius: var(--radius-sm, 4px) !important;
+  padding: 16px !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.12em !important;
+}
+.contact--dark .submit-btn:hover {
+  filter: brightness(1.12) !important;
+  transform: translateY(-2px) !important;
+}
+
+.contact--dark .contact-heading {
+  font-family: var(--font-display, 'Cormorant Garamond', serif) !important;
+  font-size: clamp(2rem, 4vw, 3.5rem) !important;
+  font-weight: 300 !important;
+  letter-spacing: -0.5px !important;
+}
+
+/* ── 11. DARK SECTION TRANSITIONS — smooth gradients ────────────
+   Add a gradient top-border to dark sections so they don't
+   feel like an abrupt cutoff from the light sections above.   */
+.cg-section,
+.corp-dark-panel,
+.wedding-showcase {
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+/* CG section: soft gradient fade from light above */
+.cg-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(to bottom, var(--background, #fff) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+.cg-section { position: relative; }
+
+/* ── 12. SIGNATURE LOOK CARDS — equal height alignment ──────────  */
+.cg-sig-cards {
+  align-items: stretch !important;
+}
+.cg-sig-card {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+}
+.cg-sig-card h4 {
+  font-family: var(--font-display, 'Cormorant Garamond', serif) !important;
+  font-size: 1.1rem !important;
+  font-weight: 600 !important;
+  margin-bottom: 10px !important;
+}
+
+/* ── 13. HERO TITLE — Cormorant Garamond display ────────────────
+   Replaces the heavier Fredoka with elegant cinematic serif.  */
+h1.hero-title {
+  font-family: var(--font-display, 'Cormorant Garamond', 'Playfair Display', serif) !important;
+  font-weight: 300 !important;
+  font-size: clamp(3.5rem, 10vw, 7rem) !important;
+  line-height: 0.95 !important;
+  letter-spacing: -0.03em !important;
+}
+
+/* Hero sub-text — DM Sans italic */
+.hero-subtext {
+  font-family: var(--font-display, 'Cormorant Garamond', serif) !important;
+  font-style: italic !important;
+  font-weight: 300 !important;
+  font-size: var(--text-lg, clamp(1.125rem, 3vw, 1.375rem)) !important;
+  color: rgba(255,255,255,0.7);
+  letter-spacing: 0.02em !important;
+}
+
+/* ── 14. NAV — gold active / hover ─────────────────────────────  */
+.nav-link:hover,
+.nav-link.active {
+  color: var(--gold, #C8963E) !important;
+  text-shadow: none !important;
+}
+.nav-link.active::after,
+.nav-link:hover::after {
+  background: var(--gold, #C8963E) !important;
+}
+
+/* CTA border turns gold */
+.cinematic-header .nav-cta {
+  border: 1.5px solid var(--gold, #C8963E) !important;
+  color: var(--gold, #C8963E) !important;
+  background: transparent !important;
+}
+.cinematic-header .nav-cta:hover {
+  background: var(--gold, #C8963E) !important;
+  color: #111 !important;
+}
+
+/* ── 15. GLOBAL TRANSITIONS ─────────────────────────────────────
+   Ensure all interactive elements share the same easing.      */
+a, button,
+.contact-card,
+.service-card,
+.hosp-card,
+.corp-card,
+.ws-img,
+.cg-handle-btn,
+.hosp-nav-btn,
+.corp-nav-btn,
+.sm-foot-social {
+  transition: var(--transition, all 0.3s cubic-bezier(0.4,0,0.2,1));
+}
+
+/* ── 16. MOBILE OVERFLOW FIXES ──────────────────────────────────
+   Prevent ANY element from causing horizontal scroll.         */
+html, body {
+  overflow-x: hidden !important;
+  max-width: 100vw !important;
+}
+
+section,
+.photo-block,
+.video-block,
+.contact-container,
+.philosophy-container,
+.ref-about-content,
+.corp-section,
+.lms-section,
+.hosp-fan-section,
+.cg-section,
+.wedding-showcase {
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+/* ── 17. MOBILE: 768px breakpoint ───────────────────────────────  */
+@media (max-width: 768px) {
+
+  /* Base section padding */
+  section {
+    padding-top: clamp(40px, 8vw, 80px) !important;
+    padding-bottom: clamp(40px, 8vw, 80px) !important;
+  }
+
+  /* Testimonials: stack to 1 column */
+  .testimonials-grid-inner {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* About: rebalance */
+  .ref-about-left {
+    flex: 0 0 100% !important;
+    max-width: 260px !important;
+    margin: 0 auto 32px !important;
+  }
+  .ref-about-right {
+    width: 100% !important;
+  }
+
+  /* Footer heading size */
+  .footer-title {
+    font-size: clamp(42px, 12vw, 72px) !important;
+    letter-spacing: -1px !important;
+  }
+
+  /* LMS bento — handled separately but ensure no overflow */
+  .lms-bento,
+  .corp-dark-panel {
+    overflow: hidden !important;
+  }
+
+  /* Contact form full-width actions */
+  .contact-actions {
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+  .contact-actions .submit-btn,
+  .contact-actions .whatsapp-btn {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  /* Philosophy: stack portrait above text */
+  .philosophy-container {
+    flex-direction: column !important;
+    gap: 32px !important;
+  }
+  .phil-left, .phil-right {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* Corp/hosp sections: tighter padding */
+  .hosp-fan-section,
+  .corp-section { padding-left: 16px !important; padding-right: 16px !important; }
+
+  /* Testimonials section */
+  .testimonials-section {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  /* Testimonials: stay single column */
+  .testimonials-grid-inner { grid-template-columns: 1fr !important; }
+
+  /* Hero title */
+  h1.hero-title {
+    font-size: clamp(3rem, 14vw, 5rem) !important;
+  }
+
+  /* Bento grid LMS — 1 col fallback */
+  .lms-bento {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto !important;
+    grid-template-areas:
+      "hero"
+      "tagline"
+      "cta" !important;
+  }
+  .lms-explore, .lms-film, .lms-fauna,
+  .lms-cuisine, .lms-food { display: none !important; }
+}
+
+/* ── 18. SCROLL REVEAL GLOBAL DEFAULTS ──────────────────────────
+   Baseline: elements start invisible, JS or AOS reveals them. */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal-up,
+  .reveal-left,
+  .reveal-right,
+  .reveal-fade {
+    transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1),
+                transform 0.8s cubic-bezier(0.22,1,0.36,1) !important;
+  }
+}
+
+
+/* ════════════════════════════════════════════════════════════════
+   SPECIFIC ISSUE FIXES — 10-POINT AUDIT
+   ════════════════════════════════════════════════════════════════ */
+
+/* ── FIX 1: ART OF HOSPITALITY — dark section, left/right ───────
+   Full-width dark bg. Cormorant heading left in gold.
+   Description right in muted white.                            */
+
+.hosp-fan-section {
+  background: #0d0d0d !important;
+  padding: clamp(60px,8vw,100px) 80px !important;
+}
+
+/* Two-column header: overline+heading left, desc right */
+.hosp-fan-header {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  grid-template-areas:
+    "overline ."
+    "heading  desc" !important;
+  column-gap: 80px !important;
+  row-gap: 10px !important;
+  align-items: center !important;
+  text-align: left !important;
+  margin-bottom: 56px !important;
+}
+
+.hosp-fan-overline { grid-area: overline !important; text-align: left !important; }
+.hosp-fan-title    { grid-area: heading  !important; text-align: left !important; margin-bottom: 0 !important; }
+.hosp-fan-desc     {
+  grid-area: desc !important;
+  align-self: center !important;
+  text-align: left !important;
+  color: rgba(255,255,255,0.52) !important;
+  max-width: 420px !important;
+  margin: 0 !important;
+  font-size: 15px !important;
+  line-height: 1.75 !important;
+}
+
+/* Heading text: gold Cormorant, no yellow chip */
+.hosp-heading-text {
+  font-family: var(--font-display,'Cormorant Garamond','Playfair Display',serif) !important;
+  font-size: clamp(2.4rem,6vw,4.8rem) !important;
+  font-weight: 300 !important;
+  letter-spacing: -0.02em !important;
+  line-height: 1.1 !important;
+  color: var(--gold,#C8963E) !important;
+  display: inline !important;
+  background: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+}
+
+/* Edge fades must match dark bg */
+.hosp-fade--l { background: linear-gradient(to right,  #0d0d0d 0%, transparent 100%) !important; }
+.hosp-fade--r { background: linear-gradient(to left, #0d0d0d 0%, transparent 100%) !important; }
+
+/* Nav buttons on dark */
+.hosp-nav-btn {
+  background: rgba(255,255,255,0.07) !important;
+  border-color: rgba(255,255,255,0.18) !important;
+  color: #fff !important;
+}
+.hosp-nav-btn:hover {
+  background: var(--gold,#C8963E) !important;
+  border-color: var(--gold,#C8963E) !important;
+  color: #111 !important;
+}
+
+@media (max-width:768px) {
+  .hosp-fan-section { padding: 48px 20px !important; }
+  .hosp-fan-header {
+    grid-template-columns: 1fr !important;
+    grid-template-areas: "overline" "heading" "desc" !important;
+    row-gap: 16px !important;
+  }
+  .hosp-fan-desc { max-width: 100% !important; }
+}
+
+/* ── FIX 2: UNDER THE SPOTLIGHT — overflow + alignment ───────── */
+.block-bottom {
+  align-items: center !important;
+}
+.diagonal-gallery,
+.diag-wrap {
+  overflow: hidden !important;
+}
+.diag-wrap {
+  max-height: 540px !important;
+}
+.diag-img img {
+  max-width: 100% !important;
+  height: auto !important;
+  display: block !important;
+}
+
+/* ── FIX 3: SIGNATURE LOOK CARDS — equal height ─────────────── */
+.cg-sig-cards {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 20px !important;
+  align-items: stretch !important;
+}
+.cg-sig-card {
+  display: flex !important;
+  flex-direction: column !important;
+  min-height: 200px !important;
+}
+.cg-sig-card p {
+  margin-top: auto !important;
+  padding-top: 10px !important;
+}
+
+/* ── FIX 4: HERO — balanced 50/50 grid ──────────────────────── */
+@media (min-width:1101px) {
+  .hero-content {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 48px !important;
+    align-items: center !important;
+  }
+  .hero-portrait-area {
+    margin-left: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+/* ── FIX 5: MOMENTS THAT MATTER — top padding + gradient ─────── */
+.corp-section {
+  padding-top: clamp(60px,8vw,100px) !important;
+}
+.corp-dark-panel {
+  position: relative;
+}
+.corp-dark-panel::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 56px;
+  background: linear-gradient(to bottom, rgba(25,25,25,0.55) 0%, transparent 100%);
+  border-radius: 18px 18px 0 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ── FIX 6: ABOUT SECTION — portrait size + gap + HELLO ─────── */
+.ref-about-content {
+  gap: 64px !important;
+}
+.ref-about-left {
+  min-width: 200px !important;
+}
+.ref-portrait-wrap,
+.about-image-wrapper {
+  min-width: 200px !important;
+  width: 100% !important;
+}
+.ref-hello-text {
+  font-size: clamp(3rem,6vw,5rem) !important;
+  font-weight: 300 !important;
+  line-height: 1.0 !important;
+  letter-spacing: -1px !important;
+  font-family: var(--font-display,'Cormorant Garamond',serif) !important;
+}
+
+/* ── FIX 7: TESTIMONIALS — min-height + align-items start ───── */
+.testimonials-grid-inner {
+  align-items: start !important;
+}
+.testimonial-card {
+  min-height: 280px !important;
+}
+
+/* ── FIX 8: FILTER PILLS — consistent 32px height ───────────── */
+.photo-filter-bar {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+  justify-content: center !important;
+  margin: 0 auto 40px !important;
+  padding: 0 !important;
+}
+.filter-btn {
+  height: 32px !important;
+  padding: 0 16px !important;
+  font-size: 11px !important;
+  font-family: var(--font-ui,'DM Sans','Inter',sans-serif) !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+  border-radius: 100px !important;
+  border: 1px solid rgba(0,0,0,0.22) !important;
+  background: transparent !important;
+  color: var(--dark) !important;
+  cursor: pointer !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  white-space: nowrap !important;
+  transition: background 0.22s ease, color 0.22s ease, border-color 0.22s ease !important;
+}
+.filter-btn.active,
+.filter-btn[aria-pressed="true"] {
+  background: var(--gold,#C8963E) !important;
+  color: #111 !important;
+  border-color: var(--gold,#C8963E) !important;
+}
+.filter-btn:hover:not(.active) {
+  border-color: var(--gold,#C8963E) !important;
+  color: var(--gold,#C8963E) !important;
+}
+
+/* ── FIX 9: WHY I SHOOT — gap + image ───────────────────────── */
+.philosophy-container {
+  gap: 80px !important;
+  align-items: center !important;
+}
+.phil-left {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+.phil-img {
+  max-width: 420px !important;
+  width: 100% !important;
+  aspect-ratio: 3/4 !important;
+  object-fit: cover !important;
+  display: block !important;
+}
+
+/* ── FIX 10: FOOTER TOGETHER — spacing refinement ───────────── */
+.sm-footer .footer-content {
+  padding-top: 80px !important;
+}
+.sm-footer .footer-title {
+  margin-bottom: 32px !important;
+}
+.sm-foot-email {
+  font-size: clamp(1rem,2vw,1.25rem) !important;
+  margin-top: 16px !important;
+}
+
+/* ── GLOBAL: 375px no horizontal scroll ─────────────────────── */
+@media (max-width:375px) {
+  html, body { overflow-x: hidden !important; max-width: 100vw !important; }
+
+  .hosp-fan-section,
+  .corp-section,
+  .lms-section,
+  .cg-section,
+  .wedding-showcase,
+  .contact--dark,
+  .cinematic-footer,
+  .sm-footer,
+  .testimonials-section {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    overflow-x: hidden !important;
+  }
+
+  .photo-filter-bar { padding: 0 8px !important; gap: 6px !important; }
+  .filter-btn       { height: 28px !important; padding: 0 10px !important; font-size: 10px !important; }
+
+  .hosp-fan-header  { grid-template-columns: 1fr !important; }
+  .ws-masonry       { columns: 2 !important; padding: 8px !important; }
+  .lms-bento        { grid-template-columns: 1fr !important; }
+  .cg-sig-cards     { grid-template-columns: 1fr !important; }
+  .testimonials-grid-inner { grid-template-columns: 1fr !important; }
+}
+
+
+/* ════════════════════════════════════════════════════════════════
+   VISUAL BUG FIXES — 10-POINT AUDIT
+   ════════════════════════════════════════════════════════════════ */
+
+/* ── FIX 1: HERO TITLE — stop clipping ──────────────────────────
+   Reduce max cap, force no-wrap on desktop, allow wrap on mobile.  */
+h1.hero-title {
+  font-size: clamp(2.8rem, 8vw, 5.5rem) !important;
+  white-space: nowrap !important;
+  word-break: normal !important;
+  overflow: visible !important;
+  line-height: 0.96 !important;
+}
+
+/* Text container must be wide enough and never clip */
+.hero-text-area {
+  overflow: visible !important;
+  min-width: min(45%, 100%) !important;
+}
+
+/* Hero wrapper rows must not hide text */
+.cinematic-hero,
+.hero-content {
+  overflow: visible !important;
+}
+
+@media (max-width: 768px) {
+  h1.hero-title {
+    font-size: clamp(2.5rem, 12vw, 4rem) !important;
+    white-space: normal !important;
+    word-break: break-word !important;
+  }
+  .hero-text-area { min-width: 100% !important; }
+}
+
+/* ── FIX 2: NAVBAR OVERFLOW — stop link compression ─────────────  */
+.nav-container {
+  padding-right: 24px !important;
+  overflow: visible !important;
+}
+
+.nav-links {
+  flex-shrink: 0 !important;
+  flex-wrap: nowrap !important;
+  gap: 20px !important;
+}
+
+.nav-link {
+  flex-shrink: 0 !important;
+  white-space: nowrap !important;
+}
+
+/* At medium screens: smaller font; hide 2 least critical links */
+@media (max-width: 1280px) {
+  .nav-link { font-size: 11px !important; }
+}
+
+@media (max-width: 1100px) {
+  .nav-link { font-size: 10px !important; letter-spacing: 0.04em !important; }
+  /* Hide "Home" and "Films" — logo = home; films is in portfolio */
+  .nav-link[href="#hero"],
+  .nav-link[href="#videography"] { display: none !important; }
+  .nav-links { gap: 14px !important; }
+}
+
+/* ── FIX 3: ART OF HOSPITALITY — 2-col layout + image grid ──────
+   Left 40%: heading stacked. Right 60%: 3-col image grid.
+   Replaces the fan carousel visually; JS still runs but is hidden. */
+
+/* Section: two-column layout */
+.hosp-fan-section {
+  display: grid !important;
+  grid-template-columns: 40% 60% !important;
+  grid-template-areas:
+    "header grid"
+    "header nav" !important;
+  column-gap: 56px !important;
+  row-gap: 0 !important;
+  align-items: start !important;
+}
+
+/* Header: single vertical stack in left column */
+.hosp-fan-header {
+  grid-area: header !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 20px !important;
+  text-align: left !important;
+  align-self: center !important;
+  grid-template-columns: unset !important;
+  grid-template-areas: unset !important;
+}
+.hosp-fan-overline { grid-area: unset !important; }
+.hosp-fan-title    { grid-area: unset !important; }
+.hosp-fan-desc     {
+  grid-area: unset !important;
+  max-width: 100% !important;
+  color: rgba(255,255,255,0.52) !important;
+}
+
+/* Fan wrap: right column */
+.hosp-fan-wrap {
+  grid-area: grid !important;
+  height: auto !important;
+  overflow: visible !important;
+  position: static !important;
+}
+
+/* Nav: bottom right, subtle */
+.hosp-nav {
+  grid-area: nav !important;
+  justify-content: flex-start !important;
+  margin-top: 16px !important;
+}
+
+/* Convert fan (absolute-positioned) → CSS grid cells */
+.hosp-fan {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 8px !important;
+  position: static !important;
+  height: auto !important;
+  width: 100% !important;
+}
+
+/* All 5 cards: uniform grid cells — override all data-pos transforms */
+.hosp-card,
+.hosp-card[data-pos="0"],
+.hosp-card[data-pos="1"],
+.hosp-card[data-pos="2"],
+.hosp-card[data-pos="3"],
+.hosp-card[data-pos="4"] {
+  position: relative !important;
+  transform: none !important;
+  opacity: 1 !important;
+  filter: none !important;
+  z-index: auto !important;
+  width: 100% !important;
+  aspect-ratio: 4/3 !important;
+  cursor: default !important;
+  border-radius: 12px !important;
+}
+.hosp-card img {
+  width: 100% !important;
+  height: 100% !important;
+  aspect-ratio: 4/3 !important;
+  object-fit: cover !important;
+}
+
+/* Edge fades are irrelevant in grid mode */
+.hosp-fade--l,
+.hosp-fade--r { display: none !important; }
+
+/* ── FIX 3 mobile ── */
+@media (max-width: 1024px) {
+  .hosp-fan-section {
+    grid-template-columns: 1fr !important;
+    grid-template-areas: "header" "grid" "nav" !important;
+  }
+  .hosp-fan { grid-template-columns: repeat(3, 1fr) !important; }
+}
+@media (max-width: 600px) {
+  .hosp-fan-section { padding: 48px 20px !important; }
+  .hosp-fan { grid-template-columns: repeat(2, 1fr) !important; }
+}
+
+/* ── FIX 4: ABOUT — resolve yellow circle / card overlap ─────────  */
+.ref-about-content {
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 64px !important;
+  overflow: visible !important;
+}
+.ref-about-left {
+  position: relative !important;
+  overflow: visible !important;
+}
+.ref-portrait-wrap {
+  position: relative !important;
+  overflow: visible !important;
+}
+.ref-portrait-img {
+  position: relative !important;
+  z-index: 1 !important;
+}
+/* Black "Let's Work Together" card sits below portrait, no overlap */
+.ref-contact-card {
+  position: relative !important;
+  margin-top: 16px !important;
+  z-index: 2 !important;
+}
+
+/* ── FIX 5: LOVE IN MOTION — clean white + top padding ──────────  */
+.photography {
+  background: #ffffff !important;
+}
+.lim-perspective-wrap {
+  background: #ffffff !important;
+  padding-top: clamp(60px, 8vw, 100px) !important;
+}
+.photo-block.block-top {
+  background: #ffffff !important;
+}
+
+/* ── FIX 6: BRIDE'S TALE left panel — force readable colours ─────  */
+.ws-header   { background: #0d0d0d !important; }
+.ws-heading  { color: #f0ece5 !important; }
+.ws-desc     { color: rgba(255,255,255,0.55) !important; }
+.ws-overline { color: rgba(255,255,255,0.4) !important; }
+.ws-cta      { color: #111 !important; }
+
+/* ── FIX 7: TESTIMONIALS — ensure visible, no stuck opacity ──────  */
+.testimonials-section {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  min-height: 200px !important;
+}
+
+/* Force cards out of any stuck reveal state */
+.testimonials-section .testimonial-card,
+.testimonials-section .reveal-up,
+.testimonials-section [data-reveal],
+.testimonials-section [data-aos] {
+  opacity: 1 !important;
+  transform: none !important;
+  visibility: visible !important;
+}
+
+/* ── FIX 8: WHY I SHOOT — gap + controlled flex sides ───────────  */
+.philosophy-container {
+  gap: 80px !important;
+  align-items: center !important;
+  display: flex !important;
+}
+.phil-left {
+  flex: 0 0 380px !important;
+  max-width: 380px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+.phil-right {
+  flex: 1 !important;
+  min-width: 0 !important;
+}
+
+@media (max-width: 768px) {
+  .philosophy-container {
+    flex-direction: column !important;
+    gap: 32px !important;
+  }
+  .phil-left {
+    flex: none !important;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+}
+
+/* ── FIX 9: FOOTER EMAIL size + colour ───────────────────────────  */
+.sm-foot-email {
+  font-size: clamp(1.1rem, 2.5vw, 1.6rem) !important;
+  margin-top: 20px !important;
+  color: rgba(255,255,255,0.85) !important;
+}
+
+/* ── FIX 10: GLOBAL OVERFLOW AUDIT ──────────────────────────────
+   Clamp the three known overflow culprits.                      */
+.cinematic-hero,
+section.hero,
+.hero {
+  overflow-x: hidden !important;
+  max-width: 100vw !important;
+}
+
+.wedding-showcase {
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+  box-sizing: border-box !important;
+}
+
+.hosp-fan-section {
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+  box-sizing: border-box !important;
+}
+
+/* Hard cap: 375px mobile — zero horizontal scroll */
+@media (max-width: 375px) {
+  h1.hero-title {
+    font-size: clamp(2.2rem, 13vw, 3rem) !important;
+    white-space: normal !important;
+  }
+  /* Mobile nav uses hamburger — hide link row */
+  .nav-links { display: none !important; }
+
+  .ws-masonry  { columns: 1 !important; }
+  .hosp-fan    { grid-template-columns: 1fr !important; }
+  .cg-sig-cards, .testimonials-grid-inner { grid-template-columns: 1fr !important; }
+  .lms-bento   { grid-template-columns: 1fr !important; }
+  .phil-left   { flex: none !important; max-width: 100% !important; }
 }

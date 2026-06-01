@@ -118,11 +118,236 @@
   }
 
   /* ---------------------------------------------------------
+     3. COLOR GRADING — BEFORE/AFTER SLIDER
+     Dragging anywhere on the slider (or the handle) updates:
+       • .cg-graded clip-path → inset(0 0 0 pct%)  (reveals right portion)
+       • #cgHandle left       → pct%
+  --------------------------------------------------------- */
+  function initCGSlider() {
+    var slider = document.getElementById('cgSlider');
+    if (!slider) return;
+
+    var graded = document.getElementById('cgGraded');
+    var handle = document.getElementById('cgHandle');
+    var active  = false;
+
+    function move(clientX) {
+      var rect = slider.getBoundingClientRect();
+      var pct  = Math.max(4, Math.min(96, ((clientX - rect.left) / rect.width) * 100));
+      graded.style.clipPath = 'inset(0 0 0 ' + pct + '%)';
+      handle.style.left     = pct + '%';
+    }
+
+    /* Mouse */
+    slider.addEventListener('mousedown', function (e) {
+      active = true;
+      move(e.clientX);
+      e.preventDefault();
+    });
+    window.addEventListener('mousemove', function (e) { if (active) move(e.clientX); });
+    window.addEventListener('mouseup',   function ()  { active = false; });
+
+    /* Touch */
+    slider.addEventListener('touchstart', function (e) {
+      active = true;
+      move(e.touches[0].clientX);
+    }, { passive: true });
+    slider.addEventListener('touchmove', function (e) {
+      if (!active) return;
+      move(e.touches[0].clientX);
+      e.preventDefault();
+    }, { passive: false });
+    window.addEventListener('touchend', function () { active = false; });
+  }
+
+  /* ---------------------------------------------------------
+     4. MOMENTS THAT MATTER — CORPORATE FAN CAROUSEL
+     Same position-formula logic as initHospFan but uses
+     #corpFan / #corpPrev / #corpNext + auto-loop.
+  --------------------------------------------------------- */
+  function initCorpFan() {
+    var fan = document.getElementById('corpFan');
+    if (!fan) return;
+
+    var cards  = Array.from(fan.querySelectorAll('.corp-card'));
+    var total  = cards.length;
+    var center = 2;
+    var loopTimer = null;
+
+    function applyPositions() {
+      cards.forEach(function (card, i) {
+        var pos = ((i - center + 2) % total + total) % total;
+        card.setAttribute('data-pos', String(pos));
+      });
+    }
+
+    applyPositions();
+
+    function tick()       { center = (center + 1) % total; applyPositions(); }
+    function startLoop()  { if (!loopTimer) loopTimer = setInterval(tick, 3200); }
+    function pauseLoop()  { clearInterval(loopTimer); loopTimer = null; }
+    function resumeLoop() {
+      pauseLoop();
+      loopTimer = setTimeout(function () { loopTimer = null; startLoop(); }, 1200);
+    }
+
+    var btnPrev = document.getElementById('corpPrev');
+    var btnNext = document.getElementById('corpNext');
+    if (btnPrev) btnPrev.addEventListener('click', function () {
+      center = (center - 1 + total) % total; applyPositions(); pauseLoop(); resumeLoop();
+    });
+    if (btnNext) btnNext.addEventListener('click', function () {
+      center = (center + 1) % total; applyPositions(); pauseLoop(); resumeLoop();
+    });
+
+    cards.forEach(function (card, i) {
+      card.addEventListener('click', function () {
+        if (parseInt(card.getAttribute('data-pos')) !== 2) {
+          center = i; applyPositions();
+        }
+      });
+    });
+
+    var wrap = fan.closest('.corp-fan-wrap');
+    if (wrap) {
+      wrap.addEventListener('mouseenter', pauseLoop);
+      wrap.addEventListener('mouseleave', startLoop);
+    }
+
+    // Swipe support
+    var dragX = null;
+    fan.addEventListener('touchstart',  function (e) { pauseLoop(); dragX = e.touches[0].clientX; }, { passive: true });
+    fan.addEventListener('touchend',    function (e) {
+      if (dragX === null) return;
+      var d = e.changedTouches[0].clientX - dragX; dragX = null;
+      if (d >  50) { center = (center - 1 + total) % total; applyPositions(); }
+      if (d < -50) { center = (center + 1) % total;          applyPositions(); }
+      resumeLoop();
+    });
+
+    startLoop();
+  }
+
+  /* ---------------------------------------------------------
+     5. ART OF HOSPITALITY — FAN CAROUSEL
+     5 cards, 5 visual positions (data-pos 0..4, centre = 2).
+     Formula: pos = ((cardIndex - centerIndex + 2) % total + total) % total
+     Clicking prev/next shifts centerIndex; clicking a side card
+     centres it immediately.
+  --------------------------------------------------------- */
+  function initHospFan() {
+    var fan = document.getElementById('hospFan');
+    if (!fan) return;
+
+    var cards  = Array.from(fan.querySelectorAll('.hosp-card'));
+    var total  = cards.length;
+    var center = 2; // index of the card currently at visual position 2
+
+    function applyPositions() {
+      cards.forEach(function (card, i) {
+        var pos = ((i - center + 2) % total + total) % total;
+        card.setAttribute('data-pos', String(pos));
+      });
+    }
+
+    applyPositions(); // set initial state
+
+    var btnPrev = document.getElementById('hospPrev');
+    var btnNext = document.getElementById('hospNext');
+
+    if (btnPrev) {
+      btnPrev.addEventListener('click', function () {
+        center = (center - 1 + total) % total;
+        applyPositions();
+      });
+    }
+    if (btnNext) {
+      btnNext.addEventListener('click', function () {
+        center = (center + 1) % total;
+        applyPositions();
+      });
+    }
+
+    // Click a side card to bring it to centre
+    cards.forEach(function (card, i) {
+      card.addEventListener('click', function () {
+        if (parseInt(card.getAttribute('data-pos')) !== 2) {
+          center = i;
+          applyPositions();
+        }
+      });
+    });
+
+    // Swipe / drag support (touch + mouse)
+    var dragStartX = null;
+    var THRESHOLD  = 50; // px
+
+    function onDragStart(x) { pauseLoop(); dragStartX = x; }
+    function onDragEnd(x) {
+      if (dragStartX === null) return;
+      var delta = x - dragStartX;
+      dragStartX = null;
+      if (delta > THRESHOLD)  { center = (center - 1 + total) % total; applyPositions(); }
+      if (delta < -THRESHOLD) { center = (center + 1) % total;          applyPositions(); }
+      resumeLoop();
+    }
+
+    fan.addEventListener('touchstart',  function (e) { onDragStart(e.touches[0].clientX); }, { passive: true });
+    fan.addEventListener('touchend',    function (e) { onDragEnd(e.changedTouches[0].clientX); });
+    fan.addEventListener('mousedown',   function (e) { onDragStart(e.clientX); });
+    fan.addEventListener('mouseup',     function (e) { onDragEnd(e.clientX); });
+    fan.addEventListener('mouseleave',  function ()  { dragStartX = null; resumeLoop(); });
+
+    // Pause auto-loop on button click too, then resume after a beat
+    if (btnPrev) btnPrev.addEventListener('click', function () { pauseLoop(); resumeLoop(); });
+    if (btnNext) btnNext.addEventListener('click', function () { pauseLoop(); resumeLoop(); });
+
+    // Auto-loop: advance one card every 3 s, pause on hover
+    var loopTimer = null;
+    var LOOP_MS   = 3000;
+
+    function tick() {
+      center = (center + 1) % total;
+      applyPositions();
+    }
+
+    function startLoop() {
+      if (loopTimer) return;
+      loopTimer = setInterval(tick, LOOP_MS);
+    }
+
+    function pauseLoop() {
+      clearInterval(loopTimer);
+      loopTimer = null;
+    }
+
+    function resumeLoop() {
+      // Debounce: restart after a short idle gap so manual clicks feel snappy
+      pauseLoop();
+      loopTimer = setTimeout(function () {
+        loopTimer = null;
+        startLoop();
+      }, 1200);
+    }
+
+    var wrap = fan.closest('.hosp-fan-wrap');
+    if (wrap) {
+      wrap.addEventListener('mouseenter', pauseLoop);
+      wrap.addEventListener('mouseleave', startLoop);
+    }
+
+    startLoop(); // begin auto-advance
+  }
+
+  /* ---------------------------------------------------------
      INIT
   --------------------------------------------------------- */
   function init() {
     initReelTriggers();
     initReveals();
+    initCGSlider();
+    initCorpFan();
+    initHospFan();
   }
 
   if (document.readyState === 'loading') {
