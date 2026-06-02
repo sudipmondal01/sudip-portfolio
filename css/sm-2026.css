@@ -538,6 +538,15 @@ section.wow-section {
   margin-bottom: 18px !important;
 }
 
+.hosp-fan-title::before {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 2px;
+  background: #C8963E;
+  margin: 0 0 16px;
+}
+
 .hosp-fan-desc {
   max-width: 540px;
   margin: 0 auto;
@@ -2711,7 +2720,7 @@ section,
   font-weight: 300 !important;
   letter-spacing: -0.02em !important;
   line-height: 1.1 !important;
-  color: var(--gold,#C8963E) !important;
+  color: #f0ece5 !important;
   display: inline !important;
   background: none !important;
   padding: 0 !important;
