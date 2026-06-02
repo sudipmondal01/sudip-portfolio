@@ -478,7 +478,7 @@ section.wow-section {
 
 .lim-scroll-card {
   transform-origin: center top;
-  transform: rotateX(16deg) scale(0.96);
+  transform: none;
   will-change: transform;
   /* No CSS transition here â€” JS drives every frame via RAF for butter-smooth
      tracking. A CSS transition would fight the JS updates and cause lag. */
@@ -495,7 +495,7 @@ section.wow-section {
    rotateX looks unnatural */
 @media (max-width: 768px) {
   .lim-perspective-wrap  { perspective: 800px; }
-  .lim-scroll-card       { transform: rotateX(10deg) scale(0.97); }
+  .lim-scroll-card       { transform: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
