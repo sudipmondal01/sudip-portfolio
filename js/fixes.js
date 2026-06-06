@@ -138,12 +138,10 @@
     document.head.appendChild(l);
   };
   addMeta('name',     'twitter:card',        'summary_large_image');
-  addMeta('name',     'twitter:title',       'Sudip Mondal — Best Cinematic Photographer in India | Weddings, Portraits & Films');
-  addMeta('name',     'twitter:description', 'India\'s premier cinematic photographer & filmmaker. Weddings, portraits, brand films — making life look like a movie frame. Based in Kolkata · available pan-India.');
+  addMeta('name',     'twitter:title',       'Sudip Mondal — Cinematic Photographer & Filmmaker in Kolkata, India');
+  addMeta('name',     'twitter:description', 'Kolkata-based cinematic photographer specialising in weddings, portraits & brand films. 170+ projects across India. Book your session.');
   addMeta('name',     'twitter:image',       'https://i.ibb.co/MDFzyJcW/5O7A6852.webp');
-  addMeta('property', 'og:url',             'https://sudip-mondal.com/');
-  // Swap canonical href to your real domain once deployed
-  addLink('canonical', 'https://sudip-mondal.com/');
+  // og:url and canonical are already set in HTML — this guard prevents duplicates
 
   /* ─────────────────────────────────────────────
      RUN DOM MUTATIONS AFTER CONTENT IS READY
@@ -293,6 +291,30 @@
         window.open('https://www.youtube.com/@bunnyxdneo', '_blank', 'noopener');
       });
     }
+
+    /* ── 8. FAQ ACCORDION ── */
+    document.querySelectorAll('.faq-q').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var expanded = btn.getAttribute('aria-expanded') === 'true';
+        var answer   = btn.nextElementSibling;
+
+        // Close all other open items
+        document.querySelectorAll('.faq-q').forEach(function (otherBtn) {
+          if (otherBtn === btn) return;
+          otherBtn.setAttribute('aria-expanded', 'false');
+          var otherAns = otherBtn.nextElementSibling;
+          if (otherAns) otherAns.setAttribute('hidden', '');
+        });
+
+        // Toggle this item
+        btn.setAttribute('aria-expanded', String(!expanded));
+        if (expanded) {
+          answer.setAttribute('hidden', '');
+        } else {
+          answer.removeAttribute('hidden');
+        }
+      });
+    });
 
   } // end run()
 

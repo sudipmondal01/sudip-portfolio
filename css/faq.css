@@ -1,0 +1,104 @@
+/* ============================================================
+   FAQ SECTION — Accordion styles
+   ============================================================ */
+
+.sec-faq {
+  padding: 100px 0;
+  background: var(--background);
+}
+
+.sec-faq .sec-eyebrow {
+  color: var(--primary);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.sec-faq .sec-title {
+  margin-bottom: 56px;
+}
+
+.faq-list {
+  max-width: 760px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-top: 1px solid var(--border);
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--border);
+}
+
+.faq-q {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 24px 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--foreground);
+  transition: color 0.3s ease;
+}
+
+.faq-q:hover {
+  color: var(--primary);
+}
+
+.faq-q::after {
+  content: '+';
+  flex-shrink: 0;
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: var(--primary);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  line-height: 1;
+}
+
+.faq-q[aria-expanded="true"]::after {
+  transform: rotate(45deg);
+}
+
+.faq-a {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.faq-a:not([hidden]) {
+  display: block;
+  max-height: 300px;
+}
+
+.faq-a[hidden] {
+  display: block;
+  max-height: 0;
+}
+
+.faq-a p {
+  padding-bottom: 24px;
+  color: var(--muted-foreground);
+  font-size: 0.9375rem;
+  line-height: 1.75;
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .sec-faq {
+    padding: 72px 0;
+  }
+  .faq-q {
+    font-size: 0.9375rem;
+    padding: 20px 0;
+  }
+}
