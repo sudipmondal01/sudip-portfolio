@@ -219,11 +219,40 @@
         open(`<iframe src="https://www.youtube.com/embed/${id}?autoplay=1&rel=0" title="Showreel" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>`);
       }
     });
+    // Work card video lightbox (data-video attribute)
+    document.addEventListener('click', (e) => {
+      const card = e.target.closest('[data-video]');
+      if (card) {
+        const id = card.getAttribute('data-video');
+        if (id && id !== 'REPLACE_WITH_FILM_ID') {
+          e.preventDefault();
+          open(`<iframe src="https://www.youtube.com/embed/${id}?autoplay=1&rel=0" title="Chasing Shadows" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>`);
+        }
+      }
+    });
     lb.addEventListener('click', (e) => { if (e.target === lb || e.target.closest('.lightbox-close')) close(); });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && lb.classList.contains('open')) close(); });
   })();
 
-  /* ---------- 11. CAROUSELS ---------- */
+  /* ---------- 11. WORK FILTERS ---------- */
+  (() => {
+    const tabs = document.querySelectorAll('.wf-tab');
+    const cards = document.querySelectorAll('.work-card[data-category]');
+    if (!tabs.length || !cards.length) return;
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        const filter = tab.getAttribute('data-filter');
+        cards.forEach(card => {
+          const match = filter === 'all' || card.getAttribute('data-category') === filter;
+          card.classList.toggle('wc-hidden', !match);
+        });
+      });
+    });
+  })();
+
+  /* ---------- 12. CAROUSELS ---------- */
   (() => {
     const wire = (trackId, prevId, nextId) => {
       const track = document.getElementById(trackId);
@@ -262,6 +291,22 @@
     window.addEventListener('pointermove', move, { passive: true });
     window.addEventListener('pointerup', end);
     slider.style.cursor = 'ew-resize';
+
+    // pair switcher
+    const rawImg = $('#cgRawImg');
+    const gradedImg = $('#cgGradedImg');
+    $$('.cg-pair-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        $$('.cg-pair-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const src = btn.dataset.src;
+        if (rawImg) rawImg.src = src;
+        if (gradedImg) gradedImg.src = src;
+        // reset handle to centre
+        graded.style.clipPath = 'inset(0 0 0 50%)';
+        handle.style.left = '50%';
+      });
+    });
   })();
 
   /* ---------- 13. FORM VALIDATION ---------- */
@@ -285,7 +330,7 @@
       el.addEventListener('input', () => clearErr(el));
       el.addEventListener('change', () => clearErr(el));
     });
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
       let ok = true;
       const name = form.querySelector('[name="name"]');
@@ -297,8 +342,30 @@
       if (type && !type.value) { fail(type, 'Please choose a project type'); ok = false; }
       if (message && message.value.trim().length < 10) { fail(message, 'Tell me a little more (10+ characters)'); ok = false; }
       if (!ok) return;
-      form.classList.add('gone');
-      if (success) success.classList.add('show');
+
+      const btn = form.querySelector('[type="submit"]');
+      const origText = btn ? btn.textContent : '';
+      const errDiv = $('#formError');
+      if (errDiv) errDiv.classList.remove('show');
+      if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+
+      try {
+        const res = await fetch('https://formspree.io/f/mykazbdb', {
+          method: 'POST',
+          headers: { Accept: 'application/json' },
+          body: new FormData(form),
+        });
+        if (res.ok) {
+          form.classList.add('gone');
+          if (success) success.classList.add('show');
+        } else {
+          if (btn) { btn.disabled = false; btn.textContent = origText; }
+          if (errDiv) errDiv.classList.add('show');
+        }
+      } catch {
+        if (btn) { btn.disabled = false; btn.textContent = origText; }
+        if (errDiv) errDiv.classList.add('show');
+      }
     });
   })();
 
