@@ -25,10 +25,10 @@
       if (status) status.textContent = words[i];
     }, 350);
     window.addEventListener('load', () => {
-      setTimeout(() => { clearInterval(timer); finish(); }, 1500);
+      setTimeout(() => { clearInterval(timer); finish(); }, 500);
     });
-    // safety net if 'load' is slow
-    setTimeout(() => { clearInterval(timer); finish(); }, 4000);
+    // safety net so slow third-party images never hold the page hostage
+    setTimeout(() => { clearInterval(timer); finish(); }, 2200);
   })();
 
   /* ---------- 2. SCROLL PROGRESS ---------- */
@@ -309,20 +309,28 @@
     });
   })();
 
-  /* ---------- 13. FORM VALIDATION ---------- */
+  /* ---------- 13. ENQUIRY WIZARD (3-step) ---------- */
   (() => {
     const form = $('#bookingForm');
     const success = $('#formSuccess');
     if (!form) return;
+    const panels = $$('.fw-panel', form);
+    const steps = $$('.fw-step', form);
+    const barFill = $('#fwBarFill');
+    const label = $('#fwLabel');
+    if (!panels.length) return;
+    const titles = ['Your event', 'Date & location', 'Your details'];
     const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const fieldOf = (input) => input.closest('.fg');
-    const fail = (input, msg) => {
-      const fg = fieldOf(input); if (!fg) return;
+    let current = 0;
+
+    const fieldOf = (el) => el.closest('.fg');
+    const fail = (el, msg) => {
+      const fg = fieldOf(el); if (!fg) return;
       fg.classList.add('error');
       const m = $('.msg', fg); if (m) m.textContent = msg;
     };
-    const clearErr = (input) => {
-      const fg = fieldOf(input); if (!fg) return;
+    const clearErr = (el) => {
+      const fg = fieldOf(el); if (!fg) return;
       fg.classList.remove('error');
       const m = $('.msg', fg); if (m) m.textContent = '';
     };
@@ -330,27 +338,46 @@
       el.addEventListener('input', () => clearErr(el));
       el.addEventListener('change', () => clearErr(el));
     });
+
+    const goTo = (idx) => {
+      current = clamp(idx, 0, panels.length - 1);
+      panels.forEach((p, i) => p.classList.toggle('active', i === current));
+      steps.forEach((s, i) => s.classList.toggle('active', i <= current));
+      if (barFill) barFill.style.width = ((current + 1) / panels.length) * 100 + '%';
+      if (label) label.textContent = `Step ${current + 1} of ${panels.length} · ${titles[current] || ''}`;
+    };
+
+    const validatePanel = (idx) => {
+      const panel = panels[idx];
+      let ok = true;
+      // required radio group
+      const radio = panel.querySelector('input[type="radio"][required]');
+      if (radio && !panel.querySelector(`input[name="${radio.name}"]:checked`)) {
+        fail(radio, 'Please pick one'); ok = false;
+      }
+      $$('input:not([type="radio"])[required], select[required], textarea[required]', panel).forEach(el => {
+        const v = el.value.trim();
+        if (!v) { fail(el, 'This field is required'); ok = false; }
+        else if (el.type === 'email' && !emailRe.test(v)) { fail(el, 'Enter a valid email'); ok = false; }
+      });
+      return ok;
+    };
+
+    $$('.fw-next', form).forEach(btn => btn.addEventListener('click', () => {
+      if (validatePanel(current)) goTo(current + 1);
+    }));
+    $$('.fw-back', form).forEach(btn => btn.addEventListener('click', () => goTo(current - 1)));
+
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      let ok = true;
-      const name = form.querySelector('[name="name"]');
-      const email = form.querySelector('[name="email"]');
-      const type = form.querySelector('[name="type"]');
-      const message = form.querySelector('[name="message"]');
-      if (name && !name.value.trim()) { fail(name, 'Please enter your name'); ok = false; }
-      if (email && !emailRe.test(email.value.trim())) { fail(email, 'Enter a valid email'); ok = false; }
-      if (type && !type.value) { fail(type, 'Please choose a project type'); ok = false; }
-      if (message && message.value.trim().length < 10) { fail(message, 'Tell me a little more (10+ characters)'); ok = false; }
-      if (!ok) return;
-
+      if (!validatePanel(current)) return;
       const btn = form.querySelector('[type="submit"]');
       const origText = btn ? btn.textContent : '';
       const errDiv = $('#formError');
       if (errDiv) errDiv.classList.remove('show');
       if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
-
       try {
-        const res = await fetch('https://formspree.io/f/mykazbdb', {
+        const res = await fetch(form.action, {
           method: 'POST',
           headers: { Accept: 'application/json' },
           body: new FormData(form),
@@ -367,6 +394,8 @@
         if (errDiv) errDiv.classList.add('show');
       }
     });
+
+    goTo(0);
   })();
 
   /* ---------- 14. FOOTER YEAR ---------- */
