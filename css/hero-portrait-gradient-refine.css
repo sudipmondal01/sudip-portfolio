@@ -1,6 +1,0 @@
-
-/* ===== HERO PORTRAIT GRADIENT REFINE ===== */
-.hero-portrait-area::before {
-    background: linear-gradient(to right, rgba(240,240,240,0.85) 0%, rgba(240,240,240,0.3) 40%, transparent 70%) !important;
-    width: 150px !important; /* Expanded slightly to ensure the 70% dissolve has enough physical room to look soft */
-}
