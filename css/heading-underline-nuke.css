@@ -1,7 +1,0 @@
-
-/* ===== PERMANENT UNDERLINE FIX (PSEUDO-ELEMENT) ===== */
-.ref-contact-info h3::after {
-    display: none !important;
-    content: none !important;
-    height: 0 !important;
-}

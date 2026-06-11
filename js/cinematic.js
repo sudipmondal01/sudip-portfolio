@@ -17,6 +17,12 @@
     const loader = $('#loader');
     const finish = () => document.body.classList.add('loaded');
     if (!loader || reduce) { finish(); return; }
+
+    // Repeat visit this session → no curtain, straight to content
+    let seen = false;
+    try { seen = sessionStorage.getItem('sm-seen') === '1'; sessionStorage.setItem('sm-seen', '1'); } catch (e) {}
+    if (seen) { loader.style.display = 'none'; finish(); return; }
+
     const status = $('#ld-status');
     const words = ['FOCUSING…', 'METERING…', 'ROLLING…'];
     let i = 0;
@@ -24,12 +30,26 @@
       i = (i + 1) % words.length;
       if (status) status.textContent = words[i];
     }, 350);
-    window.addEventListener('load', () => {
-      setTimeout(() => { clearInterval(timer); finish(); }, 500);
-    });
+
+    const t0 = performance.now();
+    let done = false;
+    const finishSoon = () => {
+      if (done) return; done = true;
+      // keep the curtain up just long enough to not flash (min 600ms)
+      const wait = Math.max(0, 600 - (performance.now() - t0));
+      setTimeout(() => { clearInterval(timer); finish(); }, wait);
+    };
+    // Reveal as soon as the hero (LCP) is painted — don't wait for every asset
+    const hero = $('.hero-bg');
+    if (hero) {
+      if (hero.complete) finishSoon();
+      else { hero.addEventListener('load', finishSoon, { once: true }); hero.addEventListener('error', finishSoon, { once: true }); }
+    }
+    window.addEventListener('load', finishSoon);
     // safety net so slow third-party images never hold the page hostage
-    setTimeout(() => { clearInterval(timer); finish(); }, 2200);
+    setTimeout(finishSoon, 1400);
   })();
+
 
   /* ---------- 2. SCROLL PROGRESS ---------- */
   (() => {
@@ -187,11 +207,60 @@
     reveals.forEach(el => io.observe(el));
   })();
 
-  /* ---------- 10. LIGHTBOX ---------- */
+  /* ---------- 10. LIGHTBOX — VIEWFINDER ---------- */
   (() => {
     const lb = $('#lightbox');
     const stage = $('#lightboxStage');
     if (!lb || !stage) return;
+    const counter = $('#lbCounter');
+    const cap = $('#lbCap');
+    const prevBtn = $('.lb-prev', lb);
+    const nextBtn = $('.lb-next', lb);
+
+    // Serve lightbox images via the same CDN at display size (faster than raw originals)
+    const sized = (src, w = 1920) =>
+      src.includes('i.ibb.co') && !src.includes('wsrv.nl')
+        ? `https://wsrv.nl/?url=${src}&w=${w}&q=85&output=webp&we&maxage=1y`
+        : src;
+
+    // Gallery = every [data-lightbox] trigger, in document order
+    let items = [];
+    let idx = -1;
+    const collect = () => {
+      items = $$('[data-lightbox]').map(el => ({
+        src: el.getAttribute('data-lightbox'),
+        cap: (el.getAttribute('data-cap') || ($('img', el) || el).getAttribute?.('alt') || '')
+          .split('—')[0].trim()
+      })).filter(it => it.src);
+    };
+
+    const pad = (n) => String(n).padStart(2, '0');
+    const updateHud = () => {
+      if (counter) counter.textContent = items.length ? `FR ${pad(idx + 1)} / ${pad(items.length)}` : '';
+      if (cap) cap.textContent = (items[idx] && items[idx].cap) || '';
+    };
+    const preload = (i) => {
+      const it = items[(i + items.length) % items.length];
+      if (it) { const im = new Image(); im.src = sized(it.src); }
+    };
+
+    const isImgMode = () => idx >= 0;
+    const show = (i, instant = false) => {
+      if (!items.length) return;
+      idx = (i + items.length) % items.length;
+      const swap = () => {
+        stage.innerHTML = `<img src="${sized(items[idx].src)}" alt="${items[idx].cap || 'Selected work — Sudip Mondal'}">`;
+        const im = $('img', stage);
+        if (im) im.addEventListener('error', () => { im.src = items[idx].src; }, { once: true });
+        stage.classList.remove('is-switching');
+        updateHud();
+        preload(idx + 1); preload(idx - 1);
+      };
+      if (instant || reduce) { swap(); return; }
+      stage.classList.add('is-switching');
+      setTimeout(swap, 160);
+    };
+
     const open = (html) => {
       stage.innerHTML = html;
       lb.classList.add('open');
@@ -203,20 +272,34 @@
       lb.setAttribute('aria-hidden', 'true');
       document.body.classList.remove('lb-lock');
       stage.innerHTML = '';
+      idx = -1;
+      if (counter) counter.textContent = '';
+      if (cap) cap.textContent = '';
     };
+
     document.addEventListener('click', (e) => {
       const trigger = e.target.closest('[data-lightbox]');
       if (trigger) {
+        e.preventDefault();
+        collect();
         const src = trigger.getAttribute('data-lightbox');
-        if (src) { e.preventDefault(); open(`<img src="${src}" alt="Selected work — Sudip Mondal">`); }
+        const i = items.findIndex(it => it.src === src);
+        open('');
+        show(i === -1 ? 0 : i, true);
       }
     });
+    if (prevBtn) prevBtn.addEventListener('click', (e) => { e.stopPropagation(); show(idx - 1); });
+    if (nextBtn) nextBtn.addEventListener('click', (e) => { e.stopPropagation(); show(idx + 1); });
+
     // Featured reel → YouTube
     const reel = $('.fm-reel');
     if (reel) reel.addEventListener('click', () => {
       const id = reel.getAttribute('data-yt');
       if (id && id !== 'REPLACE_WITH_SHOWREEL_ID') {
+        idx = -1;
         open(`<iframe src="https://www.youtube.com/embed/${id}?autoplay=1&rel=0" title="Showreel" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>`);
+      } else {
+        window.open('https://www.youtube.com/@bunnyxdneo', '_blank', 'noopener');
       }
     });
     // Work card video lightbox (data-video attribute)
@@ -224,14 +307,22 @@
       const card = e.target.closest('[data-video]');
       if (card) {
         const id = card.getAttribute('data-video');
+        e.preventDefault();
         if (id && id !== 'REPLACE_WITH_FILM_ID') {
-          e.preventDefault();
+          idx = -1;
           open(`<iframe src="https://www.youtube.com/embed/${id}?autoplay=1&rel=0" title="Chasing Shadows" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>`);
+        } else {
+          window.open('https://www.youtube.com/@bunnyxdneo', '_blank', 'noopener');
         }
       }
     });
     lb.addEventListener('click', (e) => { if (e.target === lb || e.target.closest('.lightbox-close')) close(); });
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && lb.classList.contains('open')) close(); });
+    document.addEventListener('keydown', (e) => {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape') close();
+      if (isImgMode() && e.key === 'ArrowLeft') { e.preventDefault(); show(idx - 1); }
+      if (isImgMode() && e.key === 'ArrowRight') { e.preventDefault(); show(idx + 1); }
+    });
   })();
 
   /* ---------- 11. WORK FILTERS ---------- */
@@ -398,7 +489,44 @@
     goTo(0);
   })();
 
-  /* ---------- 14. FOOTER YEAR ---------- */
+  /* ---------- 14. FAQ ACCORDION ---------- */
+  (() => {
+    const btns = $$('.faq-q');
+    if (!btns.length) return;
+    btns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        btns.forEach(other => {
+          if (other === btn) return;
+          other.setAttribute('aria-expanded', 'false');
+          const a = other.nextElementSibling;
+          if (a) a.setAttribute('hidden', '');
+        });
+        btn.setAttribute('aria-expanded', String(!expanded));
+        const answer = btn.nextElementSibling;
+        if (answer) {
+          if (expanded) answer.setAttribute('hidden', '');
+          else answer.removeAttribute('hidden');
+        }
+      });
+    });
+  })();
+
+  /* ---------- 15. IMAGE CDN RESILIENCE ---------- */
+  // If the image CDN ever fails, fall back to the original file (data-fb)
+  (() => {
+    window.addEventListener('error', (e) => {
+      const t = e.target;
+      if (t && t.tagName === 'IMG' && t.dataset.fb && !t.dataset.fbDone) {
+        t.dataset.fbDone = '1';
+        t.removeAttribute('srcset');
+        t.removeAttribute('sizes');
+        t.src = t.dataset.fb;
+      }
+    }, true);
+  })();
+
+  /* ---------- 16. FOOTER YEAR ---------- */
   (() => { const yr = $('#yr'); if (yr) yr.textContent = new Date().getFullYear(); })();
 
 })();

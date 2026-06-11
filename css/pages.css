@@ -294,7 +294,7 @@ a:hover { text-decoration: underline; }
   content: '+';
   flex-shrink: 0;
   font-size: 1.5rem;
-  font-weight: 300;
+  font-weight: 400;
   color: var(--primary, #f59e0b);
   transition: transform 0.3s ease;
   line-height: 1;
